@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prismm Cold Outreach — Community Bank VP/EVP (Southeast)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f2f0eb;
+    --surface: #ffffff;
+    --surface-alt: #f8f7f4;
+    --border: #e2ddd6;
+    --border-strong: #c8c2b8;
+    --text-primary: #1a1814;
+    --text-secondary: #6b6560;
+    --text-muted: #9c9690;
+    --accent: #2d5a3d;
+    --accent-light: #eef4f0;
+    --accent-mid: #c8dece;
+    --tag-a: #1e3a5f;
+    --tag-a-bg: #e8eef5;
+    --tag-b: #5a2d1e;
+    --tag-b-bg: #f5ece8;
+    --divider: #ede9e3;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .review-bar {
+    background: #EAF3FB;
+    border-bottom: 1px solid #B5D4F4;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: #185FA5;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: -40px -20px 40px;
+  }
+  .review-bar a {
+    background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB;
+    padding: 5px 14px; border-radius: 6px; text-decoration: none;
+    font-weight: 500; font-size: 12px;
+  }
+  .review-bar a:hover { background: #D1E5F7; }
+  .rb-status { display: flex; align-items: center; gap: 6px; }
+  .rb-pending {
+    background: #FAEEDA; color: #854F0B; padding: 3px 10px;
+    border-radius: 20px; font-weight: 500; border: 1px solid #FAC775;
+  }
+  .rb-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; display: inline-block; margin-right: 4px; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+
+  .page-header { max-width: 720px; margin: 0 auto 40px; }
+  .page-header h1 { font-weight: 300; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .page-header p { font-size: 22px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+  .page-header .sub { font-size: 14px; font-weight: 400; color: var(--text-secondary); margin-top: 8px; line-height: 1.6; }
+
+  .meta-row {
+    max-width: 720px; margin: -24px auto 40px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; font-family: 'DM Mono', monospace;
+  }
+  .pill-type   { background: #FAEEDA; color: #854F0B; }
+  .pill-sender { background: #e8eef5; color: #1e3a5f; }
+  .pill-aud    { background: #eef4f0; color: #2d5a3d; }
+  .pill-batch  { background: #f5ece8; color: #5a2d1e; }
+
+  .timeline { max-width: 720px; margin: 0 auto 48px; display: flex; align-items: center; }
+  .timeline-step { flex: 1; text-align: center; position: relative; }
+  .timeline-step:not(:last-child)::after {
+    content: ''; position: absolute; top: 14px;
+    left: calc(50% + 14px); right: -1px;
+    width: calc(100% - 28px); height: 1px; background: var(--border-strong);
+  }
+  .timeline-dot {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--surface);
+    border: 1.5px solid var(--border-strong); display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-secondary);
+  }
+  .timeline-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .timeline-label strong { display: block; color: var(--text-secondary); font-weight: 500; font-size: 12px; margin-bottom: 2px; }
+
+  .email-block { max-width: 720px; margin: 0 auto 32px; }
+  .email-block-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 500; margin-bottom: 10px;
+    padding-left: 2px; font-family: 'DM Mono', monospace;
+  }
+  .ab-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .ab-pair { grid-template-columns: 1fr; } }
+
+  .email-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .email-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .version-tag {
+    display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px;
+    font-weight: 500; letter-spacing: 0.08em; padding: 2px 8px;
+    border-radius: 2px; margin-bottom: 8px;
+  }
+  .version-tag.a { background: var(--tag-a-bg); color: var(--tag-a); }
+  .version-tag.b { background: var(--tag-b-bg); color: var(--tag-b); }
+  .email-meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: 12px; }
+  .email-meta-label { color: var(--text-muted); font-weight: 400; white-space: nowrap; }
+  .email-meta-value { color: var(--text-secondary); font-weight: 400; }
+  .email-meta-value.subject { color: var(--text-primary); font-weight: 500; }
+  .email-body { padding: 18px 16px 20px; font-size: 14px; line-height: 1.75; color: var(--text-primary); font-weight: 300; }
+  .email-body p { margin-bottom: 14px; }
+  .email-body p:last-child { margin-bottom: 0; }
+  .token { font-family: 'DM Mono', monospace; font-size: 12px; background: #fff8e6; color: #8a6000; padding: 1px 4px; border-radius: 2px; border: 1px solid #f0d878; }
+  .stat { font-weight: 500; color: var(--text-primary); }
+  .email-rationale { padding: 10px 16px 12px; border-top: 1px solid var(--divider); background: var(--surface-alt); }
+  .rationale-label { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .rationale-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+
+  .cta-callout {
+    max-width: 720px; margin: -18px auto 32px;
+    padding: 10px 16px; border-left: 3px solid var(--border-strong); background: var(--surface);
+  }
+  .cta-callout p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+  .cta-callout strong { color: var(--text-primary); font-weight: 500; }
+
+  .use-guidance {
+    max-width: 720px; margin: -18px auto 32px;
+    background: var(--accent-light); border: 1px solid var(--accent-mid);
+    border-radius: 4px; padding: 12px 16px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+  }
+  @media (max-width: 600px) { .use-guidance { grid-template-columns: 1fr; } }
+  .use-guidance-item { font-size: 12px; color: var(--accent); line-height: 1.5; }
+  .use-guidance-item strong {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+    display: block; margin-bottom: 2px; color: var(--accent); opacity: 0.7; text-transform: uppercase;
+  }
+
+  .section-divider { max-width: 720px; margin: 8px auto 32px; display: flex; align-items: center; gap: 12px; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-divider span { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); white-space: nowrap; letter-spacing: 0.08em; }
+
+  .crm-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .crm-header { padding: 12px 16px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-header h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; }
+  .crm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .crm-table th { text-align: left; padding: 10px 16px; font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-table td { padding: 10px 16px; border-bottom: 1px solid var(--divider); color: var(--text-primary); vertical-align: top; line-height: 1.5; }
+  .crm-table tr:last-child td { border-bottom: none; }
+  .crm-table td:first-child { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a6000; background: #fffdf5; white-space: nowrap; }
+  .crm-table td:nth-child(3) { font-size: 12px; color: var(--text-secondary); }
+
+  .ambient-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 20px; }
+  .ambient-section h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; margin-bottom: 14px; }
+  .trigger-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 500px) { .trigger-list { grid-template-columns: 1fr; } }
+  .trigger-list li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-left: 16px; position: relative; }
+  .trigger-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--border-strong); }
+  .ambient-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--divider); font-size: 12px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+
+  .stat-note {
+    max-width: 720px; margin: 0 auto 32px;
+    background: #fffdf5; border: 1px solid #f0d878; border-radius: 4px;
+    padding: 12px 16px;
+  }
+  .stat-note h4 { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: #8a6000; margin-bottom: 8px; }
+  .stat-note ul { list-style: none; }
+  .stat-note ul li { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding-left: 14px; position: relative; }
+  .stat-note ul li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: #f0d878; }
+
+  .page-footer { max-width: 720px; margin: 0 auto; text-align: center; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); letter-spacing: 0.06em; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+
+<div class="review-bar">
+  <div class="rb-status">
+    <span class="rb-pending"><span class="rb-dot"></span>Awaiting review</span>
+    <span>Cold Outreach — Community Bank VP/EVP &mdash; seq-002</span>
+  </div>
+  <a href="https://keyona-rerev.github.io/prismm-sequence-review/">&#8592; Back to review portal</a>
+</div>
+
+<div class="page-header">
+  <h1>Prismm Sales Playbook</h1>
+  <p>Cold Outreach — Community Bank VP/EVP (Southeast)</p>
+  <p class="sub">Use for cold contacts at community banks with $500M–$1B in assets, VP or EVP level, Southeast and Mid-Atlantic. Do not use for event contacts (see seq-001), CDFI contacts, or C-suite at institutions over $2B.</p>
+</div>
+
+<div class="meta-row">
+  <span class="meta-pill pill-type">Cold</span>
+  <span class="meta-pill pill-sender">Sender: Roland Mercer</span>
+  <span class="meta-pill pill-aud">Community bank · $500M–$1B · SE/Mid-Atlantic</span>
+  <span class="meta-pill pill-batch">Batch 1</span>
+</div>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <div class="timeline-dot">E1</div>
+    <div class="timeline-label"><strong>Email 1</strong>Day 1</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">E2</div>
+    <div class="timeline-label"><strong>Email 2</strong>Day 5</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">E3</div>
+    <div class="timeline-label"><strong>Email 3</strong>Day 11</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">E4</div>
+    <div class="timeline-label"><strong>Email 4</strong>Day 18</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">~</div>
+    <div class="timeline-label"><strong>Ambient</strong>Until trigger</div>
+  </div>
+</div>
+
+<!-- STAT BACKING -->
+<div class="stat-note">
+  <h4>Numbers used in this sequence — sources</h4>
+  <ul>
+    <li><strong>~2.5 million</strong> Americans die each year (CDC, National Vital Statistics). Average household holds accounts at 2–3 financial institutions. The affected account volume is in the tens of millions annually — and largely untracked by the institutions holding them.</li>
+    <li><strong>Attrition claim:</strong> We do not claim a specific attrition rate because no institution tracks it — that absence is the point. Do not fabricate a percentage.</li>
+    <li><strong>Generational wealth transfer:</strong> $84 trillion expected to transfer between generations over the next 20 years (Cerulli Associates, 2023). Community banks capture a small fraction without intentional infrastructure.</li>
+  </ul>
+</div>
+
+<!-- EMAIL 1 -->
+<div class="email-block">
+  <div class="email-block-label">Email 1 &mdash; The Hook &mdash; Day 1</div>
+  <div class="ab-pair">
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag a">Version A &mdash; Problem-first</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">A category of attrition that doesn't show up in your dashboard</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Community banks track attrition closely — rate sensitivity, digital competition, branch traffic. But there's one category almost no institution measures: what happens to a member relationship when the primary account holder dies.</p>
+        <p>The family doesn't know what accounts exist. Nobody at the institution reaches out. The relationship quietly dissolves while the family figures it out elsewhere. <span class="stat">Roughly 2.5 million Americans die each year</span>, each with accounts spread across multiple institutions. The attrition from that moment alone is significant — and almost entirely invisible.</p>
+        <p>Curious whether <span class="token">{{institution_name}}</span> has a way of handling it.</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Names the problem without naming the product. Ends with a genuine question, not a pitch. The stat earns credibility without overclaiming. Best for ops and retail banking titles who live in attrition metrics.</div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag b">Version B &mdash; Curiosity-first</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">What {{institution_name}} probably isn't tracking</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>A question I've been putting to community banks your size: when a primary account holder dies, what happens to the relationship with the family?</p>
+        <p>Most can't answer it — not because they don't care, but because it's never been the kind of thing that gets measured. <span class="stat">About 2.5 million Americans die each year</span>, each leaving behind accounts at multiple institutions. For the family, whoever shows up first and makes it easy tends to win the relationship going forward.</p>
+        <p>Worth a brief conversation about how <span class="token">{{institution_name}}</span> approaches it?</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Opens with a direct question that flatters their perspective. "Most can't answer it" is a subtle competitive pressure without being aggressive. Best for EVP and relationship-oriented titles who respond to peer framing.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="use-guidance">
+  <div class="use-guidance-item">
+    <strong>Use Version A for</strong>
+    VP Retail Banking, VP Operations, heads of member services — metric-oriented titles
+  </div>
+  <div class="use-guidance-item">
+    <strong>Use Version B for</strong>
+    EVP, Chief Retail Officer, Chief Experience Officer — relationship and strategy titles
+  </div>
+</div>
+
+<div class="cta-callout">
+  <p><strong>CTA for Email 1:</strong> Soft — a question, not a meeting ask. The goal is a reply that opens the door for Email 2 to do harder work. Do not include a calendar link.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- EMAIL 2 -->
+<div class="email-block">
+  <div class="email-block-label">Email 2 &mdash; The Reframe &mdash; Day 5</div>
+  <div class="ab-pair">
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag a">Version A &mdash; Competitive pressure</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">The banks that are getting ahead of it</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Following up on my note from a few days ago.</p>
+        <p>A handful of community banks have started treating the moment a primary account holder dies as a relationship entry point rather than an exit. They're not doing anything complicated — they have a white-label digital vault in place that the family is already connected to before anything happens. When it does, the institution is already there.</p>
+        <p>The ones doing this well are seeing families stay, add accounts, and bring in the next generation instead of defaulting to wherever is easiest. The platform making that possible is called Prismm.</p>
+        <p>Would a 20-minute call make sense to hear more?</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Names Prismm for the first time but frames it as "what others are doing" — peer pressure without being a pitch. The "20-minute call" is the first direct CTA in the sequence. Metric-oriented titles respond to outcomes language.</div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag b">Version B &mdash; Generational angle</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">How a few institutions are turning this into an advantage</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Wanted to follow up and share a bit more context on what I was pointing at.</p>
+        <p>The challenge isn't just attrition at the moment of death — it's that <span class="stat">$84 trillion is expected to transfer between generations over the next 20 years</span>, and most community banks have no infrastructure to stay in the picture when that happens at the family level. Larger institutions have trust departments for this. Banks your size haven't had a good answer.</p>
+        <p>Prismm is a white-label digital vault that community banks offer to members for estate and document planning — so when a transfer happens, the institution is already embedded in the process. A few banks in the Southeast are getting ahead of this now.</p>
+        <p>Worth 20 minutes to talk through whether it makes sense for <span class="token">{{institution_name}}</span>?</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Leads with the generational wealth transfer stat — higher stakes, longer horizon. "Banks your size haven't had a good answer" is the competitive gap without naming competitors. Best for EVP and strategy titles thinking about 5-year positioning.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="use-guidance">
+  <div class="use-guidance-item">
+    <strong>Use Version A for</strong>
+    Contacts who opened Email 1 or are ops/retail-titled — outcomes and peer pressure framing
+  </div>
+  <div class="use-guidance-item">
+    <strong>Use Version B for</strong>
+    EVP and strategy titles, or anyone who replied to Email 1 showing interest in the bigger picture
+  </div>
+</div>
+
+<div class="cta-callout">
+  <p><strong>CTA for Email 2:</strong> First direct ask — "Would a 20-minute call make sense?" Reply-based only. No calendar link in the email body.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- EMAIL 3 -->
+<div class="email-block">
+  <div class="email-block-label">Email 3 &mdash; The Research Touch &mdash; Day 11</div>
+  <div class="ab-pair">
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag a">Version A &mdash; Sector signal</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">What we're hearing from Southeast community banks right now</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>One more note before I leave you alone.</p>
+        <p>We've been talking to a number of community banks in the $500M–$1B range across the Southeast over the past few months. The consistent theme: retention infrastructure is the priority, but most of the tools available were built for institutions ten times their size.</p>
+        <p>What's interesting about banks in this tier is that the relationship culture is already there — the gap is usually just the tooling to formalize it at the family level. That's exactly what Prismm was built for.</p>
+        <p>If a 20-minute conversation has any appeal, I'm easy to get on the calendar. Just reply and we'll find a time.</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Reads as researched without being hyper-personalized. References their tier and geography as evidence of due diligence. "We've been talking to banks in your tier" is the social proof without fabricating specifics. Default version for most contacts.</div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag b">Version B &mdash; Role-specific signal</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">One thing VP-level folks in retail banking usually tell us</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Last note, I promise.</p>
+        <p>When we talk to people in <span class="token">{{role_title}}</span> roles at community banks, the thing that comes up most often is that they know this gap exists — the moment a primary account holder dies and the family goes quiet — but it's never been urgent enough to prioritize because it's hard to put a number on it.</p>
+        <p>That's actually why we built Prismm the way we did. It's not a big lift to implement, and the retention case becomes visible pretty quickly once it's in place.</p>
+        <p>If any of this is relevant to where <span class="token">{{institution_name}}</span> is right now, a 20-minute call would be worth it. Just reply and I'll send over some times.</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">"People in your role usually tell us" validates their experience without being presumptuous. Addresses the "hard to prioritize" objection directly. Use when the contact's title is clearly ops or VP-level retail banking.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="use-guidance">
+  <div class="use-guidance-item">
+    <strong>Use Version A for</strong>
+    Default. Any contact where you don't have a strong role signal or specific intel.
+  </div>
+  <div class="use-guidance-item">
+    <strong>Use Version B for</strong>
+    VP Retail Banking, VP Operations — titles where the "hard to prioritize" objection is most likely true.
+  </div>
+</div>
+
+<div class="cta-callout">
+  <p><strong>CTA for Email 3:</strong> Same ask — 20-minute call, reply to schedule. "Just reply and I'll send over some times" is slightly warmer than Email 2's phrasing. Still no calendar link in body.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- EMAIL 4 -->
+<div class="email-block">
+  <div class="email-block-label">Email 4 &mdash; The Clean Close &mdash; Day 18</div>
+  <div class="ab-pair">
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag a">Version A &mdash; Graceful exit</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">Closing the loop</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>I've sent a few notes and don't want to keep cluttering your inbox.</p>
+        <p>If the timing isn't right or it's just not where <span class="token">{{institution_name}}</span> is focused right now, completely understood. If things shift and the conversation ever makes sense down the road, I'm easy to find.</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Clean, no pressure, no last pitch. Leaves the door fully open without pushing it. Use as the default close for any contact with no engagement signal across the sequence.</div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag b">Version B &mdash; One last door</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Roland Mercer</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">Last note for now</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Last one from me for a while.</p>
+        <p>If the timing is off right now, no problem at all. And if a conversation about what we're doing at Prismm ever makes sense — whether it's Q3, next year, or when something shifts at <span class="token">{{institution_name}}</span> — I'm easy to reach.</p>
+        <p>Appreciate you taking the time to read through these.</p>
+        <p>Roland Mercer</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">"Q3, next year, or when something shifts" gives them a future permission structure without pressure. "Appreciate you taking the time" is gracious without being sycophantic. Use when the contact opened or clicked at any point but didn't reply.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="use-guidance">
+  <div class="use-guidance-item">
+    <strong>Use Version A for</strong>
+    Default close. No engagement signal at any point in the sequence.
+  </div>
+  <div class="use-guidance-item">
+    <strong>Use Version B for</strong>
+    Contact opened or clicked at any point but never replied. Shows they saw it — acknowledge it gracefully.
+  </div>
+</div>
+
+<div class="section-divider"><span>after email 4</span></div>
+
+<!-- CRM TAGS -->
+<div class="email-block">
+  <div class="email-block-label">CRM Tags &amp; ReachInbox Fields — Required Before Launching Sequence</div>
+  <div class="crm-section">
+    <div class="crm-header"><h3>Merge tags</h3></div>
+    <table class="crm-table">
+      <thead>
+        <tr><th>Tag</th><th>Field</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{first_name}}</td>
+          <td>Contact first name</td>
+          <td>Required. Used in every email.</td>
+        </tr>
+        <tr>
+          <td>{{institution_name}}</td>
+          <td>Short institution name</td>
+          <td>e.g. "Blue Ridge" not "Blue Ridge Community Bank." Used in Emails 1, 3, and 4.</td>
+        </tr>
+        <tr>
+          <td>{{role_title}}</td>
+          <td>Their role, generalized</td>
+          <td>e.g. "VP Retail Banking" or "EVP" — used in Email 3 Version B only. Pull from Apollo.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- REACHINBOX LABELS -->
+<div class="email-block">
+  <div class="email-block-label">ReachInbox Sequence Labels</div>
+  <div class="crm-section">
+    <div class="crm-header"><h3>Label this sequence in ReachInbox exactly as shown</h3></div>
+    <table class="crm-table">
+      <thead>
+        <tr><th>Field</th><th>Value</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sequence name</td>
+          <td>seq-002 · Cold · CB VP/EVP · SE · Batch 1</td>
+          <td>Consistent naming lets you filter by batch and audience in reporting.</td>
+        </tr>
+        <tr>
+          <td>Sender name</td>
+          <td>Roland Mercer</td>
+          <td>Persona name — not your personal name or Prismm brand.</td>
+        </tr>
+        <tr>
+          <td>Sending domain</td>
+          <td>tryprismm.com or withprismm.com</td>
+          <td>Never send from getprismm.com or rerev.io. Use the warmed outreach domain only.</td>
+        </tr>
+        <tr>
+          <td>Reply-to</td>
+          <td>roland@[outreach-domain]</td>
+          <td>Replies should land somewhere monitored. Set up a forwarding rule to your main inbox.</td>
+        </tr>
+        <tr>
+          <td>Pipedrive trigger</td>
+          <td>Any reply → create lead · tag: cold-cb-batch1</td>
+          <td>No contacts enter Pipedrive until they reply. Tag keeps batch tracking clean.</td>
+        </tr>
+        <tr>
+          <td>Sequence type tag</td>
+          <td>cold</td>
+          <td>Distinguishes from event, nurture, and warm-intro sequences in reporting.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RESTART TRIGGERS -->
+<div class="email-block">
+  <div class="email-block-label">After Email 4 &mdash; Ambient Until a Restart Trigger</div>
+  <div class="ambient-section">
+    <h3>Restart Triggers</h3>
+    <ul class="trigger-list">
+      <li>They engage with Prismm content on LinkedIn</li>
+      <li>They change roles or move to a different institution</li>
+      <li>Their institution announces a digital initiative, rebrand, or acquisition</li>
+      <li>They appear at an event Prismm is attending or sponsoring</li>
+      <li>A mutual contact flags them as newly relevant</li>
+      <li>6+ months have passed and Prismm has a significant product update</li>
+    </ul>
+    <p class="ambient-note">When a restart trigger fires, treat it as a warm re-introduction. Do not resume the cold sequence — start fresh with a context-specific opener that references the trigger.</p>
+  </div>
+</div>
+
+<div class="page-footer">Prismm Outreach Playbook &mdash; Cold Track · Batch 1 &mdash; Internal Use Only</div>
+
+</body>
+</html>
