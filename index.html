@@ -35,6 +35,7 @@
     .badge-rejected { background: #FAECE7; color: #993C1D; }
     .badge-scenario { background: #EAF3FB; color: #185FA5; }
     .badge-audience { background: #F2EAF9; color: #6B3A9C; }
+    .badge-info     { background: #F1EFE8; color: #5F5E5A; }
 
     .main { padding: 28px 32px; max-width: 860px; margin: 0 auto; }
     .tab-content { display: none; }
@@ -80,13 +81,11 @@
     .typical-titles { font-size: 12px; color: #185FA5; line-height: 1.6; }
     .typical-titles strong { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 4px; }
 
-    /* AUDIENCE TAB */
     .aud-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
     .view-toggle { display: flex; border: 1px solid #B5D4F4; border-radius: 6px; overflow: hidden; }
     .view-btn { font-size: 12px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; }
     .view-btn.active { background: #EAF3FB; color: #0C447C; font-weight: 600; }
     .view-btn:first-child { border-right: 1px solid #B5D4F4; }
-
     .aud-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
     .aud-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; border-left: 4px solid #6B3A9C; }
     .aud-segment { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6B3A9C; margin-bottom: 5px; }
@@ -99,7 +98,6 @@
     .aud-angle { font-size: 12px; color: #444; line-height: 1.55; border-top: 1px solid #D1E5F7; padding-top: 10px; margin-top: 4px; }
     .aud-angle strong { display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 3px; }
     .aud-seq-link { margin-top: 10px; }
-
     .aud-list-table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; }
     .aud-list-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
     .aud-list-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; color: #1a1a2e; vertical-align: top; line-height: 1.5; }
@@ -107,6 +105,52 @@
     .aud-list-table td:first-child { border-left: 4px solid #6B3A9C; padding-left: 12px; }
     .aud-list-name { font-weight: 600; font-size: 13px; color: #0C447C; }
     .aud-list-titles { font-size: 12px; color: #185FA5; margin-top: 2px; }
+
+    /* SYSTEM INFO TAB */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; }
+    .info-card-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #378ADD; margin-bottom: 12px; }
+    .info-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid #EAF3FB; font-size: 13px; }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: #185FA5; font-weight: 500; flex-shrink: 0; }
+    .info-value { color: #0C447C; text-align: right; font-size: 12px; }
+    .info-value.mono { font-family: monospace; font-size: 11px; background: #F5F9FF; padding: 2px 6px; border-radius: 4px; }
+    .info-value.green { color: #3B6D11; font-weight: 600; }
+    .info-value.amber { color: #854F0B; font-weight: 600; }
+
+    .domain-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .domain-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .domain-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; line-height: 1.5; color: #1a1a2e; }
+    .domain-table tr:last-child td { border-bottom: none; }
+    .domain-table td:first-child { font-family: monospace; font-size: 12px; color: #0C447C; font-weight: 600; }
+    .status-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+    .status-pending-purchase { background: #FAEEDA; color: #854F0B; }
+    .status-warming          { background: #EAF3FB; color: #185FA5; }
+    .status-active           { background: #EAF3DE; color: #3B6D11; }
+
+    .persona-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; border-left: 4px solid #378ADD; }
+    .persona-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
+    .persona-role { font-size: 13px; color: #185FA5; margin-bottom: 12px; }
+    .persona-detail { font-size: 12px; color: #444; line-height: 1.65; }
+    .persona-detail strong { color: #0C447C; font-weight: 600; display: block; margin-top: 8px; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .flow-steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 16px; }
+    .flow-step { display: flex; gap: 14px; align-items: flex-start; }
+    .flow-step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .flow-dot { width: 10px; height: 10px; border-radius: 50%; background: #378ADD; margin-top: 4px; flex-shrink: 0; }
+    .flow-connector { width: 2px; height: 28px; background: #B5D4F4; margin: 2px 0; }
+    .flow-step:last-child .flow-connector { display: none; }
+    .flow-label { font-size: 13px; color: #1a1a2e; padding-bottom: 20px; line-height: 1.5; }
+    .flow-label strong { color: #0C447C; font-weight: 600; }
+    .flow-label span { font-size: 11px; color: #185FA5; display: block; margin-top: 2px; font-family: monospace; }
+
+    .stack-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .stack-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .stack-table td { padding: 11px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; color: #1a1a2e; font-size: 13px; line-height: 1.5; }
+    .stack-table tr:last-child td { border-bottom: none; }
+    .stack-table td:first-child { font-weight: 600; color: #0C447C; white-space: nowrap; }
+    .cost-total { background: #EAF3FB; font-weight: 600; color: #0C447C; }
 
     .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
     .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
@@ -137,6 +181,7 @@
     <div class="tab" onclick="switchTab('rejected',this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
     <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
     <div class="tab" onclick="switchTab('audiences',this)">Audiences <span class="tab-badge badge-audience" id="count-audiences">—</span></div>
+    <div class="tab" onclick="switchTab('sysinfo',this)">System info <span class="tab-badge badge-info">&#9432;</span></div>
   </div>
 
   <div class="main">
@@ -146,6 +191,7 @@
     <div id="rejected"  class="tab-content" style="display:none;"></div>
     <div id="scenarios" class="tab-content" style="display:none;"></div>
     <div id="audiences" class="tab-content" style="display:none;"></div>
+    <div id="sysinfo"   class="tab-content" style="display:none;"></div>
   </div>
 </div>
 
@@ -190,22 +236,19 @@
     const pending  = sequences.filter(s => s.status === 'pending');
     const approved = sequences.filter(s => s.status === 'approved');
     const rejected = sequences.filter(s => s.status === 'rejected');
-
     document.getElementById('count-pending').textContent   = pending.length;
     document.getElementById('count-approved').textContent  = approved.length;
     document.getElementById('count-rejected').textContent  = rejected.length;
     document.getElementById('count-scenarios').textContent = scenarios.length;
     document.getElementById('count-audiences').textContent = audiences.length;
-
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     document.getElementById('last-updated').textContent = 'keyona@rerev.io · Updated ' + now;
-
     renderReviewTab('pending',  pending,  'pending');
     renderReviewTab('approved', approved, 'approved');
     renderReviewTab('rejected', rejected, 'rejected');
     renderScenariosTab(scenarios, sequences);
     renderAudiencesTab(audiences, sequences);
-
+    renderSysInfo(sequences);
     document.getElementById('pending').classList.add('active');
     document.getElementById('pending').style.display = 'block';
   }
@@ -236,7 +279,7 @@
     return '<div class="' + cardClass + '"><div class="card-top"><div>' +
       '<div class="card-title">' + seq.title + '</div>' +
       (seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : '') +
-      '<div class="card-meta">' + seq.pushedDate + ' &middot; ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' &middot; ' + seq.cadence + ' ' + typeBadge + '</div>' +
+      '<div class="card-meta">' + seq.pushedDate + ' &middot; ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' &middot; ' + seq.cadence + ' &middot; Sender: ' + (seq.sender || '—') + ' ' + typeBadge + '</div>' +
       '</div>' + reviewBadge + '</div>' + usageNote + note +
       '<div class="card-actions">' + viewBtn + feedbackBtn + '</div></div>';
   }
@@ -280,35 +323,115 @@
 
   function renderAudCard(a, sequences) {
     const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
-    const seqLinks = linkedSeqs.map(s =>
-      s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:4px 12px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : ''
-    ).join('');
-    return '<div class="aud-card">' +
-      '<div class="aud-segment">' + a.segment + '</div>' +
-      '<div class="aud-name">' + a.name + '</div>' +
+    const seqLinks = linkedSeqs.map(s => s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:4px 12px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : '').join('');
+    return '<div class="aud-card"><div class="aud-segment">' + a.segment + '</div><div class="aud-name">' + a.name + '</div>' +
       '<div class="aud-titles">' + a.targetTitles.join(', ') + '</div>' +
-      '<div class="aud-tags">' +
-        '<span class="aud-tag aud-tag-asset">' + a.assetSize + '</span>' +
-        '<span class="aud-tag aud-tag-geo">' + a.geo + '</span>' +
-      '</div>' +
+      '<div class="aud-tags"><span class="aud-tag aud-tag-asset">' + a.assetSize + '</span><span class="aud-tag aud-tag-geo">' + a.geo + '</span></div>' +
       '<div class="aud-angle"><strong>Pain point</strong>' + a.painPoint + '</div>' +
       '<div class="aud-angle" style="margin-top:8px;"><strong>Outreach angle</strong>' + a.angle + '</div>' +
-      (seqLinks ? '<div class="aud-seq-link"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#378ADD;margin-bottom:6px;">Sequences</div>' + seqLinks + '</div>' : '') +
-    '</div>';
+      (seqLinks ? '<div class="aud-seq-link"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#378ADD;margin-bottom:6px;">Sequences</div>' + seqLinks + '</div>' : '') + '</div>';
   }
 
   function renderAudList(audiences, sequences) {
     const rows = audiences.map(a => {
       const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
-      const seqLinks = linkedSeqs.map(s =>
-        s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:3px 10px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : ''
-      ).join(' ');
+      const seqLinks = linkedSeqs.map(s => s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:3px 10px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : '').join(' ');
       return '<tr><td><div class="aud-list-name">' + a.name + '</div><div class="aud-list-titles">' + a.targetTitles.join(', ') + '</div></td>' +
         '<td><span class="aud-tag aud-tag-asset">' + a.assetSize + '</span></td>' +
         '<td><span class="aud-tag aud-tag-geo">' + a.geo + '</span></td>' +
         '<td>' + (seqLinks || '<span style="font-size:12px;color:#185FA5;">—</span>') + '</td></tr>';
     }).join('');
     return '<table class="aud-list-table"><thead><tr><th>Audience</th><th>Asset size</th><th>Geography</th><th>Sequences</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  function renderSysInfo(sequences) {
+    const el = document.getElementById('sysinfo');
+    el.innerHTML = `
+      <div class="section-label">Cold email system overview</div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-title">Personas</div>
+          <div class="info-row"><span class="info-label">Roland Mercer</span><span class="info-value">Cold outreach only</span></div>
+          <div class="info-row"><span class="info-label">Keyona Meeks</span><span class="info-value">Warm handoff + close</span></div>
+          <div class="info-row"><span class="info-label">Martha</span><span class="info-value">Event + nurture sequences</span></div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">Monthly cost estimate</div>
+          <div class="info-row"><span class="info-label">ReachInbox</span><span class="info-value">~$75/mo</span></div>
+          <div class="info-row"><span class="info-label">Sending inboxes (×2)</span><span class="info-value">~$6/mo</span></div>
+          <div class="info-row"><span class="info-label">Apollo (free tier)</span><span class="info-value">$0 until maxed</span></div>
+          <div class="info-row"><span class="info-label">Domains (annualized)</span><span class="info-value">~$2/mo</span></div>
+          <div class="info-row"><span class="info-label" style="font-weight:700;">Total</span><span class="info-value green">~$83/mo to start</span></div>
+        </div>
+      </div>
+
+      <div class="section-label">Sending domains</div>
+      <table class="domain-table">
+        <thead><tr><th>Domain</th><th>Purpose</th><th>Persona</th><th>Cost</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>tryprismm.com</td>
+            <td>Cold outreach — all Roland sequences</td>
+            <td>Roland Mercer</td>
+            <td>$13.44/yr</td>
+            <td><span class="status-pill status-pending-purchase">Pending purchase</span></td>
+          </tr>
+          <tr>
+            <td>withprismm.com</td>
+            <td>Cold outreach — backup / second inbox for volume scaling</td>
+            <td>Roland Mercer</td>
+            <td>$13.44/yr</td>
+            <td><span class="status-pill status-pending-purchase">Pending purchase</span></td>
+          </tr>
+          <tr>
+            <td>getprismm.com</td>
+            <td>Primary brand domain — proposals, contracts, real relationships only</td>
+            <td>Keyona / Martha</td>
+            <td>Existing</td>
+            <td><span class="status-pill status-active">Protected — do not use for cold sends</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-label">Warm-up schedule</div>
+      <table class="stack-table">
+        <thead><tr><th>Phase</th><th>Volume per inbox/day</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td>Weeks 1–2</td><td>10–20 emails/day</td><td>Ramp up</td></tr>
+          <tr><td>Weeks 3–4</td><td>30–50 emails/day</td><td>Building reputation</td></tr>
+          <tr><td>Weeks 6–8</td><td>100–150 emails/day</td><td>Fully warmed</td></tr>
+          <tr><td>2 inboxes fully warmed</td><td>200 emails/day</td><td>~50,000 emails/year</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-label">Lead flow</div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="flow-steps">
+          <div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Apollo (prospecting)</strong> Find and verify contacts by title, institution size, and geography.<span>Free tier until maxed → then evaluate paid upgrade</span></div></div>
+          <div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>ReachInbox (sequencing)</strong> Roland Mercer sends cold sequence from tryprismm.com or withprismm.com.<span>Domain warm-up runs first — do not send before warm-up complete</span></div></div>
+          <div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Prospect replies to Roland</strong> Roland can hold the conversation for 1–2 exchanges, answer questions, build rapport.<span>No Pipedrive entry yet</span></div></div>
+          <div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Roland handoff to Keyona</strong> When appropriate, Roland introduces Keyona and transitions to keyona@getprismm.com.<span>This is when the contact enters Pipedrive as a lead — tagged by batch</span></div></div>
+          <div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Pipedrive</strong> Lead created automatically on first reply. Tagged: cold-cb-batch1 (or relevant batch tag).<span>From here: Keyona owns the relationship</span></div></div>
+        </div>
+      </div>
+
+      <div class="section-label">Persona: Roland Mercer</div>
+      <div class="persona-card">
+        <div class="persona-name">Roland Mercer</div>
+        <div class="persona-role">Cold outreach point of contact — Prismm</div>
+        <div class="persona-detail">
+          <strong>What he is</strong>
+          A sending persona used exclusively for cold email outreach. Not a real person, not a Prismm employee, and does not have a getprismm.com email address. He exists entirely inside ReachInbox.
+          <strong>What he does</strong>
+          Opens cold conversations, holds early-stage exchanges, and hands off warm prospects to Keyona when the timing is right. He never closes deals — he opens doors.
+          <strong>Sending from</strong>
+          roland@tryprismm.com and/or roland@withprismm.com — dedicated outreach domains that protect the primary Prismm domain from cold email risk.
+          <strong>What Martha does not need to do</strong>
+          Do not create a getprismm.com account for Roland. Do not add him to any internal team systems. His entire infrastructure is in ReachInbox only.
+        </div>
+      </div>
+    `;
   }
 
   function setAudView(v) {
