@@ -1,0 +1,15 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario-001",
+      "name": "Conference / Event Follow-Up",
+      "description": "Outreach to contacts made at in-person or virtual industry events. Prioritizes recency of the encounter — Email 1 goes within 48 hours while the interaction is still fresh.",
+      "targetAudience": "Community bank and credit union executives met at industry events",
+      "typicalTitles": ["CRO", "VP Member Experience", "Chief Experience Officer", "CAO", "VP Digital Banking"],
+      "assetSize": "$250M–$2B",
+      "trigger": "In-person or virtual event encounter",
+      "sequences": ["seq-001"],
+      "tags": ["conference", "event", "warm-contact", "credit-union", "community-bank"]
+    }
+  ]
+}
