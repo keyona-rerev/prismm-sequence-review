@@ -8,6 +8,36 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F6FF; color: #1a1a2e; min-height: 100vh; }
 
+    /* PASSWORD GATE */
+    #gate {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; background: #F0F6FF;
+    }
+    .gate-card {
+      background: #fff; border: 1px solid #B5D4F4; border-radius: 16px;
+      padding: 40px 48px; max-width: 380px; width: 90%; text-align: center;
+    }
+    .gate-logo { font-size: 14px; font-weight: 600; color: #0C447C; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .gate-logo span { color: #378ADD; font-weight: 400; }
+    .gate-subtitle { font-size: 13px; color: #185FA5; margin-bottom: 28px; }
+    .gate-card input[type="password"] {
+      width: 100%; padding: 10px 14px; font-size: 14px;
+      border: 1px solid #B5D4F4; border-radius: 8px; outline: none;
+      background: #F5F9FF; color: #0C447C; margin-bottom: 12px;
+      transition: border-color 0.15s;
+    }
+    .gate-card input[type="password"]:focus { border-color: #378ADD; background: #fff; }
+    .gate-btn {
+      width: 100%; padding: 10px; font-size: 14px; font-weight: 600;
+      background: #378ADD; color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .gate-btn:hover { background: #185FA5; }
+    .gate-error { font-size: 12px; color: #993C1D; margin-top: 10px; display: none; }
+
+    /* MAIN APP */
+    #app { display: none; }
+
     /* HEADER */
     .site-header {
       background: #EAF3FB; border-bottom: 1px solid #B5D4F4;
@@ -47,24 +77,12 @@
     }
 
     /* CARD */
-    .card {
-      background: #fff; border: 1px solid #B5D4F4; border-radius: 12px;
-      padding: 20px 22px; margin-bottom: 16px;
-    }
+    .card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
     .card.needs-review { border-left: 4px solid #378ADD; }
-    .card-top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 12px; margin-bottom: 12px;
-    }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
     .card-title { font-size: 15px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
-    .card-meta {
-      font-size: 12px; color: #185FA5; display: flex;
-      align-items: center; gap: 8px; flex-wrap: wrap;
-    }
-    .type-badge {
-      font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
-      letter-spacing: 0.04em; text-transform: uppercase;
-    }
+    .card-meta { font-size: 12px; color: #185FA5; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .type-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
     .badge-html  { background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB; }
     .badge-plain { background: #F1EFE8; color: #5F5E5A; border: 1px solid #B4B2A9; }
     .review-badge {
@@ -72,10 +90,7 @@
       color: #185FA5; font-size: 11px; font-weight: 600; padding: 4px 12px;
       border-radius: 20px; white-space: nowrap; flex-shrink: 0;
     }
-    .pulse-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #378ADD;
-      animation: pulse 1.4s infinite; flex-shrink: 0;
-    }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
 
     /* PREVIEW TOGGLE */
@@ -83,110 +98,92 @@
       display: flex; border: 1px solid #B5D4F4; border-radius: 6px;
       overflow: hidden; width: fit-content; margin-bottom: 12px;
     }
-    .toggle-btn {
-      font-size: 11px; padding: 5px 14px; background: #fff; color: #185FA5;
-      border: none; cursor: pointer; font-weight: 500; transition: background 0.12s;
-    }
+    .toggle-btn { font-size: 11px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; transition: background 0.12s; }
     .toggle-btn.active { background: #EAF3FB; color: #0C447C; font-weight: 600; }
     .toggle-btn:first-child { border-right: 1px solid #B5D4F4; }
 
-    /* PLAIN TEXT PREVIEW */
-    .plain-preview {
-      background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px;
-      padding: 14px 16px; margin-bottom: 12px;
-    }
+    .plain-preview { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; }
     .email-row { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; font-size: 13px; }
     .email-row:last-child { margin-bottom: 0; }
     .email-day  { font-size: 11px; color: #378ADD; font-weight: 600; min-width: 38px; text-transform: uppercase; letter-spacing: 0.05em; }
     .email-subj { font-weight: 600; color: #0C447C; }
     .email-body { color: #444; line-height: 1.55; }
 
-    /* HTML PREVIEW */
-    .html-preview-wrap {
-      border: 1px solid #D1E5F7; border-radius: 8px; overflow: hidden; margin-bottom: 12px;
-    }
-    .html-rendered {
-      width: 100%; background: #fff; padding: 18px 22px; font-size: 13px; line-height: 1.7;
-    }
-    .html-rendered .ep-header {
-      background: #0C447C; color: #fff; padding: 14px 22px;
-      margin: -18px -22px 16px; font-size: 13px; font-weight: 600;
-    }
+    .html-preview-wrap { border: 1px solid #D1E5F7; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+    .html-rendered { width: 100%; background: #fff; padding: 18px 22px; font-size: 13px; line-height: 1.7; }
+    .html-rendered .ep-header { background: #0C447C; color: #fff; padding: 14px 22px; margin: -18px -22px 16px; font-size: 13px; font-weight: 600; }
     .html-rendered .ep-body { color: #333; }
-    .html-rendered .ep-cta {
-      display: inline-block; margin-top: 14px; background: #378ADD; color: #fff;
-      padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
-      text-decoration: none;
-    }
-    .html-rendered .ep-footer {
-      margin-top: 18px; font-size: 11px; color: #999;
-      border-top: 1px solid #eee; padding-top: 12px;
-    }
-    .raw-code {
-      background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px;
-      padding: 14px 16px; margin-bottom: 12px; font-family: 'Courier New', monospace;
-      font-size: 11px; color: #185FA5; line-height: 1.6; overflow-x: auto; white-space: pre;
-    }
-    .preview-note { font-size: 11px; color: #378ADD; margin-bottom: 10px; }
+    .html-rendered .ep-cta { display: inline-block; margin-top: 14px; background: #378ADD; color: #fff; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+    .html-rendered .ep-footer { margin-top: 18px; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 12px; }
+    .raw-code { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; font-family: 'Courier New', monospace; font-size: 11px; color: #185FA5; line-height: 1.6; overflow-x: auto; white-space: pre; }
 
-    /* ACTIONS */
     .card-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
     .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; }
     .btn-feedback { background: #EAF3FB; color: #185FA5; border-color: #85B7EB; }
     .btn-approve  { background: #EAF3DE; color: #3B6D11;  border-color: #97C459; }
     .btn-reject   { background: #FAECE7; color: #993C1D;  border-color: #F0997B; }
 
-    /* NOTES */
-    .rejection-note {
-      background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px;
-      padding: 12px 16px; font-size: 13px; color: #712B13; margin-top: 12px;
-    }
+    .rejection-note { background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #712B13; margin-top: 12px; }
     .rejection-note strong { display: block; font-weight: 600; margin-bottom: 4px; color: #993C1D; }
-    .approved-note {
-      background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px;
-      padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-top: 12px;
-    }
+    .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-top: 12px; }
     .approved-note strong { display: block; font-weight: 600; margin-bottom: 4px; }
 
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px;
-    }
+    .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
     .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
-
-    /* LOADING */
     #loading { text-align: center; padding: 60px; color: #378ADD; font-size: 14px; }
   </style>
 </head>
 <body>
 
-<div class="site-header">
-  <div class="site-logo">Prismm <span>/ Email Sequence Review</span></div>
-  <div class="header-meta" id="last-updated">Loading...</div>
-</div>
-
-<div class="tabs-bar">
-  <div class="tab active" onclick="switchTab('pending', this)">
-    Awaiting review <span class="tab-badge badge-pending" id="count-pending">—</span>
-  </div>
-  <div class="tab" onclick="switchTab('approved', this)">
-    Approved <span class="tab-badge badge-approved" id="count-approved">—</span>
-  </div>
-  <div class="tab" onclick="switchTab('rejected', this)">
-    Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span>
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">Prismm <span>/ Review Portal</span></div>
+    <div class="gate-subtitle">Email sequence review — team access only</div>
+    <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()" />
+    <button class="gate-btn" onclick="checkPw()">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect password. Please try again.</div>
   </div>
 </div>
 
-<div class="main">
-  <div id="loading">Loading sequences...</div>
+<!-- MAIN APP -->
+<div id="app">
+  <div class="site-header">
+    <div class="site-logo">Prismm <span>/ Email Sequence Review</span></div>
+    <div class="header-meta" id="last-updated">Loading...</div>
+  </div>
 
-  <div id="pending" class="tab-content" style="display:none;"></div>
-  <div id="approved" class="tab-content" style="display:none;"></div>
-  <div id="rejected" class="tab-content" style="display:none;"></div>
+  <div class="tabs-bar">
+    <div class="tab active" onclick="switchTab('pending', this)">Awaiting review <span class="tab-badge badge-pending" id="count-pending">—</span></div>
+    <div class="tab" onclick="switchTab('approved', this)">Approved <span class="tab-badge badge-approved" id="count-approved">—</span></div>
+    <div class="tab" onclick="switchTab('rejected', this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
+  </div>
+
+  <div class="main">
+    <div id="loading">Loading sequences...</div>
+    <div id="pending"  class="tab-content" style="display:none;"></div>
+    <div id="approved" class="tab-content" style="display:none;"></div>
+    <div id="rejected" class="tab-content" style="display:none;"></div>
+  </div>
 </div>
 
 <script>
+  const SITE_PASSWORD = 'prismm2026';
   const REPO_RAW = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
+
+  function checkPw() {
+    const val = document.getElementById('pw-input').value;
+    if (val === SITE_PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadData();
+    } else {
+      const err = document.getElementById('gate-error');
+      err.style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
 
   async function loadData() {
     try {
@@ -204,22 +201,17 @@
 
   function render(sequences, rejections) {
     document.getElementById('loading').style.display = 'none';
-
     const pending  = sequences.filter(s => s.status === 'pending');
     const approved = sequences.filter(s => s.status === 'approved');
     const rejected = sequences.filter(s => s.status === 'rejected');
-
     document.getElementById('count-pending').textContent  = pending.length;
     document.getElementById('count-approved').textContent = approved.length;
     document.getElementById('count-rejected').textContent = rejected.length;
-
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     document.getElementById('last-updated').textContent = 'keyona@rerev.io · Updated ' + now;
-
     renderTab('pending',  pending,  'pending');
     renderTab('approved', approved, 'approved');
     renderTab('rejected', rejected, 'rejected');
-
     document.getElementById('pending').classList.add('active');
     document.getElementById('pending').style.display = 'block';
   }
@@ -231,9 +223,10 @@
       el.innerHTML = '<div class="empty-state"><strong>' + labels[status] + '</strong><p>Sequences will appear here once pushed.</p></div>';
       return;
     }
-    const label = status === 'pending' ? sequences.length + ' sequence' + (sequences.length > 1 ? 's' : '') + ' awaiting review'
-      : status === 'approved' ? sequences.length + ' approved sequence' + (sequences.length > 1 ? 's' : '')
-      : sequences.length + ' rejected sequence' + (sequences.length > 1 ? 's' : '');
+    const count = sequences.length;
+    const label = status === 'pending' ? count + ' sequence' + (count > 1 ? 's' : '') + ' awaiting review'
+      : status === 'approved' ? count + ' approved sequence' + (count > 1 ? 's' : '')
+      : count + ' rejected sequence' + (count > 1 ? 's' : '');
     el.innerHTML = '<div class="section-label">' + label + '</div>' + sequences.map(renderCard).join('');
   }
 
@@ -241,21 +234,15 @@
     const typeBadge = seq.type === 'html'
       ? '<span class="type-badge badge-html">HTML</span>'
       : '<span class="type-badge badge-plain">Plain text</span>';
-
     const reviewBadge = seq.status === 'pending'
       ? '<div class="review-badge"><div class="pulse-dot"></div> Needs review</div>' : '';
-
     const cardClass = seq.status === 'pending' ? 'card needs-review' : 'card';
-
     const preview = renderPreview(seq);
     const note = renderNote(seq);
     const actions = seq.status === 'pending' ? `
       <div class="card-actions">
-        <a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+${encodeURIComponent(seq.title)}&body=**Sequence+ID:**+${seq.id}%0A%0A**Feedback:**%0A" target="_blank">Leave feedback (GitHub)</a>
-        <button class="btn btn-approve" onclick="alert('To approve: tell Keyona to update status in sequences.json')">Mark approved</button>
-        <button class="btn btn-reject"  onclick="alert('To reject: tell Keyona to update status in sequences.json')">Mark rejected</button>
+        <a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+${encodeURIComponent(seq.title)}&body=**Sequence+ID:**+${seq.id}%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>
       </div>` : '';
-
     return `<div class="${cardClass}">
       <div class="card-top">
         <div>
@@ -264,9 +251,7 @@
         </div>
         ${reviewBadge}
       </div>
-      ${preview}
-      ${note}
-      ${actions}
+      ${preview}${note}${actions}
     </div>`;
   }
 
@@ -277,7 +262,7 @@
           <span class="email-day">Day ${e.day}</span>
           <div><div class="email-subj">${e.subject}</div>${e.preview ? '<div class="email-body">' + e.preview + '</div>' : ''}</div>
         </div>`).join('');
-      const rawText = seq.emails.map(e => `Subject: ${e.subject}\n\n${e.body || e.preview || ''}`).join('\n\n---\n\n');
+      const rawText = seq.emails.map(e => 'Subject: ' + e.subject + '\n\n' + (e.body || e.preview || '')).join('\n\n---\n\n');
       return `
         <div class="preview-toggle">
           <button class="toggle-btn active" onclick="togglePreview('${seq.id}','preview',this)">Preview</button>
@@ -293,12 +278,12 @@
             <div class="html-rendered">
               <div class="ep-header">${e.subject}</div>
               <div class="ep-body">${e.htmlBody || e.preview || ''}</div>
-              ${e.ctaText ? '<a class="ep-cta" href="#">' + e.ctaText + ' →</a>' : ''}
-              <div class="ep-footer">Prismm · <a href="#" style="color:#999;">Unsubscribe</a></div>
+              ${e.ctaText ? '<a class="ep-cta" href="#">' + e.ctaText + ' \u2192</a>' : ''}
+              <div class="ep-footer">Prismm &middot; <a href="#" style="color:#999;">Unsubscribe</a></div>
             </div>
           </div>
         </div>`).join('');
-      const rawCode = seq.emails.map(e => `<!-- Day ${e.day}: ${e.subject} -->\n${e.rawHtml || e.htmlBody || ''}`).join('\n\n');
+      const rawCode = seq.emails.map(e => '<!-- Day ' + e.day + ': ' + e.subject + ' -->\n' + (e.rawHtml || e.htmlBody || '')).join('\n\n');
       return `
         <div class="preview-toggle">
           <button class="toggle-btn active" onclick="togglePreview('${seq.id}','rendered',this)">Rendered</button>
@@ -310,18 +295,15 @@
   }
 
   function renderNote(seq) {
-    if (seq.status === 'approved' && seq.approvalNote) {
-      return `<div class="approved-note"><strong>Why it worked</strong>${seq.approvalNote}</div>`;
-    }
-    if (seq.status === 'rejected' && seq.rejectionReason) {
-      return `<div class="rejection-note"><strong>Reason for rejection</strong>${seq.rejectionReason}</div>`;
-    }
+    if (seq.status === 'approved' && seq.approvalNote)
+      return '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>';
+    if (seq.status === 'rejected' && seq.rejectionReason)
+      return '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>';
     return '';
   }
 
   function togglePreview(id, view, btn) {
-    const all = btn.closest('.preview-toggle').querySelectorAll('.toggle-btn');
-    all.forEach(b => b.classList.remove('active'));
+    btn.closest('.preview-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const rendered = document.getElementById(id + '-rendered');
     const preview  = document.getElementById(id + '-preview');
@@ -348,8 +330,6 @@
   function escHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
-
-  loadData();
 </script>
 </body>
 </html>
