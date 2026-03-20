@@ -10,9 +10,23 @@
       "emailCount": 3,
       "cadence": "6-week cadence",
       "sender": "Martha",
+      "targetAudience": "Credit union executives met at industry events",
       "sequenceFile": "sequences/seq-001-conference-outreach.html",
-      "approvalNote": "Approved by Martha and Shella. Sequence uses A/B versions per email keyed to contact title and communication style. Email 2 collaborative invite angle was well-received. Timing rationale (48hr / 10-14d / 14d) was explicitly called out as intentional and approved as-is.",
-      "usageNote": "Use for any contact made at an in-person or virtual industry event. Do not use for cold contacts with no event connection, or for warm intro referrals."
+      "approvalNote": "Approved by Martha and Shella. A/B versions per email keyed to contact title. Email 2 collaborative invite angle well-received. Timing rationale approved as-is.",
+      "usageNote": "Use for any contact made at an in-person or virtual industry event. Do not use for cold contacts or warm intro referrals."
+    },
+    {
+      "id": "seq-002",
+      "title": "Cold Outreach — Community Bank VP/EVP (Southeast)",
+      "status": "pending",
+      "type": "plain",
+      "pushedDate": "Mar 20, 2026",
+      "emailCount": 4,
+      "cadence": "18-day cadence",
+      "sender": "Roland Mercer",
+      "targetAudience": "VP/EVP at community banks, $500M–$1B assets, Southeast & Mid-Atlantic",
+      "sequenceFile": "sequences/seq-002-cold-cb-vpevp-southeast.html",
+      "usageNote": "Angle: invisible attrition — member relationships lost when primary account holder dies. Do not use for event contacts, CDFIs, or institutions over $2B. Batch 1."
     }
   ]
 }
