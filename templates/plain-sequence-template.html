@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prismm — SEQUENCE TITLE HERE</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f2f0eb;
+    --surface: #ffffff;
+    --surface-alt: #f8f7f4;
+    --border: #e2ddd6;
+    --border-strong: #c8c2b8;
+    --text-primary: #1a1814;
+    --text-secondary: #6b6560;
+    --text-muted: #9c9690;
+    --accent: #2d5a3d;
+    --accent-light: #eef4f0;
+    --accent-mid: #c8dece;
+    --tag-a: #1e3a5f;
+    --tag-a-bg: #e8eef5;
+    --tag-b: #5a2d1e;
+    --tag-b-bg: #f5ece8;
+    --divider: #ede9e3;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  /* PAGE HEADER */
+  .page-header { max-width: 720px; margin: 0 auto 40px; }
+  .page-header h1 { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .page-header p { font-size: 22px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+  .page-header .sub { font-size: 14px; font-weight: 400; color: var(--text-secondary); margin-top: 8px; line-height: 1.6; }
+
+  /* TIMELINE */
+  .timeline { max-width: 720px; margin: 0 auto 48px; display: flex; align-items: center; }
+  .timeline-step { flex: 1; text-align: center; position: relative; }
+  .timeline-step:not(:last-child)::after { content: ''; position: absolute; top: 14px; left: calc(50% + 14px); right: -1px; width: calc(100% - 28px); height: 1px; background: var(--border-strong); }
+  .timeline-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+  .timeline-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; font-weight: 400; }
+  .timeline-label strong { display: block; color: var(--text-secondary); font-weight: 500; font-size: 12px; margin-bottom: 2px; }
+
+  /* EMAIL BLOCK */
+  .email-block { max-width: 720px; margin: 0 auto 32px; }
+  .email-block-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-bottom: 10px; padding-left: 2px; font-family: 'DM Mono', monospace; }
+
+  /* A/B PAIR */
+  .ab-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .ab-pair { grid-template-columns: 1fr; } }
+
+  /* SINGLE EMAIL (no A/B) */
+  .single { display: grid; grid-template-columns: 1fr; }
+
+  /* EMAIL CARD */
+  .email-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .email-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .version-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; }
+  .version-tag.a { background: var(--tag-a-bg); color: var(--tag-a); }
+  .version-tag.b { background: var(--tag-b-bg); color: var(--tag-b); }
+  .version-tag.single { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border); }
+  .email-meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: 12px; }
+  .email-meta-label { color: var(--text-muted); font-weight: 400; white-space: nowrap; }
+  .email-meta-value { color: var(--text-secondary); font-weight: 400; }
+  .email-meta-value.subject { color: var(--text-primary); font-weight: 500; }
+  .email-body { padding: 18px 16px 20px; font-size: 14px; line-height: 1.75; color: var(--text-primary); font-weight: 300; }
+  .email-body p { margin-bottom: 14px; }
+  .email-body p:last-child { margin-bottom: 0; }
+  .token { font-family: 'DM Mono', monospace; font-size: 12px; background: #fff8e6; color: #8a6000; padding: 1px 4px; border-radius: 2px; border: 1px solid #f0d878; }
+
+  /* RATIONALE */
+  .email-rationale { padding: 10px 16px 12px; border-top: 1px solid var(--divider); background: var(--surface-alt); }
+  .rationale-label { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .rationale-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+
+  /* USE GUIDANCE */
+  .use-guidance { max-width: 720px; margin: -18px auto 32px; background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 4px; padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  @media (max-width: 600px) { .use-guidance { grid-template-columns: 1fr; } }
+  .use-guidance-item { font-size: 12px; color: var(--accent); line-height: 1.5; }
+  .use-guidance-item strong { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; display: block; margin-bottom: 2px; color: var(--accent); opacity: 0.7; text-transform: uppercase; }
+
+  /* TIMING CALLOUT */
+  .timing-callout { max-width: 720px; margin: -18px auto 32px; padding: 10px 16px; border-left: 3px solid var(--border-strong); background: var(--surface); }
+  .timing-callout p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+  .timing-callout strong { color: var(--text-primary); font-weight: 500; }
+
+  /* SECTION DIVIDER */
+  .section-divider { max-width: 720px; margin: 8px auto 32px; display: flex; align-items: center; gap: 12px; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-divider span { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); white-space: nowrap; letter-spacing: 0.08em; }
+
+  /* CRM TAGS */
+  .crm-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .crm-header { padding: 12px 16px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-header h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; }
+  .crm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .crm-table th { text-align: left; padding: 10px 16px; font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-table td { padding: 10px 16px; border-bottom: 1px solid var(--divider); color: var(--text-primary); vertical-align: top; line-height: 1.5; }
+  .crm-table tr:last-child td { border-bottom: none; }
+  .crm-table td:first-child { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a6000; background: #fffdf5; white-space: nowrap; }
+  .crm-table td:nth-child(3) { font-size: 12px; color: var(--text-secondary); }
+
+  /* AMBIENT / TRIGGERS */
+  .ambient-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 20px; }
+  .ambient-section h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; margin-bottom: 14px; }
+  .trigger-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 500px) { .trigger-list { grid-template-columns: 1fr; } }
+  .trigger-list li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-left: 16px; position: relative; }
+  .trigger-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--border-strong); }
+  .ambient-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--divider); font-size: 12px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+
+  /* FOOTER */
+  .page-footer { max-width: 720px; margin: 0 auto; text-align: center; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); letter-spacing: 0.06em; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  PAGE HEADER
+  h1 = playbook category (e.g. "Prismm Sales Playbook")
+  p   = sequence title
+  sub = usage scope / when to use vs not use this sequence
+============================================================ -->
+<div class="page-header">
+  <h1>Prismm Sales Playbook</h1>
+  <p>SEQUENCE TITLE HERE</p>
+  <p class="sub">USAGE SCOPE: When to use this sequence. When NOT to use it.</p>
+</div>
+
+<!-- ============================================================
+  TIMELINE
+  Add/remove .timeline-step blocks to match email count.
+  Last step is typically "Ambient" or "End".
+  Dot label: E1, E2, E3... or ~ for ambient
+============================================================ -->
+<div class="timeline">
+  <div class="timeline-step">
+    <div class="timeline-dot">E1</div>
+    <div class="timeline-label"><strong>Email 1</strong>TIMING</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">E2</div>
+    <div class="timeline-label"><strong>Email 2</strong>TIMING</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">E3</div>
+    <div class="timeline-label"><strong>Email 3</strong>TIMING</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">~</div>
+    <div class="timeline-label"><strong>Ambient</strong>Until trigger</div>
+  </div>
+</div>
+
+<!-- ============================================================
+  EMAIL 1
+  Use .ab-pair for A/B versions, .single for one version only.
+  version-tag classes: a, b, or single
+============================================================ -->
+<div class="email-block">
+  <div class="email-block-label">Email 1 &mdash; NAME &mdash; TIMING</div>
+  <div class="ab-pair">
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag a">Version A &mdash; LABEL</div>
+        <div class="email-meta">
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">SUBJECT LINE</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>EMAIL BODY PARAGRAPH.</p>
+        <p>SIGN OFF NAME</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">RATIONALE FOR VERSION A.</div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag b">Version B &mdash; LABEL</div>
+        <div class="email-meta">
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">SUBJECT LINE</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>EMAIL BODY PARAGRAPH.</p>
+        <p>SIGN OFF NAME</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">RATIONALE FOR VERSION B.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Use guidance below each email pair -->
+<div class="use-guidance">
+  <div class="use-guidance-item">
+    <strong>Use Version A for</strong>
+    AUDIENCE DESCRIPTION
+  </div>
+  <div class="use-guidance-item">
+    <strong>Use Version B for</strong>
+    AUDIENCE DESCRIPTION
+  </div>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- ============================================================
+  EMAIL 2 — copy email-block pattern above, update label + content
+============================================================ -->
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- ============================================================
+  EMAIL 3 — copy email-block pattern above, update label + content
+============================================================ -->
+
+<!-- ============================================================
+  OPTIONAL: TIMING CALLOUT
+  Use for operational notes that must precede or follow an email.
+============================================================ -->
+<!-- 
+<div class="timing-callout">
+  <p><strong>Note:</strong> OPERATIONAL NOTE HERE.</p>
+</div>
+-->
+
+<div class="section-divider"><span>after email 3</span></div>
+
+<!-- ============================================================
+  CRM TAGS TABLE
+  Add/remove rows for each merge tag used in this sequence.
+============================================================ -->
+<div class="email-block">
+  <div class="email-block-label">CRM Tags Required Before Starting Sequence</div>
+  <div class="crm-section">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th>Tag</th>
+          <th>Field</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{first_name}}</td>
+          <td>Contact first name</td>
+          <td>Required. Used in every email.</td>
+        </tr>
+        <!-- ADD MORE TAGS HERE -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================
+  AMBIENT / RESTART TRIGGERS
+  List conditions that re-open outreach after sequence ends.
+============================================================ -->
+<div class="email-block">
+  <div class="email-block-label">After Email 3 &mdash; Ambient Only Until a Restart Trigger</div>
+  <div class="ambient-section">
+    <h3>Restart Triggers</h3>
+    <ul class="trigger-list">
+      <li>TRIGGER ONE</li>
+      <li>TRIGGER TWO</li>
+      <li>TRIGGER THREE</li>
+      <li>TRIGGER FOUR</li>
+    </ul>
+    <p class="ambient-note">When a restart trigger fires, treat the outreach as a warm re-introduction, not a continuation of the original sequence.</p>
+  </div>
+</div>
+
+<div class="page-footer">Prismm Outreach Playbook &mdash; TRACK NAME &mdash; Internal Use Only</div>
+
+</body>
+</html>
