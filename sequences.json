@@ -10,29 +10,9 @@
       "emailCount": 3,
       "cadence": "6-week cadence",
       "sender": "Martha",
+      "sequenceFile": "sequences/seq-001-conference-outreach.html",
       "approvalNote": "Approved by Martha and Shella. Sequence uses A/B versions per email keyed to contact title and communication style. Email 2 collaborative invite angle was well-received. Timing rationale (48hr / 10-14d / 14d) was explicitly called out as intentional and approved as-is.",
-      "emails": [
-        {
-          "day": 1,
-          "subject": "From the {{event_name}} (Version A) / Good to meet you at {{event_name}} (Version B)",
-          "preview": "Version A (Direct): Names Prismm and value prop in one sentence. Best for ops/tech/product titles. Version B (Peer Energy): Positions as peer, not founder in sales mode. Best for C-suite and VP-level.",
-          "body": "VERSION A:\n\n{{first_name}},\n\nWe only had a few minutes {{event_day}} but I'm glad we crossed paths.\n\nI'm building Prismm, a white-label digital vault that credit unions offer to members for estate and beneficiary planning, so when a member dies the institution is already embedded in what comes next instead of getting cut out of it. I'd love to hear how {{institution_name}} is thinking about that moment right now.\n\nOpen to a short call in the next few weeks?\n\nKeyona\n\n---\n\nVERSION B:\n\n{{first_name}},\n\nWish we'd had more time to talk {{event_day}}, the cocktail hour moves fast.\n\nI'm working on something called Prismm, a white-label platform that helps credit unions stay in the picture when a member dies and the family has to figure out what comes next. It sits at the intersection of estate planning and member retention, which {{role_relevance}} I suspect you've felt the gap firsthand.\n\nI'd genuinely love to hear your perspective on how {{institution_name}} approaches it. No deck, just a conversation.\n\nKeyona"
-        },
-        {
-          "day": 14,
-          "subject": "Quick question + something you might want to be part of (Version A) / For a piece we're publishing on generational member retention (Version B)",
-          "preview": "Version A (Warm Invite): Soft re-entry, resets thread. Best for contacts who went cold quietly. Version B (Specific Question): Direct framing with 'wish it could do' opening. Best for data-oriented contacts.",
-          "body": "VERSION A:\n\n{{first_name}},\n\nFollowing up on my note from a couple weeks ago, and also wanted to reach out about something separate.\n\nWe're putting together a short piece on how credit unions are navigating member retention across generations, specifically the moment a primary member dies and what happens to that relationship. We're pulling in perspectives from a handful of people in member experience roles and I'd love to include yours if you're open to it. One or two sentences on how {{institution_name}} thinks about that moment is all we'd need.\n\nHappy to share the piece with you before it publishes.\n\nKeyona\n\n---\n\nVERSION B:\n\n{{first_name}},\n\nWanted to follow up on my note from a couple weeks ago, and also flag something that might be relevant to you.\n\nWe're publishing a piece on generational member retention and reaching out to a few VP-level voices in member experience for perspective. The core question is simple: what does your institution do, or wish it could do, at the moment a primary member dies and the family has to decide what comes next?\n\nNo more than a sentence or two from you. We'd send you the piece before it goes out.\n\nWorth it?\n\nKeyona"
-        },
-        {
-          "day": 28,
-          "subject": "Closing the loop (Version A) / Last note for now (Version B)",
-          "preview": "Version A (Light & Clean): Default close, no prior engagement. Gracious, brief, event callback. Version B (One Last Offer): Keeps both doors open. Use when contact engaged at any point then went quiet.",
-          "body": "VERSION A:\n\n{{first_name}},\n\nI've sent a couple of notes and don't want to keep cluttering your inbox.\n\nIf the timing isn't right or it's just not relevant to where {{institution_name}} is right now, totally understand. If things shift down the road I'd love to reconnect.\n\nEither way, glad we crossed paths at {{event_name}}.\n\nKeyona\n\n---\n\nVERSION B:\n\n{{first_name}},\n\nLast note from me for a while, I promise.\n\nIf the piece on generational member retention is something you'd still want to weigh in on, the offer stands. And if a conversation about what we're building at Prismm ever makes sense, I'm easy to find.\n\nHope {{institution_name}} is having a good spring.\n\nKeyona"
-        }
-      ],
-      "crmTags": ["{{first_name}}", "{{event_name}}", "{{event_day}}", "{{institution_name}}", "{{role_relevance}}"],
-      "usageNote": "Use for any contact made at an in-person or virtual industry event. Do not use for cold contacts with no event connection, or for warm intro referrals (separate playbook). Email 2 collaborative invite only works if the referenced piece actually exists or is in progress — coordinate with content calendar before sending."
+      "usageNote": "Use for any contact made at an in-person or virtual industry event. Do not use for cold contacts with no event connection, or for warm intro referrals."
     }
   ]
 }
