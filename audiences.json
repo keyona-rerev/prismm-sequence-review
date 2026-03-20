@@ -1,0 +1,18 @@
+{
+  "audiences": [
+    {
+      "id": "cu-conference",
+      "name": "Credit union — event contact",
+      "segment": "Credit union",
+      "targetTitles": ["CRO", "VP Member Experience", "Chief Experience Officer", "CAO"],
+      "assetSize": "$250M–$2B",
+      "geo": "National",
+      "trigger": "In-person or virtual industry event encounter",
+      "painPoint": "Member attrition at life transition moments — death of primary member, beneficiary handoff, estate decisions. Institution gets cut out of what comes next.",
+      "angle": "Prismm keeps the institution embedded in the member relationship beyond death — estate planning as retention infrastructure.",
+      "whyDistinct": "Warmth from in-person encounter changes the opener entirely. The 48hr window post-event is the highest-leverage outreach moment. Generic cold copy would waste it.",
+      "sequences": ["seq-001"],
+      "tags": ["credit-union", "conference", "warm-contact", "event"]
+    }
+  ]
+}
