@@ -8,7 +8,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F6FF; color: #1a1a2e; min-height: 100vh; }
 
-    /* GATE */
     #gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #F0F6FF; }
     .gate-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 16px; padding: 40px 48px; max-width: 380px; width: 90%; text-align: center; }
     .gate-logo { font-size: 14px; font-weight: 600; color: #0C447C; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
@@ -16,36 +15,32 @@
     .gate-subtitle { font-size: 13px; color: #185FA5; margin-bottom: 28px; }
     .gate-card input[type="password"] { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #B5D4F4; border-radius: 8px; outline: none; background: #F5F9FF; color: #0C447C; margin-bottom: 12px; transition: border-color 0.15s; }
     .gate-card input[type="password"]:focus { border-color: #378ADD; background: #fff; }
-    .gate-btn { width: 100%; padding: 10px; font-size: 14px; font-weight: 600; background: #378ADD; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+    .gate-btn { width: 100%; padding: 10px; font-size: 14px; font-weight: 600; background: #378ADD; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
     .gate-btn:hover { background: #185FA5; }
     .gate-error { font-size: 12px; color: #993C1D; margin-top: 10px; display: none; }
 
-    /* APP */
     #app { display: none; }
 
-    /* HEADER */
     .site-header { background: #EAF3FB; border-bottom: 1px solid #B5D4F4; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
     .site-logo { font-size: 15px; font-weight: 600; color: #0C447C; letter-spacing: 0.05em; text-transform: uppercase; }
     .site-logo span { color: #378ADD; font-weight: 400; }
     .header-meta { font-size: 12px; color: #185FA5; }
 
-    /* TABS */
     .tabs-bar { display: flex; gap: 4px; padding: 16px 32px 0; background: #EAF3FB; border-bottom: 2px solid #B5D4F4; overflow-x: auto; }
-    .tab { padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; background: transparent; display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background 0.15s; }
+    .tab { padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; background: transparent; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
     .tab.active { background: #fff; border-color: #B5D4F4; border-bottom-color: #fff; font-weight: 600; color: #0C447C; margin-bottom: -2px; }
     .tab-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
     .badge-pending  { background: #FAEEDA; color: #854F0B; }
     .badge-approved { background: #EAF3DE; color: #3B6D11; }
     .badge-rejected { background: #FAECE7; color: #993C1D; }
     .badge-scenario { background: #EAF3FB; color: #185FA5; }
+    .badge-audience { background: #F2EAF9; color: #6B3A9C; }
 
-    /* MAIN */
     .main { padding: 28px 32px; max-width: 860px; margin: 0 auto; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     .section-label { font-size: 11px; color: #378ADD; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
 
-    /* REVIEW CARDS */
     .card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
     .card.needs-review { border-left: 4px solid #378ADD; }
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
@@ -58,40 +53,60 @@
     .review-badge { display: flex; align-items: center; gap: 6px; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
     .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
-
     .usage-note { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #185FA5; margin-bottom: 12px; line-height: 1.55; }
-
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; text-decoration: none; display: inline-block; }
     .btn-view     { background: #0C447C; color: #fff; border-color: #0C447C; }
-    .btn-view:hover { background: #185FA5; border-color: #185FA5; }
+    .btn-view:hover { background: #185FA5; }
     .btn-feedback { background: #EAF3FB; color: #185FA5; border-color: #85B7EB; }
-    .btn-approve  { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
-    .btn-reject   { background: #FAECE7; color: #993C1D; border-color: #F0997B; }
-
     .rejection-note { background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #712B13; margin-bottom: 12px; }
     .rejection-note strong { display: block; font-weight: 600; margin-bottom: 4px; color: #993C1D; }
     .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-bottom: 12px; }
     .approved-note strong { display: block; font-weight: 600; margin-bottom: 4px; }
 
-    /* SCENARIO CARDS */
     .scenario-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; }
-    .scenario-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
     .scenario-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
     .scenario-audience { font-size: 13px; font-weight: 600; color: #378ADD; margin-bottom: 6px; }
     .scenario-description { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 14px; }
-    .scenario-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+    .scenario-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
     .scenario-tag { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: #EAF3FB; color: #185FA5; border: 1px solid #B5D4F4; }
     .scenario-tag.trigger { background: #FAEEDA; color: #854F0B; border-color: #FAC775; }
     .scenario-tag.asset { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
     .scenario-divider { border: none; border-top: 1px solid #D1E5F7; margin: 14px 0; }
     .scenario-sequences-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 10px; }
-    .scenario-seq-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; gap: 12px; flex-wrap: wrap; }
+    .scenario-seq-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
     .scenario-seq-info { font-size: 13px; color: #0C447C; font-weight: 500; }
     .scenario-seq-meta { font-size: 11px; color: #185FA5; margin-top: 2px; }
-    .scenario-seq-actions { display: flex; gap: 8px; }
     .typical-titles { font-size: 12px; color: #185FA5; line-height: 1.6; }
     .typical-titles strong { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 4px; }
+
+    /* AUDIENCE TAB */
+    .aud-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .view-toggle { display: flex; border: 1px solid #B5D4F4; border-radius: 6px; overflow: hidden; }
+    .view-btn { font-size: 12px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; }
+    .view-btn.active { background: #EAF3FB; color: #0C447C; font-weight: 600; }
+    .view-btn:first-child { border-right: 1px solid #B5D4F4; }
+
+    .aud-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .aud-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; border-left: 4px solid #6B3A9C; }
+    .aud-segment { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6B3A9C; margin-bottom: 5px; }
+    .aud-name { font-size: 14px; font-weight: 600; color: #0C447C; margin-bottom: 3px; }
+    .aud-titles { font-size: 12px; color: #185FA5; margin-bottom: 10px; line-height: 1.5; }
+    .aud-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .aud-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+    .aud-tag-asset { background: #EAF3DE; color: #3B6D11; }
+    .aud-tag-geo   { background: #EAF3FB; color: #185FA5; }
+    .aud-angle { font-size: 12px; color: #444; line-height: 1.55; border-top: 1px solid #D1E5F7; padding-top: 10px; margin-top: 4px; }
+    .aud-angle strong { display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 3px; }
+    .aud-seq-link { margin-top: 10px; }
+
+    .aud-list-table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; }
+    .aud-list-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .aud-list-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; color: #1a1a2e; vertical-align: top; line-height: 1.5; }
+    .aud-list-table tr:last-child td { border-bottom: none; }
+    .aud-list-table td:first-child { border-left: 4px solid #6B3A9C; padding-left: 12px; }
+    .aud-list-name { font-weight: 600; font-size: 13px; color: #0C447C; }
+    .aud-list-titles { font-size: 12px; color: #185FA5; margin-top: 2px; }
 
     .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
     .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
@@ -121,6 +136,7 @@
     <div class="tab" onclick="switchTab('approved',this)">Approved <span class="tab-badge badge-approved" id="count-approved">—</span></div>
     <div class="tab" onclick="switchTab('rejected',this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
     <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
+    <div class="tab" onclick="switchTab('audiences',this)">Audiences <span class="tab-badge badge-audience" id="count-audiences">—</span></div>
   </div>
 
   <div class="main">
@@ -129,13 +145,15 @@
     <div id="approved"  class="tab-content" style="display:none;"></div>
     <div id="rejected"  class="tab-content" style="display:none;"></div>
     <div id="scenarios" class="tab-content" style="display:none;"></div>
+    <div id="audiences" class="tab-content" style="display:none;"></div>
   </div>
 </div>
 
 <script>
   const SITE_PASSWORD = 'prismm2026';
-  const REPO_RAW  = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
+  const REPO_RAW   = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
   const PAGES_BASE = 'https://keyona-rerev.github.io/prismm-sequence-review';
+  let audView = 'card';
 
   function checkPw() {
     if (document.getElementById('pw-input').value === SITE_PASSWORD) {
@@ -151,30 +169,33 @@
 
   async function loadData() {
     try {
-      const [seqRes, rejRes, scRes] = await Promise.all([
+      const [seqRes, rejRes, scRes, audRes] = await Promise.all([
         fetch(REPO_RAW + '/sequences.json?t=' + Date.now()),
         fetch(REPO_RAW + '/rejections.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/scenarios.json?t=' + Date.now())
+        fetch(REPO_RAW + '/scenarios.json?t=' + Date.now()),
+        fetch(REPO_RAW + '/audiences.json?t=' + Date.now())
       ]);
       const seqData = await seqRes.json();
       const rejData = await rejRes.json();
       const scData  = await scRes.json();
-      render(seqData.sequences, rejData.rejections, scData.scenarios);
+      const audData = await audRes.json();
+      render(seqData.sequences, rejData.rejections, scData.scenarios, audData.audiences);
     } catch(e) {
       document.getElementById('loading').textContent = 'Failed to load. Please refresh.';
     }
   }
 
-  function render(sequences, rejections, scenarios) {
+  function render(sequences, rejections, scenarios, audiences) {
     document.getElementById('loading').style.display = 'none';
     const pending  = sequences.filter(s => s.status === 'pending');
     const approved = sequences.filter(s => s.status === 'approved');
     const rejected = sequences.filter(s => s.status === 'rejected');
 
-    document.getElementById('count-pending').textContent  = pending.length;
-    document.getElementById('count-approved').textContent = approved.length;
-    document.getElementById('count-rejected').textContent = rejected.length;
+    document.getElementById('count-pending').textContent   = pending.length;
+    document.getElementById('count-approved').textContent  = approved.length;
+    document.getElementById('count-rejected').textContent  = rejected.length;
     document.getElementById('count-scenarios').textContent = scenarios.length;
+    document.getElementById('count-audiences').textContent = audiences.length;
 
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     document.getElementById('last-updated').textContent = 'keyona@rerev.io · Updated ' + now;
@@ -183,6 +204,7 @@
     renderReviewTab('approved', approved, 'approved');
     renderReviewTab('rejected', rejected, 'rejected');
     renderScenariosTab(scenarios, sequences);
+    renderAudiencesTab(audiences, sequences);
 
     document.getElementById('pending').classList.add('active');
     document.getElementById('pending').style.display = 'block';
@@ -203,85 +225,98 @@
   }
 
   function renderReviewCard(seq, status) {
-    const typeBadge = seq.type === 'html'
-      ? '<span class="type-badge badge-html">HTML</span>'
-      : '<span class="type-badge badge-plain">Plain text</span>';
-    const reviewBadge = status === 'pending'
-      ? '<div class="review-badge"><div class="pulse-dot"></div> Needs review</div>' : '';
+    const typeBadge = seq.type === 'html' ? '<span class="type-badge badge-html">HTML</span>' : '<span class="type-badge badge-plain">Plain text</span>';
+    const reviewBadge = status === 'pending' ? '<div class="review-badge"><div class="pulse-dot"></div> Needs review</div>' : '';
     const cardClass = status === 'pending' ? 'card needs-review' : 'card';
-    const viewBtn = seq.sequenceFile
-      ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>' : '';
-    const feedbackBtn = status === 'pending'
-      ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>' : '';
-    const note = status === 'approved' && seq.approvalNote
-      ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
-      : status === 'rejected' && seq.rejectionReason
-      ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>' : '';
-    const usageNote = seq.usageNote
-      ? '<div class="usage-note">' + seq.usageNote + '</div>' : '';
-
-    return '<div class="' + cardClass + '">' +
-      '<div class="card-top">' +
-        '<div>' +
-          '<div class="card-title">' + seq.title + '</div>' +
-          (seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : '') +
-          '<div class="card-meta">' + seq.pushedDate + ' &middot; ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' &middot; ' + seq.cadence + ' ' + typeBadge + '</div>' +
-        '</div>' +
-        reviewBadge +
-      '</div>' +
-      usageNote + note +
-      '<div class="card-actions">' + viewBtn + feedbackBtn + '</div>' +
-    '</div>';
+    const viewBtn = seq.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>' : '';
+    const feedbackBtn = status === 'pending' ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>' : '';
+    const note = status === 'approved' && seq.approvalNote ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
+      : status === 'rejected' && seq.rejectionReason ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>' : '';
+    const usageNote = seq.usageNote ? '<div class="usage-note">' + seq.usageNote + '</div>' : '';
+    return '<div class="' + cardClass + '"><div class="card-top"><div>' +
+      '<div class="card-title">' + seq.title + '</div>' +
+      (seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : '') +
+      '<div class="card-meta">' + seq.pushedDate + ' &middot; ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' &middot; ' + seq.cadence + ' ' + typeBadge + '</div>' +
+      '</div>' + reviewBadge + '</div>' + usageNote + note +
+      '<div class="card-actions">' + viewBtn + feedbackBtn + '</div></div>';
   }
 
   function renderScenariosTab(scenarios, sequences) {
     const el = document.getElementById('scenarios');
-    if (!scenarios.length) {
-      el.innerHTML = '<div class="empty-state"><strong>No scenarios defined yet.</strong><p>Scenarios will appear here as sequences are cataloged.</p></div>';
-      return;
-    }
+    if (!scenarios.length) { el.innerHTML = '<div class="empty-state"><strong>No scenarios yet.</strong></div>'; return; }
     el.innerHTML = '<div class="section-label">' + scenarios.length + ' scenario' + (scenarios.length > 1 ? 's' : '') + '</div>' +
-      scenarios.map(sc => renderScenarioCard(sc, sequences)).join('');
+      scenarios.map(sc => {
+        const linkedSeqs = sequences.filter(s => sc.sequences.includes(s.id));
+        const triggerTag = sc.trigger ? '<span class="scenario-tag trigger">Trigger: ' + sc.trigger + '</span>' : '';
+        const assetTag = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
+        const tags = (sc.tags || []).map(t => '<span class="scenario-tag">' + t + '</span>').join('');
+        const titles = sc.typicalTitles && sc.typicalTitles.length ? '<div class="typical-titles"><strong>Typical titles</strong>' + sc.typicalTitles.join(', ') + '</div>' : '';
+        const seqRows = linkedSeqs.map(s => {
+          const viewBtn = s.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">View sequence</a>' : '';
+          const statusBadge = s.status === 'approved' ? '<span class="scenario-tag" style="background:#EAF3DE;color:#3B6D11;border-color:#97C459;">Approved</span>'
+            : s.status === 'pending' ? '<span class="scenario-tag" style="background:#FAEEDA;color:#854F0B;border-color:#FAC775;">Pending</span>'
+            : '<span class="scenario-tag" style="background:#FAECE7;color:#993C1D;border-color:#F0997B;">Rejected</span>';
+          return '<div class="scenario-seq-row"><div><div class="scenario-seq-info">' + s.title + ' &nbsp;' + statusBadge + '</div><div class="scenario-seq-meta">' + s.emailCount + ' emails &middot; ' + s.cadence + '</div></div><div>' + viewBtn + '</div></div>';
+        }).join('');
+        return '<div class="scenario-card"><div class="scenario-name">' + sc.name + '</div><div class="scenario-audience">' + sc.targetAudience + '</div>' +
+          '<div class="scenario-description">' + sc.description + '</div>' +
+          '<div class="scenario-meta-row">' + triggerTag + assetTag + tags + '</div>' + titles +
+          '<hr class="scenario-divider"><div class="scenario-sequences-label">Sequences in this scenario</div>' +
+          (seqRows || '<div style="font-size:13px;color:#185FA5;">No sequences linked yet.</div>') + '</div>';
+      }).join('');
   }
 
-  function renderScenarioCard(sc, sequences) {
-    const linkedSeqs = sequences.filter(s => sc.sequences.includes(s.id));
-    const tags = (sc.tags || []).map(t => '<span class="scenario-tag">' + t + '</span>').join('');
-    const triggerTag = sc.trigger ? '<span class="scenario-tag trigger">Trigger: ' + sc.trigger + '</span>' : '';
-    const assetTag = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
-    const titles = sc.typicalTitles && sc.typicalTitles.length
-      ? '<div class="typical-titles"><strong>Typical titles</strong>' + sc.typicalTitles.join(', ') + '</div>' : '';
-    const seqRows = linkedSeqs.map(s => {
-      const viewBtn = s.sequenceFile
-        ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">View sequence</a>' : '';
-      const statusBadge = s.status === 'approved'
-        ? '<span class="scenario-tag" style="background:#EAF3DE;color:#3B6D11;border-color:#97C459;">Approved</span>'
-        : s.status === 'pending'
-        ? '<span class="scenario-tag" style="background:#FAEEDA;color:#854F0B;border-color:#FAC775;">Pending review</span>'
-        : '<span class="scenario-tag" style="background:#FAECE7;color:#993C1D;border-color:#F0997B;">Rejected</span>';
-      return '<div class="scenario-seq-row">' +
-        '<div>' +
-          '<div class="scenario-seq-info">' + s.title + ' &nbsp;' + statusBadge + '</div>' +
-          '<div class="scenario-seq-meta">' + s.emailCount + ' emails &middot; ' + s.cadence + '</div>' +
-        '</div>' +
-        '<div class="scenario-seq-actions">' + viewBtn + '</div>' +
-      '</div>';
-    }).join('');
+  function renderAudiencesTab(audiences, sequences) {
+    const el = document.getElementById('audiences');
+    el.innerHTML = '<div class="aud-toolbar">' +
+      '<div class="section-label" style="margin:0;">' + audiences.length + ' ICP profile' + (audiences.length !== 1 ? 's' : '') + ' with sequences</div>' +
+      '<div class="view-toggle">' +
+        '<button class="view-btn active" id="aud-card-btn" onclick="setAudView(\'card\')">Cards</button>' +
+        '<button class="view-btn" id="aud-list-btn" onclick="setAudView(\'list\')">List</button>' +
+      '</div></div>' +
+      '<div id="aud-card-view" class="aud-grid">' + audiences.map(a => renderAudCard(a, sequences)).join('') + '</div>' +
+      '<div id="aud-list-view" style="display:none;">' + renderAudList(audiences, sequences) + '</div>';
+  }
 
-    return '<div class="scenario-card">' +
-      '<div class="scenario-card-top">' +
-        '<div style="flex:1;">' +
-          '<div class="scenario-name">' + sc.name + '</div>' +
-          '<div class="scenario-audience">' + sc.targetAudience + '</div>' +
-        '</div>' +
+  function renderAudCard(a, sequences) {
+    const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
+    const seqLinks = linkedSeqs.map(s =>
+      s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:4px 12px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : ''
+    ).join('');
+    return '<div class="aud-card">' +
+      '<div class="aud-segment">' + a.segment + '</div>' +
+      '<div class="aud-name">' + a.name + '</div>' +
+      '<div class="aud-titles">' + a.targetTitles.join(', ') + '</div>' +
+      '<div class="aud-tags">' +
+        '<span class="aud-tag aud-tag-asset">' + a.assetSize + '</span>' +
+        '<span class="aud-tag aud-tag-geo">' + a.geo + '</span>' +
       '</div>' +
-      '<div class="scenario-description">' + sc.description + '</div>' +
-      '<div class="scenario-meta-row">' + triggerTag + assetTag + tags + '</div>' +
-      titles +
-      '<hr class="scenario-divider">' +
-      '<div class="scenario-sequences-label">Sequences in this scenario</div>' +
-      (seqRows || '<div style="font-size:13px;color:#185FA5;">No sequences linked yet.</div>') +
+      '<div class="aud-angle"><strong>Pain point</strong>' + a.painPoint + '</div>' +
+      '<div class="aud-angle" style="margin-top:8px;"><strong>Outreach angle</strong>' + a.angle + '</div>' +
+      (seqLinks ? '<div class="aud-seq-link"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#378ADD;margin-bottom:6px;">Sequences</div>' + seqLinks + '</div>' : '') +
     '</div>';
+  }
+
+  function renderAudList(audiences, sequences) {
+    const rows = audiences.map(a => {
+      const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
+      const seqLinks = linkedSeqs.map(s =>
+        s.sequenceFile ? '<a class="btn btn-view" style="font-size:11px;padding:3px 10px;" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">' + s.title + '</a>' : ''
+      ).join(' ');
+      return '<tr><td><div class="aud-list-name">' + a.name + '</div><div class="aud-list-titles">' + a.targetTitles.join(', ') + '</div></td>' +
+        '<td><span class="aud-tag aud-tag-asset">' + a.assetSize + '</span></td>' +
+        '<td><span class="aud-tag aud-tag-geo">' + a.geo + '</span></td>' +
+        '<td>' + (seqLinks || '<span style="font-size:12px;color:#185FA5;">—</span>') + '</td></tr>';
+    }).join('');
+    return '<table class="aud-list-table"><thead><tr><th>Audience</th><th>Asset size</th><th>Geography</th><th>Sequences</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  function setAudView(v) {
+    audView = v;
+    document.getElementById('aud-card-view').style.display = v === 'card' ? 'grid' : 'none';
+    document.getElementById('aud-list-view').style.display = v === 'list' ? 'block' : 'none';
+    document.getElementById('aud-card-btn').className = 'view-btn' + (v === 'card' ? ' active' : '');
+    document.getElementById('aud-list-btn').className = 'view-btn' + (v === 'list' ? ' active' : '');
   }
 
   function switchTab(id, el) {
