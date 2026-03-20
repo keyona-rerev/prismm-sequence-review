@@ -8,125 +8,90 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F6FF; color: #1a1a2e; min-height: 100vh; }
 
-    /* PASSWORD GATE */
-    #gate {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; background: #F0F6FF;
-    }
-    .gate-card {
-      background: #fff; border: 1px solid #B5D4F4; border-radius: 16px;
-      padding: 40px 48px; max-width: 380px; width: 90%; text-align: center;
-    }
+    /* GATE */
+    #gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #F0F6FF; }
+    .gate-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 16px; padding: 40px 48px; max-width: 380px; width: 90%; text-align: center; }
     .gate-logo { font-size: 14px; font-weight: 600; color: #0C447C; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
     .gate-logo span { color: #378ADD; font-weight: 400; }
     .gate-subtitle { font-size: 13px; color: #185FA5; margin-bottom: 28px; }
-    .gate-card input[type="password"] {
-      width: 100%; padding: 10px 14px; font-size: 14px;
-      border: 1px solid #B5D4F4; border-radius: 8px; outline: none;
-      background: #F5F9FF; color: #0C447C; margin-bottom: 12px;
-      transition: border-color 0.15s;
-    }
+    .gate-card input[type="password"] { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #B5D4F4; border-radius: 8px; outline: none; background: #F5F9FF; color: #0C447C; margin-bottom: 12px; transition: border-color 0.15s; }
     .gate-card input[type="password"]:focus { border-color: #378ADD; background: #fff; }
-    .gate-btn {
-      width: 100%; padding: 10px; font-size: 14px; font-weight: 600;
-      background: #378ADD; color: #fff; border: none; border-radius: 8px;
-      cursor: pointer; transition: background 0.15s;
-    }
+    .gate-btn { width: 100%; padding: 10px; font-size: 14px; font-weight: 600; background: #378ADD; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
     .gate-btn:hover { background: #185FA5; }
     .gate-error { font-size: 12px; color: #993C1D; margin-top: 10px; display: none; }
 
-    /* MAIN APP */
+    /* APP */
     #app { display: none; }
 
     /* HEADER */
-    .site-header {
-      background: #EAF3FB; border-bottom: 1px solid #B5D4F4;
-      padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
-    }
+    .site-header { background: #EAF3FB; border-bottom: 1px solid #B5D4F4; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
     .site-logo { font-size: 15px; font-weight: 600; color: #0C447C; letter-spacing: 0.05em; text-transform: uppercase; }
     .site-logo span { color: #378ADD; font-weight: 400; }
     .header-meta { font-size: 12px; color: #185FA5; }
 
     /* TABS */
-    .tabs-bar {
-      display: flex; gap: 4px; padding: 16px 32px 0;
-      background: #EAF3FB; border-bottom: 2px solid #B5D4F4;
-    }
-    .tab {
-      padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0;
-      cursor: pointer; border: 1px solid transparent; border-bottom: none;
-      background: transparent; display: flex; align-items: center; gap: 8px;
-      transition: background 0.15s;
-    }
-    .tab.active {
-      background: #fff; border-color: #B5D4F4; border-bottom-color: #fff;
-      font-weight: 600; color: #0C447C; margin-bottom: -2px;
-    }
+    .tabs-bar { display: flex; gap: 4px; padding: 16px 32px 0; background: #EAF3FB; border-bottom: 2px solid #B5D4F4; overflow-x: auto; }
+    .tab { padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; background: transparent; display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background 0.15s; }
+    .tab.active { background: #fff; border-color: #B5D4F4; border-bottom-color: #fff; font-weight: 600; color: #0C447C; margin-bottom: -2px; }
     .tab-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
     .badge-pending  { background: #FAEEDA; color: #854F0B; }
     .badge-approved { background: #EAF3DE; color: #3B6D11; }
     .badge-rejected { background: #FAECE7; color: #993C1D; }
+    .badge-scenario { background: #EAF3FB; color: #185FA5; }
 
     /* MAIN */
-    .main { padding: 28px 32px; max-width: 820px; margin: 0 auto; }
+    .main { padding: 28px 32px; max-width: 860px; margin: 0 auto; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .section-label {
-      font-size: 11px; color: #378ADD; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
-    }
+    .section-label { font-size: 11px; color: #378ADD; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
 
-    /* CARD */
+    /* REVIEW CARDS */
     .card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
     .card.needs-review { border-left: 4px solid #378ADD; }
-    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    .card-title { font-size: 15px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
-    .card-meta { font-size: 12px; color: #185FA5; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .card-title { font-size: 15px; font-weight: 600; color: #0C447C; margin-bottom: 3px; }
+    .card-audience { font-size: 13px; font-weight: 500; color: #185FA5; margin-bottom: 4px; }
+    .card-meta { font-size: 12px; color: #185FA5; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
     .type-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
     .badge-html  { background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB; }
     .badge-plain { background: #F1EFE8; color: #5F5E5A; border: 1px solid #B4B2A9; }
-    .review-badge {
-      display: flex; align-items: center; gap: 6px; background: #E6F1FB;
-      color: #185FA5; font-size: 11px; font-weight: 600; padding: 4px 12px;
-      border-radius: 20px; white-space: nowrap; flex-shrink: 0;
-    }
+    .review-badge { display: flex; align-items: center; gap: 6px; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
     .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
 
-    /* PREVIEW TOGGLE */
-    .preview-toggle {
-      display: flex; border: 1px solid #B5D4F4; border-radius: 6px;
-      overflow: hidden; width: fit-content; margin-bottom: 12px;
-    }
-    .toggle-btn { font-size: 11px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; transition: background 0.12s; }
-    .toggle-btn.active { background: #EAF3FB; color: #0C447C; font-weight: 600; }
-    .toggle-btn:first-child { border-right: 1px solid #B5D4F4; }
+    .usage-note { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #185FA5; margin-bottom: 12px; line-height: 1.55; }
 
-    .plain-preview { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; }
-    .email-row { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; font-size: 13px; }
-    .email-row:last-child { margin-bottom: 0; }
-    .email-day  { font-size: 11px; color: #378ADD; font-weight: 600; min-width: 38px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .email-subj { font-weight: 600; color: #0C447C; }
-    .email-body { color: #444; line-height: 1.55; }
-
-    .html-preview-wrap { border: 1px solid #D1E5F7; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
-    .html-rendered { width: 100%; background: #fff; padding: 18px 22px; font-size: 13px; line-height: 1.7; }
-    .html-rendered .ep-header { background: #0C447C; color: #fff; padding: 14px 22px; margin: -18px -22px 16px; font-size: 13px; font-weight: 600; }
-    .html-rendered .ep-body { color: #333; }
-    .html-rendered .ep-cta { display: inline-block; margin-top: 14px; background: #378ADD; color: #fff; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
-    .html-rendered .ep-footer { margin-top: 18px; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 12px; }
-    .raw-code { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; font-family: 'Courier New', monospace; font-size: 11px; color: #185FA5; line-height: 1.6; overflow-x: auto; white-space: pre; }
-
-    .card-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-    .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; }
+    .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; text-decoration: none; display: inline-block; }
+    .btn-view     { background: #0C447C; color: #fff; border-color: #0C447C; }
+    .btn-view:hover { background: #185FA5; border-color: #185FA5; }
     .btn-feedback { background: #EAF3FB; color: #185FA5; border-color: #85B7EB; }
-    .btn-approve  { background: #EAF3DE; color: #3B6D11;  border-color: #97C459; }
-    .btn-reject   { background: #FAECE7; color: #993C1D;  border-color: #F0997B; }
+    .btn-approve  { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+    .btn-reject   { background: #FAECE7; color: #993C1D; border-color: #F0997B; }
 
-    .rejection-note { background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #712B13; margin-top: 12px; }
+    .rejection-note { background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #712B13; margin-bottom: 12px; }
     .rejection-note strong { display: block; font-weight: 600; margin-bottom: 4px; color: #993C1D; }
-    .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-top: 12px; }
+    .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-bottom: 12px; }
     .approved-note strong { display: block; font-weight: 600; margin-bottom: 4px; }
+
+    /* SCENARIO CARDS */
+    .scenario-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; }
+    .scenario-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .scenario-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
+    .scenario-audience { font-size: 13px; font-weight: 600; color: #378ADD; margin-bottom: 6px; }
+    .scenario-description { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 14px; }
+    .scenario-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+    .scenario-tag { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: #EAF3FB; color: #185FA5; border: 1px solid #B5D4F4; }
+    .scenario-tag.trigger { background: #FAEEDA; color: #854F0B; border-color: #FAC775; }
+    .scenario-tag.asset { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+    .scenario-divider { border: none; border-top: 1px solid #D1E5F7; margin: 14px 0; }
+    .scenario-sequences-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 10px; }
+    .scenario-seq-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; gap: 12px; flex-wrap: wrap; }
+    .scenario-seq-info { font-size: 13px; color: #0C447C; font-weight: 500; }
+    .scenario-seq-meta { font-size: 11px; color: #185FA5; margin-top: 2px; }
+    .scenario-seq-actions { display: flex; gap: 8px; }
+    .typical-titles { font-size: 12px; color: #185FA5; line-height: 1.6; }
+    .typical-titles strong { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 4px; }
 
     .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
     .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
@@ -135,7 +100,6 @@
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
 <div id="gate">
   <div class="gate-card">
     <div class="gate-logo">Prismm <span>/ Review Portal</span></div>
@@ -146,7 +110,6 @@
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app">
   <div class="site-header">
     <div class="site-logo">Prismm <span>/ Email Sequence Review</span></div>
@@ -154,32 +117,33 @@
   </div>
 
   <div class="tabs-bar">
-    <div class="tab active" onclick="switchTab('pending', this)">Awaiting review <span class="tab-badge badge-pending" id="count-pending">—</span></div>
-    <div class="tab" onclick="switchTab('approved', this)">Approved <span class="tab-badge badge-approved" id="count-approved">—</span></div>
-    <div class="tab" onclick="switchTab('rejected', this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
+    <div class="tab active" onclick="switchTab('pending',this)">Awaiting review <span class="tab-badge badge-pending" id="count-pending">—</span></div>
+    <div class="tab" onclick="switchTab('approved',this)">Approved <span class="tab-badge badge-approved" id="count-approved">—</span></div>
+    <div class="tab" onclick="switchTab('rejected',this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
+    <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
   </div>
 
   <div class="main">
     <div id="loading">Loading sequences...</div>
-    <div id="pending"  class="tab-content" style="display:none;"></div>
-    <div id="approved" class="tab-content" style="display:none;"></div>
-    <div id="rejected" class="tab-content" style="display:none;"></div>
+    <div id="pending"   class="tab-content" style="display:none;"></div>
+    <div id="approved"  class="tab-content" style="display:none;"></div>
+    <div id="rejected"  class="tab-content" style="display:none;"></div>
+    <div id="scenarios" class="tab-content" style="display:none;"></div>
   </div>
 </div>
 
 <script>
   const SITE_PASSWORD = 'prismm2026';
-  const REPO_RAW = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
+  const REPO_RAW  = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
+  const PAGES_BASE = 'https://keyona-rerev.github.io/prismm-sequence-review';
 
   function checkPw() {
-    const val = document.getElementById('pw-input').value;
-    if (val === SITE_PASSWORD) {
+    if (document.getElementById('pw-input').value === SITE_PASSWORD) {
       document.getElementById('gate').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       loadData();
     } else {
-      const err = document.getElementById('gate-error');
-      err.style.display = 'block';
+      document.getElementById('gate-error').style.display = 'block';
       document.getElementById('pw-input').value = '';
       document.getElementById('pw-input').focus();
     }
@@ -187,36 +151,44 @@
 
   async function loadData() {
     try {
-      const [seqRes, rejRes] = await Promise.all([
+      const [seqRes, rejRes, scRes] = await Promise.all([
         fetch(REPO_RAW + '/sequences.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/rejections.json?t=' + Date.now())
+        fetch(REPO_RAW + '/rejections.json?t=' + Date.now()),
+        fetch(REPO_RAW + '/scenarios.json?t=' + Date.now())
       ]);
       const seqData = await seqRes.json();
       const rejData = await rejRes.json();
-      render(seqData.sequences, rejData.rejections);
+      const scData  = await scRes.json();
+      render(seqData.sequences, rejData.rejections, scData.scenarios);
     } catch(e) {
-      document.getElementById('loading').textContent = 'Failed to load sequences. Please refresh.';
+      document.getElementById('loading').textContent = 'Failed to load. Please refresh.';
     }
   }
 
-  function render(sequences, rejections) {
+  function render(sequences, rejections, scenarios) {
     document.getElementById('loading').style.display = 'none';
     const pending  = sequences.filter(s => s.status === 'pending');
     const approved = sequences.filter(s => s.status === 'approved');
     const rejected = sequences.filter(s => s.status === 'rejected');
+
     document.getElementById('count-pending').textContent  = pending.length;
     document.getElementById('count-approved').textContent = approved.length;
     document.getElementById('count-rejected').textContent = rejected.length;
+    document.getElementById('count-scenarios').textContent = scenarios.length;
+
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     document.getElementById('last-updated').textContent = 'keyona@rerev.io · Updated ' + now;
-    renderTab('pending',  pending,  'pending');
-    renderTab('approved', approved, 'approved');
-    renderTab('rejected', rejected, 'rejected');
+
+    renderReviewTab('pending',  pending,  'pending');
+    renderReviewTab('approved', approved, 'approved');
+    renderReviewTab('rejected', rejected, 'rejected');
+    renderScenariosTab(scenarios, sequences);
+
     document.getElementById('pending').classList.add('active');
     document.getElementById('pending').style.display = 'block';
   }
 
-  function renderTab(tabId, sequences, status) {
+  function renderReviewTab(tabId, sequences, status) {
     const el = document.getElementById(tabId);
     if (!sequences.length) {
       const labels = { pending: 'No sequences awaiting review.', approved: 'No approved sequences yet.', rejected: 'No rejected sequences yet.' };
@@ -227,96 +199,89 @@
     const label = status === 'pending' ? count + ' sequence' + (count > 1 ? 's' : '') + ' awaiting review'
       : status === 'approved' ? count + ' approved sequence' + (count > 1 ? 's' : '')
       : count + ' rejected sequence' + (count > 1 ? 's' : '');
-    el.innerHTML = '<div class="section-label">' + label + '</div>' + sequences.map(renderCard).join('');
+    el.innerHTML = '<div class="section-label">' + label + '</div>' + sequences.map(s => renderReviewCard(s, status)).join('');
   }
 
-  function renderCard(seq) {
+  function renderReviewCard(seq, status) {
     const typeBadge = seq.type === 'html'
       ? '<span class="type-badge badge-html">HTML</span>'
       : '<span class="type-badge badge-plain">Plain text</span>';
-    const reviewBadge = seq.status === 'pending'
+    const reviewBadge = status === 'pending'
       ? '<div class="review-badge"><div class="pulse-dot"></div> Needs review</div>' : '';
-    const cardClass = seq.status === 'pending' ? 'card needs-review' : 'card';
-    const preview = renderPreview(seq);
-    const note = renderNote(seq);
-    const actions = seq.status === 'pending' ? `
-      <div class="card-actions">
-        <a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+${encodeURIComponent(seq.title)}&body=**Sequence+ID:**+${seq.id}%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>
-      </div>` : '';
-    return `<div class="${cardClass}">
-      <div class="card-top">
-        <div>
-          <div class="card-title">${seq.title}</div>
-          <div class="card-meta">${seq.pushedDate} · ${seq.emailCount} email${seq.emailCount > 1 ? 's' : ''} · ${seq.cadence} ${typeBadge}</div>
-        </div>
-        ${reviewBadge}
-      </div>
-      ${preview}${note}${actions}
-    </div>`;
+    const cardClass = status === 'pending' ? 'card needs-review' : 'card';
+    const viewBtn = seq.sequenceFile
+      ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>' : '';
+    const feedbackBtn = status === 'pending'
+      ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>' : '';
+    const note = status === 'approved' && seq.approvalNote
+      ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
+      : status === 'rejected' && seq.rejectionReason
+      ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>' : '';
+    const usageNote = seq.usageNote
+      ? '<div class="usage-note">' + seq.usageNote + '</div>' : '';
+
+    return '<div class="' + cardClass + '">' +
+      '<div class="card-top">' +
+        '<div>' +
+          '<div class="card-title">' + seq.title + '</div>' +
+          (seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : '') +
+          '<div class="card-meta">' + seq.pushedDate + ' &middot; ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' &middot; ' + seq.cadence + ' ' + typeBadge + '</div>' +
+        '</div>' +
+        reviewBadge +
+      '</div>' +
+      usageNote + note +
+      '<div class="card-actions">' + viewBtn + feedbackBtn + '</div>' +
+    '</div>';
   }
 
-  function renderPreview(seq) {
-    if (seq.type === 'plain') {
-      const rows = seq.emails.map(e => `
-        <div class="email-row">
-          <span class="email-day">Day ${e.day}</span>
-          <div><div class="email-subj">${e.subject}</div>${e.preview ? '<div class="email-body">' + e.preview + '</div>' : ''}</div>
-        </div>`).join('');
-      const rawText = seq.emails.map(e => 'Subject: ' + e.subject + '\n\n' + (e.body || e.preview || '')).join('\n\n---\n\n');
-      return `
-        <div class="preview-toggle">
-          <button class="toggle-btn active" onclick="togglePreview('${seq.id}','preview',this)">Preview</button>
-          <button class="toggle-btn" onclick="togglePreview('${seq.id}','raw',this)">Raw text</button>
-        </div>
-        <div id="${seq.id}-preview" class="plain-preview">${rows}</div>
-        <div id="${seq.id}-raw" class="raw-code" style="display:none;">${escHtml(rawText)}</div>`;
-    } else {
-      const renderedHtml = seq.emails.map((e, i) => `
-        <div style="${i > 0 ? 'margin-top:16px;border-top:1px solid #eee;padding-top:16px;' : ''}">
-          <div style="font-size:11px;color:#378ADD;font-weight:600;margin-bottom:6px;">DAY ${e.day}</div>
-          <div class="html-preview-wrap">
-            <div class="html-rendered">
-              <div class="ep-header">${e.subject}</div>
-              <div class="ep-body">${e.htmlBody || e.preview || ''}</div>
-              ${e.ctaText ? '<a class="ep-cta" href="#">' + e.ctaText + ' \u2192</a>' : ''}
-              <div class="ep-footer">Prismm &middot; <a href="#" style="color:#999;">Unsubscribe</a></div>
-            </div>
-          </div>
-        </div>`).join('');
-      const rawCode = seq.emails.map(e => '<!-- Day ' + e.day + ': ' + e.subject + ' -->\n' + (e.rawHtml || e.htmlBody || '')).join('\n\n');
-      return `
-        <div class="preview-toggle">
-          <button class="toggle-btn active" onclick="togglePreview('${seq.id}','rendered',this)">Rendered</button>
-          <button class="toggle-btn" onclick="togglePreview('${seq.id}','raw',this)">Raw HTML</button>
-        </div>
-        <div id="${seq.id}-rendered">${renderedHtml}</div>
-        <div id="${seq.id}-raw" class="raw-code" style="display:none;">${escHtml(rawCode)}</div>`;
+  function renderScenariosTab(scenarios, sequences) {
+    const el = document.getElementById('scenarios');
+    if (!scenarios.length) {
+      el.innerHTML = '<div class="empty-state"><strong>No scenarios defined yet.</strong><p>Scenarios will appear here as sequences are cataloged.</p></div>';
+      return;
     }
+    el.innerHTML = '<div class="section-label">' + scenarios.length + ' scenario' + (scenarios.length > 1 ? 's' : '') + '</div>' +
+      scenarios.map(sc => renderScenarioCard(sc, sequences)).join('');
   }
 
-  function renderNote(seq) {
-    if (seq.status === 'approved' && seq.approvalNote)
-      return '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>';
-    if (seq.status === 'rejected' && seq.rejectionReason)
-      return '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>';
-    return '';
-  }
+  function renderScenarioCard(sc, sequences) {
+    const linkedSeqs = sequences.filter(s => sc.sequences.includes(s.id));
+    const tags = (sc.tags || []).map(t => '<span class="scenario-tag">' + t + '</span>').join('');
+    const triggerTag = sc.trigger ? '<span class="scenario-tag trigger">Trigger: ' + sc.trigger + '</span>' : '';
+    const assetTag = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
+    const titles = sc.typicalTitles && sc.typicalTitles.length
+      ? '<div class="typical-titles"><strong>Typical titles</strong>' + sc.typicalTitles.join(', ') + '</div>' : '';
+    const seqRows = linkedSeqs.map(s => {
+      const viewBtn = s.sequenceFile
+        ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">View sequence</a>' : '';
+      const statusBadge = s.status === 'approved'
+        ? '<span class="scenario-tag" style="background:#EAF3DE;color:#3B6D11;border-color:#97C459;">Approved</span>'
+        : s.status === 'pending'
+        ? '<span class="scenario-tag" style="background:#FAEEDA;color:#854F0B;border-color:#FAC775;">Pending review</span>'
+        : '<span class="scenario-tag" style="background:#FAECE7;color:#993C1D;border-color:#F0997B;">Rejected</span>';
+      return '<div class="scenario-seq-row">' +
+        '<div>' +
+          '<div class="scenario-seq-info">' + s.title + ' &nbsp;' + statusBadge + '</div>' +
+          '<div class="scenario-seq-meta">' + s.emailCount + ' emails &middot; ' + s.cadence + '</div>' +
+        '</div>' +
+        '<div class="scenario-seq-actions">' + viewBtn + '</div>' +
+      '</div>';
+    }).join('');
 
-  function togglePreview(id, view, btn) {
-    btn.closest('.preview-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const rendered = document.getElementById(id + '-rendered');
-    const preview  = document.getElementById(id + '-preview');
-    const raw      = document.getElementById(id + '-raw');
-    if (view === 'raw') {
-      if (rendered) rendered.style.display = 'none';
-      if (preview)  preview.style.display  = 'none';
-      raw.style.display = 'block';
-    } else {
-      if (rendered) rendered.style.display = 'block';
-      if (preview)  preview.style.display  = 'block';
-      raw.style.display = 'none';
-    }
+    return '<div class="scenario-card">' +
+      '<div class="scenario-card-top">' +
+        '<div style="flex:1;">' +
+          '<div class="scenario-name">' + sc.name + '</div>' +
+          '<div class="scenario-audience">' + sc.targetAudience + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="scenario-description">' + sc.description + '</div>' +
+      '<div class="scenario-meta-row">' + triggerTag + assetTag + tags + '</div>' +
+      titles +
+      '<hr class="scenario-divider">' +
+      '<div class="scenario-sequences-label">Sequences in this scenario</div>' +
+      (seqRows || '<div style="font-size:13px;color:#185FA5;">No sequences linked yet.</div>') +
+    '</div>';
   }
 
   function switchTab(id, el) {
@@ -325,10 +290,6 @@
     document.getElementById(id).classList.add('active');
     document.getElementById(id).style.display = 'block';
     el.classList.add('active');
-  }
-
-  function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 </script>
 </body>
