@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "queue_pointer": 0,
+    "total_institutions": 874,
+    "icp_filter": "$250M-$2B assets",
+    "sort_order": "Southeast first (AL,GA,TN,FL,NC,SC) then national, both by assets descending",
+    "last_run": null,
+    "weekly_batch_size": 5
+  },
+  "processed": []
+}
