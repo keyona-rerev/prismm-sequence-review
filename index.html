@@ -8,6 +8,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F6FF; color: #1a1a2e; min-height: 100vh; }
 
+    /* ── Gate ── */
     #gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #F0F6FF; }
     .gate-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 16px; padding: 40px 48px; max-width: 380px; width: 90%; text-align: center; }
     .gate-logo { font-size: 14px; font-weight: 600; color: #0C447C; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
@@ -19,12 +20,14 @@
     .gate-btn:hover { background: #185FA5; }
     .gate-error { font-size: 12px; color: #993C1D; margin-top: 10px; display: none; }
 
+    /* ── Shell ── */
     #app { display: none; }
     .site-header { background: #EAF3FB; border-bottom: 1px solid #B5D4F4; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
     .site-logo { font-size: 15px; font-weight: 600; color: #0C447C; letter-spacing: 0.05em; text-transform: uppercase; }
     .site-logo span { color: #378ADD; font-weight: 400; }
     .header-meta { font-size: 12px; color: #185FA5; }
 
+    /* ── Tabs ── */
     .tabs-bar { display: flex; gap: 4px; padding: 16px 32px 0; background: #EAF3FB; border-bottom: 2px solid #B5D4F4; overflow-x: auto; }
     .tab { padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; background: transparent; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
     .tab.active { background: #fff; border-color: #B5D4F4; border-bottom-color: #fff; font-weight: 600; color: #0C447C; margin-bottom: -2px; }
@@ -35,15 +38,17 @@
     .badge-scenario { background: #EAF3FB; color: #185FA5; }
     .badge-audience { background: #F2EAF9; color: #6B3A9C; }
     .badge-info     { background: #F1EFE8; color: #5F5E5A; }
-    .badge-targets  { background: #E8F4E8; color: #2D6A2D; }
+    .badge-pipeline { background: #E8F4E8; color: #2D6A2D; }
+    .badge-reports  { background: #EAF3FB; color: #185FA5; }
 
-    .main { padding: 28px 32px; max-width: 860px; margin: 0 auto; }
+    /* ── Main ── */
+    .main { padding: 28px 32px; max-width: 900px; margin: 0 auto; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     .section-label { font-size: 11px; color: #378ADD; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
 
+    /* ── Cards ── */
     .card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
-    .card.needs-review { border-left: 4px solid #378ADD; }
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
     .card-title { font-size: 15px; font-weight: 600; color: #0C447C; margin-bottom: 3px; }
     .card-audience { font-size: 13px; font-weight: 500; color: #185FA5; margin-bottom: 4px; }
@@ -51,9 +56,6 @@
     .type-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
     .badge-html  { background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB; }
     .badge-plain { background: #F1EFE8; color: #5F5E5A; border: 1px solid #B4B2A9; }
-    .review-badge { display: flex; align-items: center; gap: 6px; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
     .usage-note { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #185FA5; margin-bottom: 12px; line-height: 1.55; }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; text-decoration: none; display: inline-block; }
@@ -65,6 +67,73 @@
     .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-bottom: 12px; }
     .approved-note strong { display: block; font-weight: 600; margin-bottom: 4px; }
 
+    /* ── Status pills on sequence cards ── */
+    .status-pill-seq { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.03em; }
+    .pill-pending  { background: #FAEEDA; color: #854F0B; }
+    .pill-approved { background: #EAF3DE; color: #3B6D11; }
+    .pill-rejected { background: #FAECE7; color: #993C1D; }
+
+    /* ── Sequences tab toolbar ── */
+    .seq-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .seq-filter { padding: 7px 12px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; outline: none; cursor: pointer; }
+    .seq-filter:focus { border-color: #378ADD; }
+    .seq-count-note { font-size: 12px; color: #185FA5; }
+
+    /* ── Pipeline tab ── */
+    .pipeline-header { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .pipeline-batch-name { font-size: 15px; font-weight: 700; color: #0C447C; }
+    .pipeline-statement { font-size: 12px; color: #185FA5; margin-top: 3px; }
+    .pipeline-meta { font-size: 12px; color: #185FA5; text-align: right; }
+    .pipeline-meta strong { color: #0C447C; }
+
+    .pipeline-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+    @media (max-width: 680px) { .pipeline-board { grid-template-columns: 1fr; } }
+
+    .pipeline-col { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 10px; padding: 14px; min-height: 140px; }
+    .pipeline-col-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .pipeline-col-header .col-count { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+
+    .col-warming .pipeline-col-header { color: #854F0B; }
+    .col-warming .col-count { background: #FAEEDA; color: #854F0B; }
+    .col-batch-a .pipeline-col-header { color: #2D6A2D; }
+    .col-batch-a .col-count { background: #E8F4E8; color: #2D6A2D; }
+    .col-batch-b .pipeline-col-header { color: #185FA5; }
+    .col-batch-b .col-count { background: #EAF3FB; color: #185FA5; }
+
+    .pcard { background: #fff; border: 1px solid #C8DFF5; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+    .pcard:last-child { margin-bottom: 0; }
+    .pcard-name { font-size: 13px; font-weight: 600; color: #0C447C; margin-bottom: 3px; line-height: 1.3; }
+    .pcard-loc { font-size: 11px; color: #185FA5; margin-bottom: 5px; }
+    .pcard-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+    .pcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
+    .pcard-tag-tier  { background: #EAF3FB; color: #185FA5; }
+    .pcard-tag-asset { background: #EAF3DE; color: #3B6D11; }
+    .pcard-tag-conn  { background: #F2EAF9; color: #6B3A9C; }
+    .pcard-signals { font-size: 11px; color: #444; line-height: 1.5; border-top: 1px solid #EAF3FB; padding-top: 6px; margin-top: 4px; }
+    .pcard-signals strong { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 2px; }
+    .pcard-empty { font-size: 12px; color: #99B8D4; text-align: center; padding: 20px 0; font-style: italic; }
+
+    /* ── Weekly Reports tab ── */
+    .reports-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .reports-week-select { padding: 8px 14px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; outline: none; cursor: pointer; min-width: 160px; }
+    .reports-week-select:focus { border-color: #378ADD; }
+    .reports-no-data { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
+    .reports-no-data p { margin-top: 8px; font-size: 13px; color: #378ADD; }
+
+    .report-block { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; }
+    .report-block-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #378ADD; margin-bottom: 14px; }
+    .report-stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-bottom: 4px; }
+    .report-stat { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 12px 14px; text-align: center; }
+    .report-stat-value { font-size: 22px; font-weight: 700; color: #0C447C; }
+    .report-stat-label { font-size: 11px; color: #185FA5; margin-top: 3px; }
+    .report-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .report-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .report-table td { padding: 10px 12px; border-bottom: 1px solid #EDF4FB; color: #1a1a2e; vertical-align: top; line-height: 1.45; }
+    .report-table tr:last-child td { border-bottom: none; }
+    .report-note { font-size: 13px; color: #444; line-height: 1.65; }
+    .report-week-label { font-size: 13px; color: #185FA5; background: #EAF3FB; border: 1px solid #B5D4F4; border-radius: 20px; padding: 4px 14px; display: inline-block; margin-bottom: 20px; }
+
+    /* ── Scenarios ── */
     .scenario-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; }
     .scenario-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
     .scenario-audience { font-size: 13px; font-weight: 600; color: #378ADD; margin-bottom: 6px; }
@@ -81,6 +150,7 @@
     .typical-titles { font-size: 12px; color: #185FA5; line-height: 1.6; }
     .typical-titles strong { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 4px; }
 
+    /* ── Audiences ── */
     .aud-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
     .view-toggle { display: flex; border: 1px solid #B5D4F4; border-radius: 6px; overflow: hidden; }
     .view-btn { font-size: 12px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; }
@@ -106,6 +176,7 @@
     .aud-list-name { font-weight: 600; font-size: 13px; color: #0C447C; }
     .aud-list-titles { font-size: 12px; color: #185FA5; margin-top: 2px; }
 
+    /* ── System Info ── */
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
     .info-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; }
@@ -115,7 +186,6 @@
     .info-label { color: #185FA5; font-weight: 500; flex-shrink: 0; }
     .info-value { color: #0C447C; text-align: right; font-size: 12px; }
     .info-value.green { color: #3B6D11; font-weight: 600; }
-
     .domain-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
     .domain-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
     .domain-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; line-height: 1.5; color: #1a1a2e; }
@@ -123,14 +193,12 @@
     .domain-table td:first-child { font-family: monospace; font-size: 12px; color: #0C447C; font-weight: 600; }
     .status-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
     .status-pending-purchase { background: #FAEEDA; color: #854F0B; }
-    .status-active           { background: #EAF3DE; color: #3B6D11; }
-
+    .status-active { background: #EAF3DE; color: #3B6D11; }
     .persona-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; border-left: 4px solid #378ADD; }
     .persona-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
     .persona-role { font-size: 13px; color: #185FA5; margin-bottom: 12px; }
     .persona-detail { font-size: 12px; color: #444; line-height: 1.65; }
     .persona-detail strong { color: #0C447C; font-weight: 600; display: block; margin-top: 8px; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
-
     .flow-steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 16px; }
     .flow-step { display: flex; gap: 14px; align-items: flex-start; }
     .flow-step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
@@ -140,71 +208,18 @@
     .flow-label { font-size: 13px; color: #1a1a2e; padding-bottom: 20px; line-height: 1.5; }
     .flow-label strong { color: #0C447C; font-weight: 600; }
     .flow-label span { font-size: 11px; color: #185FA5; display: block; margin-top: 2px; font-family: monospace; }
-
     .stack-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
     .stack-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
     .stack-table td { padding: 11px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; color: #1a1a2e; font-size: 13px; line-height: 1.5; }
     .stack-table tr:last-child td { border-bottom: none; }
     .stack-table td:first-child { font-weight: 600; color: #0C447C; white-space: nowrap; }
 
+    /* ── Shared ── */
     .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
     .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
     #loading { text-align: center; padding: 60px; color: #378ADD; font-size: 14px; }
-
-    /* ── High Value Targets tab ── */
-    .hvt-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: space-between; }
-    .hvt-toolbar-left { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .hvt-search { padding: 7px 12px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; width: 200px; outline: none; }
-    .hvt-search:focus { border-color: #378ADD; }
-    .hvt-filter { padding: 7px 12px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; outline: none; cursor: pointer; }
-    .hvt-progress { font-size: 12px; color: #185FA5; background: #EAF3FB; border: 1px solid #B5D4F4; border-radius: 20px; padding: 4px 12px; white-space: nowrap; }
-    .hvt-progress strong { color: #0C447C; }
-
-    /* Kanban */
-    .kanban-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: start; }
-    @media (max-width: 700px) { .kanban-board { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 440px) { .kanban-board { grid-template-columns: 1fr; } }
-    .kanban-col { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 10px; padding: 12px; min-height: 120px; }
-    .kanban-col-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
-    .kanban-col-header span { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
-    .col-queued    .kanban-col-header { color: #185FA5; }
-    .col-queued    .kanban-col-header span { background: #EAF3FB; color: #185FA5; }
-    .col-researched .kanban-col-header { color: #854F0B; }
-    .col-researched .kanban-col-header span { background: #FAEEDA; color: #854F0B; }
-    .col-active    .kanban-col-header { color: #2D6A2D; }
-    .col-active    .kanban-col-header span { background: #E8F4E8; color: #2D6A2D; }
-    .col-pipedrive .kanban-col-header { color: #6B3A9C; }
-    .col-pipedrive .kanban-col-header span { background: #F2EAF9; color: #6B3A9C; }
-
-    .kcard { background: #fff; border: 1px solid #C8DFF5; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; font-size: 12px; }
-    .kcard:last-child { margin-bottom: 0; }
-    .kcard-name { font-size: 13px; font-weight: 600; color: #0C447C; margin-bottom: 3px; line-height: 1.3; }
-    .kcard-meta { font-size: 11px; color: #185FA5; margin-bottom: 6px; }
-    .kcard-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
-    .kcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
-    .kcard-tag-se   { background: #E8F4E8; color: #2D6A2D; }
-    .kcard-tag-nat  { background: #EAF3FB; color: #185FA5; }
-    .kcard-tag-cdcu { background: #FFF5CC; color: #7A5F00; }
-    .kcard-intel { font-size: 11px; color: #444; line-height: 1.5; border-top: 1px solid #EAF3FB; padding-top: 6px; margin-top: 4px; }
-    .kcard-intel strong { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 2px; }
-    .kcard-empty { font-size: 12px; color: #99B8D4; text-align: center; padding: 16px 0; font-style: italic; }
-
-    /* List view for targets */
-    .hvt-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; }
-    .hvt-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; white-space: nowrap; }
-    .hvt-table td { padding: 10px 14px; border-bottom: 1px solid #EDF4FB; vertical-align: top; line-height: 1.45; color: #1a1a2e; font-size: 12px; }
-    .hvt-table tr:last-child td { border-bottom: none; }
-    .hvt-table td:first-child { border-left: 3px solid #378ADD; padding-left: 11px; font-weight: 600; color: #0C447C; font-size: 13px; }
-    .hvt-stage-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
-    .stage-queued     { background: #EAF3FB; color: #185FA5; }
-    .stage-researched { background: #FAEEDA; color: #854F0B; }
-    .stage-active     { background: #E8F4E8; color: #2D6A2D; }
-    .stage-pipedrive  { background: #F2EAF9; color: #6B3A9C; }
-
-    .load-more-wrap { text-align: center; padding: 20px 0 4px; }
-    .load-more-btn { font-size: 13px; font-weight: 600; color: #185FA5; background: #fff; border: 1px solid #B5D4F4; border-radius: 8px; padding: 8px 24px; cursor: pointer; }
-    .load-more-btn:hover { background: #EAF3FB; }
-    .hvt-count-note { font-size: 12px; color: #185FA5; text-align: center; padding-top: 8px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; display: inline-block; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
   </style>
 </head>
 <body>
@@ -221,28 +236,26 @@
 
 <div id="app">
   <div class="site-header">
-    <div class="site-logo">Prismm <span>/ Email Sequence Review</span></div>
+    <div class="site-logo">Prismm <span>/ Review Portal</span></div>
     <div class="header-meta" id="last-updated">Loading...</div>
   </div>
 
   <div class="tabs-bar">
-    <div class="tab active" onclick="switchTab('pending',this)">Awaiting review <span class="tab-badge badge-pending" id="count-pending">—</span></div>
-    <div class="tab" onclick="switchTab('approved',this)">Approved <span class="tab-badge badge-approved" id="count-approved">—</span></div>
-    <div class="tab" onclick="switchTab('rejected',this)">Rejected <span class="tab-badge badge-rejected" id="count-rejected">—</span></div>
+    <div class="tab active" onclick="switchTab('sequences',this)">Sequences <span class="tab-badge badge-pending" id="count-pending">—</span></div>
+    <div class="tab" onclick="switchTab('pipeline',this)">Pipeline <span class="tab-badge badge-pipeline" id="count-pipeline">—</span></div>
+    <div class="tab" onclick="switchTab('reports',this)">Weekly Reports <span class="tab-badge badge-reports" id="count-reports">—</span></div>
     <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
     <div class="tab" onclick="switchTab('audiences',this)">Audiences <span class="tab-badge badge-audience" id="count-audiences">—</span></div>
-    <div class="tab" onclick="switchTab('targets',this)">High Value Targets <span class="tab-badge badge-targets" id="count-targets">—</span></div>
-    <div class="tab" onclick="switchTab('sysinfo',this)">System info <span class="tab-badge badge-info">&#9432;</span></div>
+    <div class="tab" onclick="switchTab('sysinfo',this)">System Info <span class="tab-badge badge-info">&#9432;</span></div>
   </div>
 
   <div class="main">
     <div id="loading">Loading...</div>
-    <div id="pending"   class="tab-content" style="display:none;"></div>
-    <div id="approved"  class="tab-content" style="display:none;"></div>
-    <div id="rejected"  class="tab-content" style="display:none;"></div>
+    <div id="sequences" class="tab-content" style="display:none;"></div>
+    <div id="pipeline"  class="tab-content" style="display:none;"></div>
+    <div id="reports"   class="tab-content" style="display:none;"></div>
     <div id="scenarios" class="tab-content" style="display:none;"></div>
     <div id="audiences" class="tab-content" style="display:none;"></div>
-    <div id="targets"   class="tab-content" style="display:none;"></div>
     <div id="sysinfo"   class="tab-content" style="display:none;"></div>
   </div>
 </div>
@@ -251,19 +264,18 @@
   const SITE_PASSWORD = 'prismm2026';
   const REPO_RAW   = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
   const PAGES_BASE = 'https://keyona-rerev.github.io/prismm-sequence-review';
-  const SE_STATES  = new Set(['AL','GA','TN','FL','NC','SC']);
-  const ICP_MIN    = 250000000;
-  const ICP_MAX    = 2000000000;
-  const PAGE_SIZE  = 20;
 
   let audView = 'card';
-  let hvtView = 'kanban';
-  let hvtPage = 1;
-  let hvtFilterState = '';
-  let hvtSearch = '';
-  let allTargets = [];   // filtered ICP institutions from CSV
-  let targetIntel = {};  // keyed by charter from targets.json
+  let seqFilter = 'pending';        // default: show pending first
+  let allSequences = [];
+  let allRejections = [];
+  let reportWeeks = [];             // discovered week numbers e.g. [1, 2, 3]
+  let reportsCache = {};            // week# -> parsed JSON
+  let currentReportWeek = null;
 
+  /* ─────────────────────────────────────────
+     Auth
+  ───────────────────────────────────────── */
   function checkPw() {
     if (document.getElementById('pw-input').value === SITE_PASSWORD) {
       document.getElementById('gate').style.display = 'none';
@@ -276,310 +288,361 @@
     }
   }
 
+  /* ─────────────────────────────────────────
+     Data loading
+  ───────────────────────────────────────── */
   async function loadData() {
     try {
-      const [seqRes, rejRes, scRes, audRes, csvRes, tgtRes] = await Promise.all([
-        fetch(REPO_RAW + '/sequences.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/rejections.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/scenarios.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/audiences.json?t=' + Date.now()),
-        fetch(REPO_RAW + '/data/credit-unions.csv?t=' + Date.now()),
-        fetch(REPO_RAW + '/data/targets.json?t=' + Date.now())
+      const ts = '?t=' + Date.now();
+      const [seqRes, rejRes, scRes, audRes, pipeRes] = await Promise.all([
+        fetch(REPO_RAW + '/sequences.json' + ts),
+        fetch(REPO_RAW + '/rejections.json' + ts),
+        fetch(REPO_RAW + '/scenarios.json' + ts),
+        fetch(REPO_RAW + '/audiences.json' + ts),
+        fetch(REPO_RAW + '/pipeline.json' + ts)
       ]);
-      const seqData = await seqRes.json();
-      const rejData = await rejRes.json();
-      const scData  = await scRes.json();
-      const audData = await audRes.json();
-      const csvText = await csvRes.text();
-      const tgtData = await tgtRes.json();
 
-      // Parse CSV
-      allTargets = parseCSV(csvText);
-      // Build intel lookup by charter
-      (tgtData.processed || []).forEach(p => { targetIntel[p.charter] = p; });
+      const seqData  = await seqRes.json();
+      const rejData  = await rejRes.json();
+      const scData   = await scRes.json();
+      const audData  = await audRes.json();
+      const pipeData = await pipeRes.json();
 
-      render(seqData.sequences, rejData.rejections, scData.scenarios, audData.audiences, tgtData);
+      allSequences  = seqData.sequences  || [];
+      allRejections = rejData.rejections || [];
+
+      // Probe for weekly reports: week-1.json through week-52.json
+      // Stop at first 404. File naming: reports/week-N.json (no zero-padding)
+      reportWeeks = await discoverReportWeeks();
+
+      render(allSequences, allRejections, scData.scenarios || [], audData.audiences || [], pipeData);
     } catch(e) {
       document.getElementById('loading').textContent = 'Failed to load. Please refresh. (' + e.message + ')';
     }
   }
 
-  function parseCSV(text) {
-    const lines = text.split('\n');
-    // Row 0 is aggregate junk, row 1 is headers
-    const headers = lines[1].split(',').map(h => h.replace(/"/g,'').trim());
-    const nameIdx   = headers.indexOf('Name');
-    const assetIdx  = headers.indexOf('$ Total Assets');
-    const cityIdx   = headers.indexOf('City');
-    const stateIdx  = headers.indexOf('State / Prov');
-    const msaIdx    = headers.indexOf('Metropolitan Statistical Area');
-    const memberIdx = headers.indexOf('# Members');
-    const ltosIdx   = headers.indexOf('% Loans to Shares');
-    const cdcuIdx   = headers.indexOf('CDCU?');
-    const charterIdx= headers.indexOf('Charter #');
-
-    const results = [];
-    for (let i = 2; i < lines.length; i++) {
-      const line = lines[i];
-      if (!line.trim()) continue;
-      // Simple CSV split respecting quotes
-      const cols = splitCSVLine(line);
-      const assetStr = (cols[assetIdx] || '').replace(/[",\$]/g,'').trim();
-      const assets = parseFloat(assetStr);
-      if (isNaN(assets) || assets < ICP_MIN || assets > ICP_MAX) continue;
-      const state = (cols[stateIdx] || '').replace(/"/g,'').trim();
-      results.push({
-        charter:  (cols[charterIdx] || '').replace(/"/g,'').trim(),
-        name:     (cols[nameIdx]    || '').replace(/"/g,'').trim(),
-        city:     (cols[cityIdx]    || '').replace(/"/g,'').trim(),
-        state:    state,
-        assets:   assets,
-        msa:      (cols[msaIdx]     || '').replace(/"/g,'').trim(),
-        members:  (cols[memberIdx]  || '').replace(/"/g,'').trim(),
-        ltos:     (cols[ltosIdx]    || '').replace(/"/g,'').trim(),
-        cdcu:     (cols[cdcuIdx]    || '').replace(/"/g,'').trim(),
-        isSE:     SE_STATES.has(state)
-      });
+  async function discoverReportWeeks() {
+    const found = [];
+    for (let n = 1; n <= 52; n++) {
+      try {
+        const res = await fetch(REPO_RAW + '/reports/week-' + n + '.json?t=' + Date.now());
+        if (!res.ok) break;  // first 404 = stop
+        const data = await res.json();
+        reportsCache[n] = data;
+        found.push(n);
+      } catch(e) {
+        break;
+      }
     }
-    // Sort: SE first by assets desc, then rest by assets desc
-    results.sort((a,b) => {
-      if (a.isSE && !b.isSE) return -1;
-      if (!a.isSE && b.isSE) return 1;
-      return b.assets - a.assets;
-    });
-    return results;
+    return found;
   }
 
-  function splitCSVLine(line) {
-    const result = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
-      else cur += c;
-    }
-    result.push(cur);
-    return result;
-  }
-
-  function fmtAssets(n) {
-    if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
-    return '$' + (n/1e6).toFixed(0) + 'M';
-  }
-
-  function getStage(charter) {
-    const t = targetIntel[charter];
-    if (!t) return 'queued';
-    return t.abm_stage || 'queued';
-  }
-
-  function render(sequences, rejections, scenarios, audiences, tgtData) {
+  /* ─────────────────────────────────────────
+     Render orchestrator
+  ───────────────────────────────────────── */
+  function render(sequences, rejections, scenarios, audiences, pipeData) {
     document.getElementById('loading').style.display = 'none';
+
     const pending  = sequences.filter(s => s.status === 'pending');
-    const approved = sequences.filter(s => s.status === 'approved');
-    const rejected = sequences.filter(s => s.status === 'rejected');
-    document.getElementById('count-pending').textContent   = pending.length;
-    document.getElementById('count-approved').textContent  = approved.length;
-    document.getElementById('count-rejected').textContent  = rejected.length;
+    const total    = sequences.length;
+
+    // Badges
+    document.getElementById('count-pending').textContent   = pending.length || '0';
     document.getElementById('count-scenarios').textContent = scenarios.length;
     document.getElementById('count-audiences').textContent = audiences.length;
-    const processed = (tgtData.processed || []).length;
-    document.getElementById('count-targets').textContent   = processed + ' / ' + allTargets.length;
+
+    const pipeCount = (pipeData.institutions || []).length;
+    document.getElementById('count-pipeline').textContent = pipeCount || '0';
+
+    const reportCount = reportWeeks.length;
+    document.getElementById('count-reports').textContent = reportCount > 0 ? reportCount + ' wk' : '0';
+
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    document.getElementById('last-updated').textContent = 'keyona@rerev.io · Updated ' + now;
-    renderReviewTab('pending',  pending,  'pending');
-    renderReviewTab('approved', approved, 'approved');
-    renderReviewTab('rejected', rejected, 'rejected');
+    document.getElementById('last-updated').textContent = 'keyona@rerev.io · ' + now;
+
+    renderSequencesTab(sequences, rejections);
+    renderPipelineTab(pipeData);
+    renderReportsTab();
     renderScenariosTab(scenarios, sequences);
     renderAudiencesTab(audiences, sequences);
-    renderTargetsTab(tgtData);
     renderSysInfo(sequences);
-    document.getElementById('pending').classList.add('active');
-    document.getElementById('pending').style.display = 'block';
+
+    // Activate Sequences tab
+    document.getElementById('sequences').classList.add('active');
+    document.getElementById('sequences').style.display = 'block';
   }
 
-  /* ── Targets Tab ── */
-  function renderTargetsTab(tgtData) {
-    const el = document.getElementById('targets');
-    const processed = (tgtData.processed || []).length;
-    const lastRun = tgtData.meta && tgtData.meta.last_run ? tgtData.meta.last_run : null;
+  /* ─────────────────────────────────────────
+     Sequences tab
+  ───────────────────────────────────────── */
+  function renderSequencesTab(sequences, rejections) {
+    const el = document.getElementById('sequences');
 
-    el.innerHTML = `
-      <div class="hvt-toolbar">
-        <div class="hvt-toolbar-left">
-          <input class="hvt-search" type="text" placeholder="Search by name or city…" oninput="hvtSearch=this.value;hvtPage=1;renderHVT()" id="hvt-search-box" />
-          <select class="hvt-filter" onchange="hvtFilterState=this.value;hvtPage=1;renderHVT()">
-            <option value="">All states</option>
-            <option value="SE">Southeast only</option>
-            <option value="AL">Alabama</option>
-            <option value="GA">Georgia</option>
-            <option value="TN">Tennessee</option>
-            <option value="FL">Florida</option>
-            <option value="NC">North Carolina</option>
-            <option value="SC">South Carolina</option>
-          </select>
-          <div class="view-toggle">
-            <button class="view-btn active" id="hvt-kanban-btn" onclick="setHvtView('kanban')">Kanban</button>
-            <button class="view-btn" id="hvt-list-btn" onclick="setHvtView('list')">List</button>
-          </div>
-        </div>
-        <div class="hvt-progress"><strong>${processed}</strong> researched of <strong>${allTargets.length}</strong> ICP institutions</div>
-      </div>
-      ${lastRun ? '<div style="font-size:11px;color:#185FA5;margin-bottom:14px;">Last intelligence run: ' + lastRun + '</div>' : ''}
-      <div id="hvt-kanban-view"></div>
-      <div id="hvt-list-view" style="display:none;"></div>
-      <div id="hvt-pagination"></div>
-    `;
-    renderHVT();
-  }
-
-  function getFilteredTargets() {
-    return allTargets.filter(t => {
-      const search = hvtSearch.toLowerCase();
-      const matchSearch = !search || t.name.toLowerCase().includes(search) || t.city.toLowerCase().includes(search) || t.msa.toLowerCase().includes(search);
-      const matchState = !hvtFilterState ? true
-        : hvtFilterState === 'SE' ? t.isSE
-        : t.state === hvtFilterState;
-      return matchSearch && matchState;
-    });
-  }
-
-  function renderHVT() {
-    const filtered = getFilteredTargets();
-    const total = filtered.length;
-    const showing = Math.min(hvtPage * PAGE_SIZE, total);
-    const visible = filtered.slice(0, showing);
-
-    if (hvtView === 'kanban') {
-      renderKanban(visible, total, showing);
-    } else {
-      renderHVTList(visible, total, showing);
-    }
-  }
-
-  function renderKanban(visible, total, showing) {
-    const kanbanEl = document.getElementById('hvt-kanban-view');
-    const pagEl    = document.getElementById('hvt-pagination');
-
-    const cols = { queued: [], researched: [], active: [], pipedrive: [] };
-    visible.forEach(t => {
-      const stage = getStage(t.charter);
-      if (cols[stage]) cols[stage].push(t); else cols.queued.push(t);
+    // Merge rejection reasons into sequences
+    const rejMap = {};
+    rejections.forEach(r => { rejMap[r.id] = r.reason; });
+    sequences.forEach(s => {
+      if (s.status === 'rejected' && rejMap[s.id]) s._rejectionReason = rejMap[s.id];
     });
 
-    const colDefs = [
-      { key: 'queued',     label: 'Queued',          cls: 'col-queued' },
-      { key: 'researched', label: 'Researched',       cls: 'col-researched' },
-      { key: 'active',     label: 'Active Outreach',  cls: 'col-active' },
-      { key: 'pipedrive',  label: 'In Pipedrive',     cls: 'col-pipedrive' }
+    // Sort: pending first, then approved, then rejected
+    const sorted = [
+      ...sequences.filter(s => s.status === 'pending'),
+      ...sequences.filter(s => s.status === 'approved'),
+      ...sequences.filter(s => s.status === 'rejected')
     ];
 
-    kanbanEl.innerHTML = '<div class="kanban-board">' + colDefs.map(col => {
-      const cards = cols[col.key];
-      return `<div class="kanban-col ${col.cls}">
-        <div class="kanban-col-header">${col.label} <span>${cards.length}</span></div>
-        ${cards.length ? cards.map(t => renderKCard(t)).join('') : '<div class="kcard-empty">None yet</div>'}
-      </div>`;
-    }).join('') + '</div>';
+    el.innerHTML = `
+      <div class="seq-toolbar">
+        <select class="seq-filter" id="seq-filter-select" onchange="seqFilter=this.value;applySeqFilter()">
+          <option value="all">All sequences</option>
+          <option value="pending" selected>Awaiting Review</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <div class="seq-count-note" id="seq-count-note"></div>
+      </div>
+      <div id="seq-list"></div>
+    `;
 
-    renderPagination(pagEl, total, showing);
+    // Store on window so applySeqFilter can access
+    window._allSeqSorted = sorted;
+    applySeqFilter();
   }
 
-  function renderKCard(t) {
-    const intel = targetIntel[t.charter];
-    const seTag = t.isSE ? '<span class="kcard-tag kcard-tag-se">Southeast</span>' : '<span class="kcard-tag kcard-tag-nat">National</span>';
-    const cdcuTag = t.cdcu === 'Y' ? '<span class="kcard-tag kcard-tag-cdcu">CDCU</span>' : '';
-    const intelBlock = intel && intel.intel && intel.intel.length
-      ? `<div class="kcard-intel"><strong>Latest intel</strong>${intel.intel[intel.intel.length-1].theme || '—'}</div>`
+  function applySeqFilter() {
+    const sorted = window._allSeqSorted || [];
+    const filter = seqFilter;
+    const filtered = filter === 'all' ? sorted : sorted.filter(s => s.status === filter);
+
+    const note = document.getElementById('seq-count-note');
+    if (note) note.textContent = filtered.length + ' sequence' + (filtered.length !== 1 ? 's' : '');
+
+    const list = document.getElementById('seq-list');
+    if (!list) return;
+
+    if (!filtered.length) {
+      const labels = {
+        pending: 'No sequences awaiting review.',
+        approved: 'No approved sequences yet.',
+        rejected: 'No rejected sequences yet.',
+        all: 'No sequences yet.'
+      };
+      list.innerHTML = '<div class="empty-state"><strong>' + (labels[filter] || 'No sequences found.') + '</strong><p>Sequences will appear here once pushed.</p></div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(s => renderSeqCard(s)).join('');
+  }
+
+  function renderSeqCard(seq) {
+    const status = seq.status || 'pending';
+    const pillClass = status === 'approved' ? 'pill-approved' : status === 'rejected' ? 'pill-rejected' : 'pill-pending';
+    const pillLabel = status === 'approved' ? 'Approved' : status === 'rejected' ? 'Rejected' : 'Awaiting Review';
+
+    const typeBadge = seq.type === 'html'
+      ? '<span class="type-badge badge-html">HTML</span>'
+      : '<span class="type-badge badge-plain">Plain text</span>';
+
+    const viewBtn = seq.sequenceFile
+      ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>'
       : '';
-    return `<div class="kcard">
-      <div class="kcard-name">${t.name}</div>
-      <div class="kcard-meta">${t.city ? t.city + ', ' : ''}${t.state} · ${fmtAssets(t.assets)}</div>
-      <div class="kcard-tags">${seTag}${cdcuTag}</div>
-      ${t.msa ? '<div style="font-size:11px;color:#185FA5;margin-bottom:4px;">MSA: ' + t.msa + '</div>' : ''}
-      ${intelBlock}
+    const feedbackBtn = status === 'pending'
+      ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>'
+      : '';
+
+    const note = status === 'approved' && seq.approvalNote
+      ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
+      : status === 'rejected' && (seq.rejectionReason || seq._rejectionReason)
+      ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + (seq.rejectionReason || seq._rejectionReason) + '</div>'
+      : '';
+
+    const usageNote = seq.usageNote
+      ? '<div class="usage-note">' + seq.usageNote + '</div>'
+      : '';
+
+    return `<div class="card">
+      <div class="card-top">
+        <div>
+          <div class="card-title">${seq.title}</div>
+          ${seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : ''}
+          <div class="card-meta">
+            ${seq.pushedDate} &middot; ${seq.emailCount} email${seq.emailCount > 1 ? 's' : ''} &middot; ${seq.cadence} &middot; Sender: ${seq.sender || '—'} ${typeBadge}
+          </div>
+        </div>
+        <span class="status-pill-seq ${pillClass}">${pillLabel}</span>
+      </div>
+      ${usageNote}${note}
+      <div class="card-actions">${viewBtn}${feedbackBtn}</div>
     </div>`;
   }
 
-  function renderHVTList(visible, total, showing) {
-    const listEl = document.getElementById('hvt-list-view');
-    const pagEl  = document.getElementById('hvt-pagination');
+  /* ─────────────────────────────────────────
+     Pipeline tab
+  ───────────────────────────────────────── */
+  function renderPipelineTab(pipeData) {
+    const el = document.getElementById('pipeline');
+    const meta = pipeData.meta || {};
+    const institutions = pipeData.institutions || [];
 
-    const rows = visible.map(t => {
-      const stage = getStage(t.charter);
-      const stageClass = 'stage-' + stage;
-      const stageLabel = stage === 'queued' ? 'Queued' : stage === 'researched' ? 'Researched' : stage === 'active' ? 'Active Outreach' : 'In Pipedrive';
-      return `<tr>
-        <td>${t.name}</td>
-        <td>${t.city ? t.city + ', ' : ''}${t.state}</td>
-        <td>${fmtAssets(t.assets)}</td>
-        <td>${t.msa || '—'}</td>
-        <td>${t.ltos || '—'}</td>
-        <td><span class="hvt-stage-pill ${stageClass}">${stageLabel}</span></td>
-      </tr>`;
-    }).join('');
+    const batchName  = meta.current_batch  || 'No active batch';
+    const lastUpdated = meta.last_updated  || '';
+    const totalContacted = meta.total_contacted || 0;
+    const tier = meta.tier || 1;
 
-    listEl.innerHTML = `<table class="hvt-table">
-      <thead><tr><th>Institution</th><th>Location</th><th>Assets</th><th>MSA</th><th>Loans/Shares</th><th>Stage</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+    const strategicStatement = totalContacted > 0
+      ? 'Tier ' + tier + ' outreach · ' + totalContacted + ' institutions contacted'
+      : 'Pipeline initialized — no outreach started yet';
 
-    renderPagination(pagEl, total, showing);
-  }
+    // Bucket institutions by column
+    const warming  = institutions.filter(i => i.bucket === 'warming_up');
+    const batchA   = institutions.filter(i => i.bucket === 'batch_a_active');
+    const batchB   = institutions.filter(i => i.bucket === 'batch_b_queued');
 
-  function renderPagination(el, total, showing) {
-    if (showing >= total) {
-      el.innerHTML = '<div class="hvt-count-note">Showing all ' + total + ' results</div>';
-    } else {
-      el.innerHTML = `<div class="load-more-wrap">
-        <button class="load-more-btn" onclick="hvtPage++;renderHVT()">Load 20 more</button>
-        <div class="hvt-count-note">Showing ${showing} of ${total}</div>
+    const headerHtml = `
+      <div class="pipeline-header">
+        <div>
+          <div class="pipeline-batch-name">${escHtml(batchName)}</div>
+          <div class="pipeline-statement">${escHtml(strategicStatement)}</div>
+        </div>
+        <div class="pipeline-meta">
+          ${lastUpdated ? 'Last updated: <strong>' + escHtml(lastUpdated) + '</strong>' : '<span style="color:#99B8D4;">Not yet updated</span>'}
+        </div>
       </div>`;
-    }
+
+    const colDefs = [
+      { key: 'warming',  label: 'Warming Up',      cls: 'col-warming',  items: warming },
+      { key: 'batch_a',  label: 'Batch A Active',   cls: 'col-batch-a',  items: batchA },
+      { key: 'batch_b',  label: 'Batch B Queued',   cls: 'col-batch-b',  items: batchB }
+    ];
+
+    const boardHtml = '<div class="pipeline-board">' + colDefs.map(col => {
+      const cards = col.items.length
+        ? col.items.map(inst => renderPipelineCard(inst)).join('')
+        : '<div class="pcard-empty">No institutions yet</div>';
+      return `<div class="pipeline-col ${col.cls}">
+        <div class="pipeline-col-header">${col.label} <span class="col-count">${col.items.length}</span></div>
+        ${cards}
+      </div>`;
+    }).join('') + '</div>';
+
+    el.innerHTML = headerHtml + boardHtml;
   }
 
-  function setHvtView(v) {
-    hvtView = v;
-    document.getElementById('hvt-kanban-view').style.display = v === 'kanban' ? 'block' : 'none';
-    document.getElementById('hvt-list-view').style.display   = v === 'list'   ? 'block' : 'none';
-    document.getElementById('hvt-kanban-btn').className = 'view-btn' + (v === 'kanban' ? ' active' : '');
-    document.getElementById('hvt-list-btn').className   = 'view-btn' + (v === 'list'   ? ' active' : '');
-    renderHVT();
+  function renderPipelineCard(inst) {
+    const assetFmt = inst.assets ? fmtAssets(inst.assets) : '—';
+    const tierTag  = inst.tier   ? '<span class="pcard-tag pcard-tag-tier">Tier ' + inst.tier + '</span>' : '';
+    const assetTag = inst.assets ? '<span class="pcard-tag pcard-tag-asset">' + assetFmt + '</span>' : '';
+    const connTag  = inst.connected ? '<span class="pcard-tag pcard-tag-conn">&#10003; Connection</span>' : '';
+    const signalHtml = inst.signals && inst.signals.length
+      ? '<div class="pcard-signals"><strong>Signals</strong>' + inst.signals.map(s => escHtml(s)).join(' &middot; ') + '</div>'
+      : '';
+    return `<div class="pcard">
+      <div class="pcard-name">${escHtml(inst.name || '—')}</div>
+      <div class="pcard-loc">${escHtml((inst.city ? inst.city + ', ' : '') + (inst.state || ''))}</div>
+      <div class="pcard-tags">${tierTag}${assetTag}${connTag}</div>
+      ${signalHtml}
+    </div>`;
   }
 
-  /* ── Existing tabs (unchanged) ── */
-  function renderReviewTab(tabId, sequences, status) {
-    const el = document.getElementById(tabId);
-    if (!sequences.length) {
-      const labels = { pending: 'No sequences awaiting review.', approved: 'No approved sequences yet.', rejected: 'No rejected sequences yet.' };
-      el.innerHTML = '<div class="empty-state"><strong>' + labels[status] + '</strong><p>Sequences will appear here once pushed.</p></div>';
+  function fmtAssets(n) {
+    if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+    return '$' + (n / 1e6).toFixed(0) + 'M';
+  }
+
+  /* ─────────────────────────────────────────
+     Weekly Reports tab
+  ───────────────────────────────────────── */
+  function renderReportsTab() {
+    const el = document.getElementById('reports');
+
+    if (!reportWeeks.length) {
+      el.innerHTML = `<div class="reports-no-data">
+        <strong>No reports yet.</strong>
+        <p>Add <code>reports/week-1.json</code>, <code>week-2.json</code>, etc. to the repo to populate this tab.</p>
+      </div>`;
       return;
     }
-    const count = sequences.length;
-    const label = status === 'pending' ? count + ' sequence' + (count > 1 ? 's' : '') + ' awaiting review'
-      : status === 'approved' ? count + ' approved sequence' + (count > 1 ? 's' : '')
-      : count + ' rejected sequence' + (count > 1 ? 's' : '');
-    el.innerHTML = '<div class="section-label">' + label + '</div>' + sequences.map(s => renderReviewCard(s, status)).join('');
+
+    currentReportWeek = reportWeeks[reportWeeks.length - 1]; // default = latest
+
+    const options = reportWeeks.slice().reverse().map(n =>
+      `<option value="${n}" ${n === currentReportWeek ? 'selected' : ''}>Week ${n}</option>`
+    ).join('');
+
+    el.innerHTML = `
+      <div class="reports-toolbar">
+        <select class="reports-week-select" id="week-selector" onchange="selectReportWeek(parseInt(this.value))">
+          ${options}
+        </select>
+        <div class="seq-count-note">${reportWeeks.length} week${reportWeeks.length !== 1 ? 's' : ''} available</div>
+      </div>
+      <div id="report-body"></div>
+    `;
+
+    renderReportBody(currentReportWeek);
   }
 
-  function renderReviewCard(seq, status) {
-    const typeBadge = seq.type === 'html' ? '<span class="type-badge badge-html">HTML</span>' : '<span class="type-badge badge-plain">Plain text</span>';
-    const reviewBadge = status === 'pending' ? '<div class="review-badge"><div class="pulse-dot"></div> Needs review</div>' : '';
-    const cardClass = status === 'pending' ? 'card needs-review' : 'card';
-    const viewBtn = seq.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>' : '';
-    const feedbackBtn = status === 'pending' ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>' : '';
-    const note = status === 'approved' && seq.approvalNote ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
-      : status === 'rejected' && seq.rejectionReason ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + seq.rejectionReason + '</div>' : '';
-    const usageNote = seq.usageNote ? '<div class="usage-note">' + seq.usageNote + '</div>' : '';
-    return '<div class="' + cardClass + '"><div class="card-top"><div>' +
-      '<div class="card-title">' + seq.title + '</div>' +
-      (seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : '') +
-      '<div class="card-meta">' + seq.pushedDate + ' · ' + seq.emailCount + ' email' + (seq.emailCount > 1 ? 's' : '') + ' · ' + seq.cadence + ' · Sender: ' + (seq.sender || '—') + ' ' + typeBadge + '</div>' +
-      '</div>' + reviewBadge + '</div>' + usageNote + note +
-      '<div class="card-actions">' + viewBtn + feedbackBtn + '</div></div>';
+  function selectReportWeek(n) {
+    currentReportWeek = n;
+    renderReportBody(n);
   }
 
+  function renderReportBody(n) {
+    const body = document.getElementById('report-body');
+    if (!body) return;
+    const data = reportsCache[n];
+    if (!data) { body.innerHTML = '<div class="reports-no-data"><strong>Report data not found for Week ' + n + '.</strong></div>'; return; }
+
+    let html = '<div class="report-week-label">Week ' + n + (data.date_range ? '  ·  ' + escHtml(data.date_range) : '') + '</div>';
+
+    // Stats block
+    if (data.stats && Object.keys(data.stats).length) {
+      const statItems = Object.entries(data.stats).map(([label, val]) =>
+        `<div class="report-stat"><div class="report-stat-value">${escHtml(String(val))}</div><div class="report-stat-label">${escHtml(label)}</div></div>`
+      ).join('');
+      html += `<div class="report-block"><div class="report-block-title">Key metrics</div><div class="report-stats-grid">${statItems}</div></div>`;
+    }
+
+    // Sequences block
+    if (data.sequences && data.sequences.length) {
+      const rows = data.sequences.map(s =>
+        `<tr><td>${escHtml(s.name || '—')}</td><td>${escHtml(String(s.sent || 0))}</td><td>${escHtml(String(s.opens || 0))}</td><td>${escHtml(String(s.replies || 0))}</td><td>${escHtml(s.notes || '—')}</td></tr>`
+      ).join('');
+      html += `<div class="report-block"><div class="report-block-title">Sequence performance</div>
+        <table class="report-table">
+          <thead><tr><th>Sequence</th><th>Sent</th><th>Opens</th><th>Replies</th><th>Notes</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>`;
+    }
+
+    // Highlights
+    if (data.highlights && data.highlights.length) {
+      const items = data.highlights.map(h => `<li style="margin-bottom:6px;">${escHtml(h)}</li>`).join('');
+      html += `<div class="report-block"><div class="report-block-title">Highlights</div><ul style="padding-left:18px;font-size:13px;color:#1a1a2e;line-height:1.7;">${items}</ul></div>`;
+    }
+
+    // Next steps
+    if (data.next_steps && data.next_steps.length) {
+      const items = data.next_steps.map(h => `<li style="margin-bottom:6px;">${escHtml(h)}</li>`).join('');
+      html += `<div class="report-block"><div class="report-block-title">Next steps</div><ul style="padding-left:18px;font-size:13px;color:#1a1a2e;line-height:1.7;">${items}</ul></div>`;
+    }
+
+    // Notes (free text)
+    if (data.notes) {
+      html += `<div class="report-block"><div class="report-block-title">Notes</div><div class="report-note">${escHtml(data.notes)}</div></div>`;
+    }
+
+    if (html === '<div class="report-week-label">Week ' + n + (data.date_range ? '  ·  ' + escHtml(data.date_range) : '') + '</div>') {
+      html += '<div class="empty-state"><strong>Report exists but has no renderable content yet.</strong><p>Add stats, sequences, highlights, or notes to the JSON.</p></div>';
+    }
+
+    body.innerHTML = html;
+  }
+
+  /* ─────────────────────────────────────────
+     Scenarios tab
+  ───────────────────────────────────────── */
   function renderScenariosTab(scenarios, sequences) {
     const el = document.getElementById('scenarios');
     if (!scenarios.length) { el.innerHTML = '<div class="empty-state"><strong>No scenarios yet.</strong></div>'; return; }
@@ -587,11 +650,11 @@
       scenarios.map(sc => {
         const linkedSeqs = sequences.filter(s => sc.sequences.includes(s.id));
         const triggerTag = sc.trigger ? '<span class="scenario-tag trigger">Trigger: ' + sc.trigger + '</span>' : '';
-        const assetTag = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
-        const tags = (sc.tags || []).map(t => '<span class="scenario-tag">' + t + '</span>').join('');
+        const assetTag   = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
+        const tags = (sc.tags || []).map(t => '<span class="scenario-tag">' + escHtml(t) + '</span>').join('');
         const titles = sc.typicalTitles && sc.typicalTitles.length ? '<div class="typical-titles"><strong>Typical titles</strong>' + sc.typicalTitles.join(', ') + '</div>' : '';
         const seqRows = linkedSeqs.map(s => {
-          const viewBtn = s.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">View sequence</a>' : '';
+          const viewBtn = s.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + s.sequenceFile + '" target="_blank">View</a>' : '';
           const statusBadge = s.status === 'approved' ? '<span class="scenario-tag" style="background:#EAF3DE;color:#3B6D11;border-color:#97C459;">Approved</span>'
             : s.status === 'pending' ? '<span class="scenario-tag" style="background:#FAEEDA;color:#854F0B;border-color:#FAC775;">Pending</span>'
             : '<span class="scenario-tag" style="background:#FAECE7;color:#993C1D;border-color:#F0997B;">Rejected</span>';
@@ -605,6 +668,9 @@
       }).join('');
   }
 
+  /* ─────────────────────────────────────────
+     Audiences tab
+  ───────────────────────────────────────── */
   function renderAudiencesTab(audiences, sequences) {
     const el = document.getElementById('audiences');
     el.innerHTML = '<div class="aud-toolbar">' +
@@ -640,6 +706,17 @@
     return '<table class="aud-list-table"><thead><tr><th>Audience</th><th>Asset size</th><th>Geography</th><th>Sequences</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
+  function setAudView(v) {
+    audView = v;
+    document.getElementById('aud-card-view').style.display = v === 'card' ? 'grid' : 'none';
+    document.getElementById('aud-list-view').style.display = v === 'list' ? 'block' : 'none';
+    document.getElementById('aud-card-btn').className = 'view-btn' + (v === 'card' ? ' active' : '');
+    document.getElementById('aud-list-btn').className = 'view-btn' + (v === 'list' ? ' active' : '');
+  }
+
+  /* ─────────────────────────────────────────
+     System Info tab
+  ───────────────────────────────────────── */
   function renderSysInfo(sequences) {
     const el = document.getElementById('sysinfo');
     el.innerHTML = `
@@ -702,20 +779,26 @@
       </div>`;
   }
 
-  function setAudView(v) {
-    audView = v;
-    document.getElementById('aud-card-view').style.display = v === 'card' ? 'grid' : 'none';
-    document.getElementById('aud-list-view').style.display = v === 'list' ? 'block' : 'none';
-    document.getElementById('aud-card-btn').className = 'view-btn' + (v === 'card' ? ' active' : '');
-    document.getElementById('aud-list-btn').className = 'view-btn' + (v === 'list' ? ' active' : '');
-  }
-
+  /* ─────────────────────────────────────────
+     Tab switching
+  ───────────────────────────────────────── */
   function switchTab(id, el) {
     document.querySelectorAll('.tab-content').forEach(t => { t.classList.remove('active'); t.style.display = 'none'; });
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.getElementById(id).style.display = 'block';
     el.classList.add('active');
+  }
+
+  /* ─────────────────────────────────────────
+     Utilities
+  ───────────────────────────────────────── */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   }
 </script>
 </body>
