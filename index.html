@@ -1,7 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prismm · Email Sequence Review</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F6FF; color: #1a1a2e; min-height: 100vh; }
+
+    /* ── Gate ── */
+    #gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #F0F6FF; }
+    .gate-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 16px; padding: 40px 48px; max-width: 380px; width: 90%; text-align: center; }
+    .gate-logo { font-size: 14px; font-weight: 600; color: #0C447C; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .gate-logo span { color: #378ADD; font-weight: 400; }
+    .gate-subtitle { font-size: 13px; color: #185FA5; margin-bottom: 28px; }
+    .gate-card input[type="password"] { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #B5D4F4; border-radius: 8px; outline: none; background: #F5F9FF; color: #0C447C; margin-bottom: 12px; transition: border-color 0.15s; }
+    .gate-card input[type="password"]:focus { border-color: #378ADD; background: #fff; }
+    .gate-btn { width: 100%; padding: 10px; font-size: 14px; font-weight: 600; background: #378ADD; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+    .gate-btn:hover { background: #185FA5; }
+    .gate-error { font-size: 12px; color: #993C1D; margin-top: 10px; display: none; }
+
+    /* ── Shell ── */
+    #app { display: none; }
+    .site-header { background: #EAF3FB; border-bottom: 1px solid #B5D4F4; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .site-logo { font-size: 15px; font-weight: 600; color: #0C447C; letter-spacing: 0.05em; text-transform: uppercase; }
+    .site-logo span { color: #378ADD; font-weight: 400; }
+    .header-meta { font-size: 12px; color: #185FA5; }
+
+    /* ── Tabs ── */
+    .tabs-bar { display: flex; gap: 4px; padding: 16px 32px 0; background: #EAF3FB; border-bottom: 2px solid #B5D4F4; overflow-x: auto; }
+    .tab { padding: 9px 20px; font-size: 13px; color: #185FA5; border-radius: 8px 8px 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; background: transparent; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .tab.active { background: #fff; border-color: #B5D4F4; border-bottom-color: #fff; font-weight: 600; color: #0C447C; margin-bottom: -2px; }
+    .tab-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+    .badge-pending  { background: #FAEEDA; color: #854F0B; }
+    .badge-approved { background: #EAF3DE; color: #3B6D11; }
+    .badge-rejected { background: #FAECE7; color: #993C1D; }
+    .badge-scenario { background: #EAF3FB; color: #185FA5; }
+    .badge-audience { background: #F2EAF9; color: #6B3A9C; }
+    .badge-info     { background: #F1EFE8; color: #5F5E5A; }
+    .badge-pipeline { background: #E8F4E8; color: #2D6A2D; }
+    .badge-reports  { background: #EAF3FB; color: #185FA5; }
+    .tab-external { text-decoration: none; }
+    .tab-external:hover { background: #F5F9FF; border-color: #B5D4F4; }
+
+    /* ── Main ── */
+    .main { padding: 28px 32px; max-width: 900px; margin: 0 auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section-label { font-size: 11px; color: #378ADD; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+
+    /* ── Cards ── */
+    .card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .card-title { font-size: 15px; font-weight: 600; color: #0C447C; margin-bottom: 3px; }
+    .card-audience { font-size: 13px; font-weight: 500; color: #185FA5; margin-bottom: 4px; }
+    .card-meta { font-size: 12px; color: #185FA5; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .type-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .badge-html  { background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB; }
+    .badge-plain { background: #F1EFE8; color: #5F5E5A; border: 1px solid #B4B2A9; }
+    .usage-note { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #185FA5; margin-bottom: 12px; line-height: 1.55; }
+    .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { font-size: 12px; padding: 6px 16px; border-radius: 6px; border: 1px solid; cursor: pointer; font-weight: 500; text-decoration: none; display: inline-block; }
+    .btn-view     { background: #0C447C; color: #fff; border-color: #0C447C; }
+    .btn-view:hover { background: #185FA5; }
+    .btn-feedback { background: #EAF3FB; color: #185FA5; border-color: #85B7EB; }
+    .rejection-note { background: #FFF5F0; border: 1px solid #F0997B; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #712B13; margin-bottom: 12px; }
+    .rejection-note strong { display: block; font-weight: 600; margin-bottom: 4px; color: #993C1D; }
+    .approved-note { background: #F2F9EA; border: 1px solid #97C459; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #3B6D11; margin-bottom: 12px; }
+    .approved-note strong { display: block; font-weight: 600; margin-bottom: 4px; }
+
+    /* ── Status pills on sequence cards ── */
+    .status-pill-seq { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.03em; }
+    .pill-pending  { background: #FAEEDA; color: #854F0B; }
+    .pill-approved { background: #EAF3DE; color: #3B6D11; }
+    .pill-rejected { background: #FAECE7; color: #993C1D; }
+
+    /* ── Sequences tab toolbar ── */
+    .seq-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .seq-filter { padding: 7px 12px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; outline: none; cursor: pointer; }
+    .seq-filter:focus { border-color: #378ADD; }
+    .seq-count-note { font-size: 12px; color: #185FA5; }
+
+    /* ── Pipeline tab ── */
+    .pipeline-header { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .pipeline-batch-name { font-size: 15px; font-weight: 700; color: #0C447C; }
+    .pipeline-statement { font-size: 12px; color: #185FA5; margin-top: 3px; }
+    .pipeline-meta { font-size: 12px; color: #185FA5; text-align: right; }
+    .pipeline-meta strong { color: #0C447C; }
+    .pipeline-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+    @media (max-width: 680px) { .pipeline-board { grid-template-columns: 1fr; } }
+    .pipeline-col { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 10px; padding: 14px; min-height: 140px; }
+    .pipeline-col-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .pipeline-col-header .col-count { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+    .col-warming .pipeline-col-header { color: #854F0B; }
+    .col-warming .col-count { background: #FAEEDA; color: #854F0B; }
+    .col-batch-a .pipeline-col-header { color: #2D6A2D; }
+    .col-batch-a .col-count { background: #E8F4E8; color: #2D6A2D; }
+    .col-batch-b .pipeline-col-header { color: #185FA5; }
+    .col-batch-b .col-count { background: #EAF3FB; color: #185FA5; }
+    .pcard { background: #fff; border: 1px solid #C8DFF5; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+    .pcard:last-child { margin-bottom: 0; }
+    .pcard-name { font-size: 13px; font-weight: 600; color: #0C447C; margin-bottom: 3px; line-height: 1.3; }
+    .pcard-loc { font-size: 11px; color: #185FA5; margin-bottom: 5px; }
+    .pcard-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+    .pcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
+    .pcard-tag-tier  { background: #EAF3FB; color: #185FA5; }
+    .pcard-tag-asset { background: #EAF3DE; color: #3B6D11; }
+    .pcard-tag-conn  { background: #F2EAF9; color: #6B3A9C; }
+    .pcard-signals { font-size: 11px; color: #444; line-height: 1.5; border-top: 1px solid #EAF3FB; padding-top: 6px; margin-top: 4px; }
+    .pcard-signals strong { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 2px; }
+    .pcard-empty { font-size: 12px; color: #99B8D4; text-align: center; padding: 20px 0; font-style: italic; }
+
+    /* ── Weekly Reports tab ── */
+    .reports-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .reports-week-select { padding: 8px 14px; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 6px; background: #fff; color: #0C447C; outline: none; cursor: pointer; min-width: 160px; }
+    .reports-week-select:focus { border-color: #378ADD; }
+    .reports-no-data { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
+    .reports-no-data p { margin-top: 8px; font-size: 13px; color: #378ADD; }
+    .report-block { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; }
+    .report-block-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #378ADD; margin-bottom: 14px; }
+    .report-stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-bottom: 4px; }
+    .report-stat { background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; padding: 12px 14px; text-align: center; }
+    .report-stat-value { font-size: 22px; font-weight: 700; color: #0C447C; }
+    .report-stat-label { font-size: 11px; color: #185FA5; margin-top: 3px; }
+    .report-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .report-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .report-table td { padding: 10px 12px; border-bottom: 1px solid #EDF4FB; color: #1a1a2e; vertical-align: top; line-height: 1.45; }
+    .report-table tr:last-child td { border-bottom: none; }
+    .report-note { font-size: 13px; color: #444; line-height: 1.65; }
+    .report-week-label { font-size: 13px; color: #185FA5; background: #EAF3FB; border: 1px solid #B5D4F4; border-radius: 20px; padding: 4px 14px; display: inline-block; margin-bottom: 20px; }
+
+    /* ── Scenarios ── */
+    .scenario-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; }
+    .scenario-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
+    .scenario-audience { font-size: 13px; font-weight: 600; color: #378ADD; margin-bottom: 6px; }
+    .scenario-description { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 14px; }
+    .scenario-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .scenario-tag { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: #EAF3FB; color: #185FA5; border: 1px solid #B5D4F4; }
+    .scenario-tag.trigger { background: #FAEEDA; color: #854F0B; border-color: #FAC775; }
+    .scenario-tag.asset { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+    .scenario-divider { border: none; border-top: 1px solid #D1E5F7; margin: 14px 0; }
+    .scenario-sequences-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 10px; }
+    .scenario-seq-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #F5F9FF; border: 1px solid #D1E5F7; border-radius: 8px; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .scenario-seq-info { font-size: 13px; color: #0C447C; font-weight: 500; }
+    .scenario-seq-meta { font-size: 11px; color: #185FA5; margin-top: 2px; }
+    .typical-titles { font-size: 12px; color: #185FA5; line-height: 1.6; }
+    .typical-titles strong { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #378ADD; margin-bottom: 4px; }
+
+    /* ── Audiences ── */
+    .aud-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .view-toggle { display: flex; border: 1px solid #B5D4F4; border-radius: 6px; overflow: hidden; }
+    .view-btn { font-size: 12px; padding: 5px 14px; background: #fff; color: #185FA5; border: none; cursor: pointer; font-weight: 500; }
+    .view-btn.active { background: #EAF3FB; color: #0C447C; font-weight: 600; }
+    .view-btn:first-child { border-right: 1px solid #B5D4F4; }
+    .aud-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .aud-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; border-left: 4px solid #6B3A9C; }
+    .aud-segment { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6B3A9C; margin-bottom: 5px; }
+    .aud-name { font-size: 14px; font-weight: 600; color: #0C447C; margin-bottom: 3px; }
+    .aud-titles { font-size: 12px; color: #185FA5; margin-bottom: 10px; line-height: 1.5; }
+    .aud-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .aud-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+    .aud-tag-asset { background: #EAF3DE; color: #3B6D11; }
+    .aud-tag-geo   { background: #EAF3FB; color: #185FA5; }
+    .aud-angle { font-size: 12px; color: #444; line-height: 1.55; border-top: 1px solid #D1E5F7; padding-top: 10px; margin-top: 4px; }
+    .aud-angle strong { display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #378ADD; margin-bottom: 3px; }
+    .aud-seq-link { margin-top: 10px; }
+    .aud-list-table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; }
+    .aud-list-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .aud-list-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; color: #1a1a2e; vertical-align: top; line-height: 1.5; }
+    .aud-list-table tr:last-child td { border-bottom: none; }
+    .aud-list-table td:first-child { border-left: 4px solid #6B3A9C; padding-left: 12px; }
+    .aud-list-name { font-weight: 600; font-size: 13px; color: #0C447C; }
+    .aud-list-titles { font-size: 12px; color: #185FA5; margin-top: 2px; }
+
+    /* ── System Info ── */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; }
+    .info-card-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #378ADD; margin-bottom: 12px; }
+    .info-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid #EAF3FB; font-size: 13px; }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: #185FA5; font-weight: 500; flex-shrink: 0; }
+    .info-value { color: #0C447C; text-align: right; font-size: 12px; }
+    .info-value.green { color: #3B6D11; font-weight: 600; }
+    .domain-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .domain-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .domain-table td { padding: 12px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; line-height: 1.5; color: #1a1a2e; }
+    .domain-table tr:last-child td { border-bottom: none; }
+    .domain-table td:first-child { font-family: monospace; font-size: 12px; color: #0C447C; font-weight: 600; }
+    .status-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+    .status-pending-purchase { background: #FAEEDA; color: #854F0B; }
+    .status-active { background: #EAF3DE; color: #3B6D11; }
+    .persona-card { background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; border-left: 4px solid #378ADD; }
+    .persona-name { font-size: 16px; font-weight: 600; color: #0C447C; margin-bottom: 4px; }
+    .persona-role { font-size: 13px; color: #185FA5; margin-bottom: 12px; }
+    .persona-detail { font-size: 12px; color: #444; line-height: 1.65; }
+    .persona-detail strong { color: #0C447C; font-weight: 600; display: block; margin-top: 8px; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .flow-steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 16px; }
+    .flow-step { display: flex; gap: 14px; align-items: flex-start; }
+    .flow-step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .flow-dot { width: 10px; height: 10px; border-radius: 50%; background: #378ADD; margin-top: 4px; flex-shrink: 0; }
+    .flow-connector { width: 2px; height: 28px; background: #B5D4F4; margin: 2px 0; }
+    .flow-step:last-child .flow-connector { display: none; }
+    .flow-label { font-size: 13px; color: #1a1a2e; padding-bottom: 20px; line-height: 1.5; }
+    .flow-label strong { color: #0C447C; font-weight: 600; }
+    .flow-label span { font-size: 11px; color: #185FA5; display: block; margin-top: 2px; font-family: monospace; }
+    .stack-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #B5D4F4; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .stack-table th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #185FA5; background: #EAF3FB; border-bottom: 1px solid #B5D4F4; }
+    .stack-table td { padding: 11px 16px; border-bottom: 1px solid #D1E5F7; vertical-align: top; color: #1a1a2e; font-size: 13px; line-height: 1.5; }
+    .stack-table tr:last-child td { border-bottom: none; }
+    .stack-table td:first-child { font-weight: 600; color: #0C447C; white-space: nowrap; }
+
+    /* ── Shared ── */
+    .empty-state { text-align: center; padding: 56px 20px; color: #185FA5; font-size: 14px; }
+    .empty-state p { margin-top: 8px; font-size: 13px; color: #378ADD; }
+    #loading { text-align: center; padding: 60px; color: #378ADD; font-size: 14px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; display: inline-block; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+  </style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">Prismm <span>/ Review Portal</span></div>
+    <div class="gate-subtitle">Email sequence review — team access only</div>
+    <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()" />
+    <button class="gate-btn" onclick="checkPw()">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="site-header">
+    <div class="site-logo">Prismm <span>/ Review Portal</span></div>
+    <div class="header-meta" id="last-updated">Loading...</div>
+  </div>
+
+  <div class="tabs-bar">
     <div class="tab active" onclick="switchTab('sequences',this)">Sequences <span class="tab-badge badge-pending" id="count-pending">—</span></div>
     <div class="tab" onclick="switchTab('pipeline',this)">Pipeline <span class="tab-badge badge-pipeline" id="count-pipeline">—</span></div>
     <div class="tab" onclick="switchTab('reports',this)">Weekly Reports <span class="tab-badge badge-reports" id="count-reports">—</span></div>
     <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
     <div class="tab" onclick="switchTab('audiences',this)">Audiences <span class="tab-badge badge-audience" id="count-audiences">—</span></div>
     <div class="tab" onclick="switchTab('sysinfo',this)">System Info <span class="tab-badge badge-info">&#9432;</span></div>
-    <a class="tab" href="icp-insights.html" target="_blank" style="text-decoration:none;">ICP Insights <span class="tab-badge badge-reports">↗</span></a>
+    <a class="tab tab-external" href="icp-insights.html" target="_blank">ICP Insights <span class="tab-badge badge-reports">↗</span></a>
+  </div>
+
+  <div class="main">
+    <div id="loading">Loading...</div>
+    <div id="sequences" class="tab-content" style="display:none;"></div>
+    <div id="pipeline"  class="tab-content" style="display:none;"></div>
+    <div id="reports"   class="tab-content" style="display:none;"></div>
+    <div id="scenarios" class="tab-content" style="display:none;"></div>
+    <div id="audiences" class="tab-content" style="display:none;"></div>
+    <div id="sysinfo"   class="tab-content" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+  const SITE_PASSWORD = 'prismm2026';
+  const REPO_RAW   = 'https://raw.githubusercontent.com/keyona-rerev/prismm-sequence-review/main';
+  const PAGES_BASE = 'https://keyona-rerev.github.io/prismm-sequence-review';
+
+  let audView = 'card';
+  let seqFilter = 'pending';
+  let allSequences = [];
+  let allRejections = [];
+  let reportWeeks = [];
+  let reportsCache = {};
+  let currentReportWeek = null;
+
+  function checkPw() {
+    if (document.getElementById('pw-input').value === SITE_PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadData();
+    } else {
+      document.getElementById('gate-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+
+  async function loadData() {
+    try {
+      const ts = '?t=' + Date.now();
+      const [seqRes, rejRes, scRes, audRes, pipeRes] = await Promise.all([
+        fetch(REPO_RAW + '/sequences.json' + ts),
+        fetch(REPO_RAW + '/rejections.json' + ts),
+        fetch(REPO_RAW + '/scenarios.json' + ts),
+        fetch(REPO_RAW + '/audiences.json' + ts),
+        fetch(REPO_RAW + '/pipeline.json' + ts)
+      ]);
+      const seqData  = await seqRes.json();
+      const rejData  = await rejRes.json();
+      const scData   = await scRes.json();
+      const audData  = await audRes.json();
+      const pipeData = await pipeRes.json();
+      allSequences  = seqData.sequences  || [];
+      allRejections = rejData.rejections || [];
+      reportWeeks = await discoverReportWeeks();
+      render(allSequences, allRejections, scData.scenarios || [], audData.audiences || [], pipeData);
+    } catch(e) {
+      document.getElementById('loading').textContent = 'Failed to load. Please refresh. (' + e.message + ')';
+    }
+  }
+
+  async function discoverReportWeeks() {
+    const found = [];
+    for (let n = 1; n <= 52; n++) {
+      try {
+        const res = await fetch(REPO_RAW + '/reports/week-' + n + '.json?t=' + Date.now());
+        if (!res.ok) break;
+        const data = await res.json();
+        reportsCache[n] = data;
+        found.push(n);
+      } catch(e) { break; }
+    }
+    return found;
+  }
+
+  function render(sequences, rejections, scenarios, audiences, pipeData) {
+    document.getElementById('loading').style.display = 'none';
+    const pending = sequences.filter(s => s.status === 'pending');
+    document.getElementById('count-pending').textContent   = pending.length || '0';
+    document.getElementById('count-scenarios').textContent = scenarios.length;
+    document.getElementById('count-audiences').textContent = audiences.length;
+    const pipeCount = (pipeData.institutions || []).length;
+    document.getElementById('count-pipeline').textContent = pipeCount || '0';
+    const reportCount = reportWeeks.length;
+    document.getElementById('count-reports').textContent = reportCount > 0 ? reportCount + ' wk' : '0';
+    const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    document.getElementById('last-updated').textContent = 'keyona@rerev.io · ' + now;
+    renderSequencesTab(sequences, rejections);
+    renderPipelineTab(pipeData);
+    renderReportsTab();
+    renderScenariosTab(scenarios, sequences);
+    renderAudiencesTab(audiences, sequences);
+    renderSysInfo(sequences);
+    document.getElementById('sequences').classList.add('active');
+    document.getElementById('sequences').style.display = 'block';
+  }
+
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab-content').forEach(t => { t.style.display = 'none'; t.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).style.display = 'block';
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  function renderSequencesTab(sequences, rejections) {
+    const el = document.getElementById('sequences');
+    const rejMap = {};
+    rejections.forEach(r => { rejMap[r.id] = r.reason; });
+    sequences.forEach(s => { if (s.status === 'rejected' && rejMap[s.id]) s._rejectionReason = rejMap[s.id]; });
+    const sorted = [
+      ...sequences.filter(s => s.status === 'pending'),
+      ...sequences.filter(s => s.status === 'approved'),
+      ...sequences.filter(s => s.status === 'rejected')
+    ];
+    el.innerHTML = `<div class="seq-toolbar">
+      <select class="seq-filter" id="seq-filter-select" onchange="seqFilter=this.value;applySeqFilter()">
+        <option value="all">All sequences</option>
+        <option value="pending" selected>Awaiting Review</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <div class="seq-count-note" id="seq-count-note"></div>
+    </div><div id="seq-list"></div>`;
+    window._allSeqSorted = sorted;
+    applySeqFilter();
+  }
+
+  function applySeqFilter() {
+    const sorted = window._allSeqSorted || [];
+    const filtered = seqFilter === 'all' ? sorted : sorted.filter(s => s.status === seqFilter);
+    const note = document.getElementById('seq-count-note');
+    if (note) note.textContent = filtered.length + ' sequence' + (filtered.length !== 1 ? 's' : '');
+    const list = document.getElementById('seq-list');
+    if (!list) return;
+    if (!filtered.length) {
+      const labels = { pending:'No sequences awaiting review.', approved:'No approved sequences yet.', rejected:'No rejected sequences yet.', all:'No sequences yet.' };
+      list.innerHTML = '<div class="empty-state"><strong>' + (labels[seqFilter] || 'No sequences found.') + '</strong><p>Sequences will appear here once pushed.</p></div>';
+      return;
+    }
+    list.innerHTML = filtered.map(s => renderSeqCard(s)).join('');
+  }
+
+  function renderSeqCard(seq) {
+    const status = seq.status || 'pending';
+    const pillClass = status === 'approved' ? 'pill-approved' : status === 'rejected' ? 'pill-rejected' : 'pill-pending';
+    const pillLabel = status === 'approved' ? 'Approved' : status === 'rejected' ? 'Rejected' : 'Awaiting Review';
+    const typeBadge = seq.type === 'html' ? '<span class="type-badge badge-html">HTML</span>' : '<span class="type-badge badge-plain">Plain text</span>';
+    const viewBtn = seq.sequenceFile ? '<a class="btn btn-view" href="' + PAGES_BASE + '/' + seq.sequenceFile + '" target="_blank">View sequence</a>' : '';
+    const feedbackBtn = status === 'pending' ? '<a class="btn btn-feedback" href="https://github.com/keyona-rerev/prismm-sequence-review/issues/new?title=Feedback%3A+' + encodeURIComponent(seq.title) + '&body=**Sequence+ID:**+' + seq.id + '%0A%0A**Feedback:**%0A" target="_blank">Leave feedback</a>' : '';
+    const note = status === 'approved' && seq.approvalNote ? '<div class="approved-note"><strong>Why it worked</strong>' + seq.approvalNote + '</div>'
+      : status === 'rejected' && (seq.rejectionReason || seq._rejectionReason) ? '<div class="rejection-note"><strong>Reason for rejection</strong>' + (seq.rejectionReason || seq._rejectionReason) + '</div>' : '';
+    const usageNote = seq.usageNote ? '<div class="usage-note">' + seq.usageNote + '</div>' : '';
+    return `<div class="card"><div class="card-top"><div><div class="card-title">${seq.title}</div>${seq.targetAudience ? '<div class="card-audience">' + seq.targetAudience + '</div>' : ''}<div class="card-meta">${seq.pushedDate} &middot; ${seq.emailCount} email${seq.emailCount > 1 ? 's' : ''} &middot; ${seq.cadence} &middot; Sender: ${seq.sender || '—'} ${typeBadge}</div></div><span class="status-pill-seq ${pillClass}">${pillLabel}</span></div>${usageNote}${note}<div class="card-actions">${viewBtn}${feedbackBtn}</div></div>`;
+  }
+
+  function renderPipelineTab(pipeData) {
+    const el = document.getElementById('pipeline');
+    const meta = pipeData.meta || {};
+    const institutions = pipeData.institutions || [];
+    const batchName = meta.current_batch || 'No active batch';
+    const lastUpdated = meta.last_updated || '';
+    const totalContacted = meta.total_contacted || 0;
+    const tier = meta.tier || 1;
+    const strategicStatement = totalContacted > 0 ? 'Tier ' + tier + ' outreach · ' + totalContacted + ' institutions contacted' : 'Pipeline initialized — no outreach started yet';
+    const warming = institutions.filter(i => i.bucket === 'warming_up');
+    const batchA  = institutions.filter(i => i.bucket === 'batch_a_active');
+    const batchB  = institutions.filter(i => i.bucket === 'batch_b_queued');
+    const headerHtml = `<div class="pipeline-header"><div><div class="pipeline-batch-name">${escHtml(batchName)}</div><div class="pipeline-statement">${escHtml(strategicStatement)}</div></div><div class="pipeline-meta">${lastUpdated ? 'Last updated: <strong>' + escHtml(lastUpdated) + '</strong>' : '<span style="color:#99B8D4;">Not yet updated</span>'}</div></div>`;
+    const colDefs = [
+      { label: 'Warming Up',    cls: 'col-warming',  items: warming },
+      { label: 'Batch A Active',cls: 'col-batch-a',  items: batchA },
+      { label: 'Batch B Queued',cls: 'col-batch-b',  items: batchB }
+    ];
+    const boardHtml = '<div class="pipeline-board">' + colDefs.map(col => {
+      const cards = col.items.length ? col.items.map(inst => renderPipelineCard(inst)).join('') : '<div class="pcard-empty">No institutions yet</div>';
+      return `<div class="pipeline-col ${col.cls}"><div class="pipeline-col-header">${col.label} <span class="col-count">${col.items.length}</span></div>${cards}</div>`;
+    }).join('') + '</div>';
+    el.innerHTML = headerHtml + boardHtml;
+  }
+
+  function renderPipelineCard(inst) {
+    const assetFmt = inst.assets ? fmtAssets(inst.assets) : '—';
+    const tierTag  = inst.tier   ? '<span class="pcard-tag pcard-tag-tier">Tier ' + inst.tier + '</span>' : '';
+    const assetTag = inst.assets ? '<span class="pcard-tag pcard-tag-asset">' + assetFmt + '</span>' : '';
+    const connTag  = inst.connected ? '<span class="pcard-tag pcard-tag-conn">&#10003; Connection</span>' : '';
+    const signalHtml = inst.signals && inst.signals.length ? '<div class="pcard-signals"><strong>Signals</strong>' + inst.signals.map(s => escHtml(s)).join(' &middot; ') + '</div>' : '';
+    return `<div class="pcard"><div class="pcard-name">${escHtml(inst.name||'—')}</div><div class="pcard-loc">${escHtml((inst.city?inst.city+', ':''+(inst.state||'')))}</div><div class="pcard-tags">${tierTag}${assetTag}${connTag}</div>${signalHtml}</div>`;
+  }
+
+  function fmtAssets(n) {
+    if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
+    return '$' + (n/1e6).toFixed(0) + 'M';
+  }
+
+  function renderReportsTab() {
+    const el = document.getElementById('reports');
+    if (!reportWeeks.length) { el.innerHTML = '<div class="reports-no-data"><strong>No reports yet.</strong><p>Add <code>reports/week-1.json</code> etc. to populate this tab.</p></div>'; return; }
+    currentReportWeek = reportWeeks[reportWeeks.length - 1];
+    const options = reportWeeks.slice().reverse().map(n => `<option value="${n}" ${n===currentReportWeek?'selected':''}>Week ${n}</option>`).join('');
+    el.innerHTML = `<div class="reports-toolbar"><select class="reports-week-select" id="week-selector" onchange="selectReportWeek(parseInt(this.value))">${options}</select><div class="seq-count-note">${reportWeeks.length} week${reportWeeks.length!==1?'s':''} available</div></div><div id="report-body"></div>`;
+    renderReportBody(currentReportWeek);
+  }
+
+  function selectReportWeek(n) { currentReportWeek = n; renderReportBody(n); }
+
+  function renderReportBody(n) {
+    const body = document.getElementById('report-body');
+    if (!body) return;
+    const data = reportsCache[n];
+    if (!data) { body.innerHTML = '<div class="reports-no-data"><strong>Report data not found for Week ' + n + '.</strong></div>'; return; }
+    let html = '<div class="report-week-label">Week ' + n + (data.date_range ? '  ·  ' + escHtml(data.date_range) : '') + '</div>';
+    if (data.stats && Object.keys(data.stats).length) {
+      html += `<div class="report-block"><div class="report-block-title">Key metrics</div><div class="report-stats-grid">${Object.entries(data.stats).map(([l,v]) => `<div class="report-stat"><div class="report-stat-value">${escHtml(String(v))}</div><div class="report-stat-label">${escHtml(l)}</div></div>`).join('')}</div></div>`;
+    }
+    if (data.sequences && data.sequences.length) {
+      html += `<div class="report-block"><div class="report-block-title">Sequence performance</div><table class="report-table"><thead><tr><th>Sequence</th><th>Sent</th><th>Opens</th><th>Replies</th><th>Notes</th></tr></thead><tbody>${data.sequences.map(s=>`<tr><td>${escHtml(s.name||'—')}</td><td>${escHtml(String(s.sent||0))}</td><td>${escHtml(String(s.opens||0))}</td><td>${escHtml(String(s.replies||0))}</td><td>${escHtml(s.notes||'—')}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+    if (data.highlights && data.highlights.length) html += `<div class="report-block"><div class="report-block-title">Highlights</div><ul style="padding-left:18px;font-size:13px;color:#1a1a2e;line-height:1.7;">${data.highlights.map(h=>`<li style="margin-bottom:6px;">${escHtml(h)}</li>`).join('')}</ul></div>`;
+    if (data.next_steps && data.next_steps.length) html += `<div class="report-block"><div class="report-block-title">Next steps</div><ul style="padding-left:18px;font-size:13px;color:#1a1a2e;line-height:1.7;">${data.next_steps.map(h=>`<li style="margin-bottom:6px;">${escHtml(h)}</li>`).join('')}</ul></div>`;
+    if (data.notes) html += `<div class="report-block"><div class="report-block-title">Notes</div><div class="report-note">${escHtml(data.notes)}</div></div>`;
+    body.innerHTML = html;
+  }
+
+  function renderScenariosTab(scenarios, sequences) {
+    const el = document.getElementById('scenarios');
+    if (!scenarios.length) { el.innerHTML = '<div class="empty-state"><strong>No scenarios yet.</strong></div>'; return; }
+    el.innerHTML = '<div class="section-label">' + scenarios.length + ' scenario' + (scenarios.length>1?'s':'') + '</div>' + scenarios.map(sc => {
+      const linkedSeqs = sequences.filter(s => sc.sequences.includes(s.id));
+      const triggerTag = sc.trigger ? '<span class="scenario-tag trigger">Trigger: ' + sc.trigger + '</span>' : '';
+      const assetTag   = sc.assetSize ? '<span class="scenario-tag asset">' + sc.assetSize + '</span>' : '';
+      const tags = (sc.tags||[]).map(t=>'<span class="scenario-tag">'+escHtml(t)+'</span>').join('');
+      const titles = sc.typicalTitles&&sc.typicalTitles.length ? '<div class="typical-titles"><strong>Typical titles</strong>'+sc.typicalTitles.join(', ')+'</div>' : '';
+      const seqRows = linkedSeqs.map(s => {
+        const viewBtn = s.sequenceFile ? '<a class="btn btn-view" href="'+PAGES_BASE+'/'+s.sequenceFile+'" target="_blank">View</a>' : '';
+        const sb = s.status==='approved'?'<span class="scenario-tag" style="background:#EAF3DE;color:#3B6D11;border-color:#97C459;">Approved</span>':s.status==='pending'?'<span class="scenario-tag" style="background:#FAEEDA;color:#854F0B;border-color:#FAC775;">Pending</span>':'<span class="scenario-tag" style="background:#FAECE7;color:#993C1D;border-color:#F0997B;">Rejected</span>';
+        return '<div class="scenario-seq-row"><div><div class="scenario-seq-info">'+s.title+' &nbsp;'+sb+'</div><div class="scenario-seq-meta">'+s.emailCount+' emails · '+s.cadence+'</div></div><div>'+viewBtn+'</div></div>';
+      }).join('');
+      return '<div class="scenario-card"><div class="scenario-name">'+sc.name+'</div><div class="scenario-audience">'+sc.targetAudience+'</div><div class="scenario-description">'+sc.description+'</div><div class="scenario-meta-row">'+triggerTag+assetTag+tags+'</div>'+titles+'<hr class="scenario-divider"><div class="scenario-sequences-label">Sequences in this scenario</div>'+(seqRows||'<div style="font-size:13px;color:#185FA5;">No sequences linked yet.</div>')+'</div>';
+    }).join('');
+  }
+
+  function renderAudiencesTab(audiences, sequences) {
+    const el = document.getElementById('audiences');
+    el.innerHTML = '<div class="aud-toolbar"><div class="section-label" style="margin:0;">'+audiences.length+' ICP profile'+(audiences.length!==1?'s':'')+' with sequences</div><div class="view-toggle"><button class="view-btn active" id="aud-card-btn" onclick="setAudView(\'card\')">Cards</button><button class="view-btn" id="aud-list-btn" onclick="setAudView(\'list\')">List</button></div></div><div id="aud-card-view" class="aud-grid">'+audiences.map(a=>renderAudCard(a,sequences)).join('')+'</div><div id="aud-list-view" style="display:none;">'+renderAudList(audiences,sequences)+'</div>';
+  }
+
+  function renderAudCard(a, sequences) {
+    const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
+    const seqLinks = linkedSeqs.map(s=>s.sequenceFile?'<a class="btn btn-view" style="font-size:11px;padding:4px 12px;" href="'+PAGES_BASE+'/'+s.sequenceFile+'" target="_blank">'+s.title+'</a>':'').join('');
+    return '<div class="aud-card"><div class="aud-segment">'+a.segment+'</div><div class="aud-name">'+a.name+'</div><div class="aud-titles">'+a.targetTitles.join(', ')+'</div><div class="aud-tags"><span class="aud-tag aud-tag-asset">'+a.assetSize+'</span><span class="aud-tag aud-tag-geo">'+a.geo+'</span></div><div class="aud-angle"><strong>Pain point</strong>'+a.painPoint+'</div><div class="aud-angle" style="margin-top:8px;"><strong>Outreach angle</strong>'+a.angle+'</div>'+(seqLinks?'<div class="aud-seq-link"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#378ADD;margin-bottom:6px;">Sequences</div>'+seqLinks+'</div>':'')+'</div>';
+  }
+
+  function renderAudList(audiences, sequences) {
+    const rows = audiences.map(a => {
+      const linkedSeqs = sequences.filter(s => a.sequences.includes(s.id));
+      const seqLinks = linkedSeqs.map(s=>s.sequenceFile?'<a class="btn btn-view" style="font-size:11px;padding:3px 10px;" href="'+PAGES_BASE+'/'+s.sequenceFile+'" target="_blank">'+s.title+'</a>':'').join(' ');
+      return '<tr><td><div class="aud-list-name">'+a.name+'</div><div class="aud-list-titles">'+a.targetTitles.join(', ')+'</div></td><td><span class="aud-tag aud-tag-asset">'+a.assetSize+'</span></td><td><span class="aud-tag aud-tag-geo">'+a.geo+'</span></td><td>'+(seqLinks||'<span style="font-size:12px;color:#185FA5;">—</span>')+'</td></tr>';
+    }).join('');
+    return '<table class="aud-list-table"><thead><tr><th>Audience</th><th>Asset size</th><th>Geography</th><th>Sequences</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+
+  function setAudView(v) {
+    audView = v;
+    document.getElementById('aud-card-view').style.display = v==='card'?'grid':'none';
+    document.getElementById('aud-list-view').style.display = v==='list'?'block':'none';
+    document.getElementById('aud-card-btn').className = 'view-btn'+(v==='card'?' active':'');
+    document.getElementById('aud-list-btn').className = 'view-btn'+(v==='list'?' active':'');
+  }
+
+  function renderSysInfo(sequences) {
+    const el = document.getElementById('sysinfo');
+    el.innerHTML = `<div class="section-label">Cold email system overview</div><div class="info-grid"><div class="info-card"><div class="info-card-title">Personas</div><div class="info-row"><span class="info-label">Roland Mercer</span><span class="info-value">Cold outreach only</span></div><div class="info-row"><span class="info-label">Keyona Meeks</span><span class="info-value">Warm handoff + close</span></div><div class="info-row"><span class="info-label">Martha</span><span class="info-value">Event + nurture sequences</span></div></div><div class="info-card"><div class="info-card-title">Monthly cost estimate</div><div class="info-row"><span class="info-label">ReachInbox</span><span class="info-value">$39/mo</span></div><div class="info-row"><span class="info-label">Sending inboxes (×2)</span><span class="info-value">~$6/mo</span></div><div class="info-row"><span class="info-label">Apollo (free tier)</span><span class="info-value">$0 until maxed</span></div><div class="info-row"><span class="info-label">Domains (annualized)</span><span class="info-value">~$2/mo</span></div><div class="info-row"><span class="info-label" style="font-weight:700;">Total</span><span class="info-value green">~$47/mo to start</span></div></div></div><div class="section-label">Sending domains</div><table class="domain-table"><thead><tr><th>Domain</th><th>Purpose</th><th>Persona</th><th>Cost</th><th>Status</th></tr></thead><tbody><tr><td>tryprismm.com</td><td>Cold outreach — all Roland sequences</td><td>Roland Mercer</td><td>$13.44/yr</td><td><span class="status-pill status-pending-purchase">Pending purchase</span></td></tr><tr><td>withprismm.com</td><td>Cold outreach — backup / second inbox for volume scaling</td><td>Roland Mercer</td><td>$13.44/yr</td><td><span class="status-pill status-pending-purchase">Pending purchase</span></td></tr><tr><td>getprismm.com</td><td>Primary brand domain — proposals, contracts, real relationships only</td><td>Keyona / Martha</td><td>Existing</td><td><span class="status-pill status-active">Protected — do not use for cold sends</span></td></tr></tbody></table><div class="section-label">Warm-up schedule</div><table class="stack-table"><thead><tr><th>Phase</th><th>Volume per inbox/day</th><th>Timeline</th></tr></thead><tbody><tr><td>Weeks 1–2</td><td>10–20 emails/day</td><td>Ramp up</td></tr><tr><td>Weeks 3–4</td><td>30–50 emails/day</td><td>Building reputation</td></tr><tr><td>Weeks 6–8</td><td>100–150 emails/day</td><td>Fully warmed</td></tr><tr><td>2 inboxes fully warmed</td><td>200 emails/day</td><td>~50,000 emails/year</td></tr></tbody></table><div class="section-label">Lead flow</div><div class="card" style="margin-bottom:16px;"><div class="flow-steps"><div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Apollo (prospecting)</strong> Find and verify contacts by title, institution size, and geography.<span>Free tier until maxed → then evaluate paid upgrade</span></div></div><div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>ReachInbox (sequencing)</strong> Roland Mercer sends cold sequence from tryprismm.com or withprismm.com.<span>Domain warm-up runs first — do not send before warm-up complete</span></div></div><div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Prospect replies to Roland</strong> Roland can hold the conversation for 1–2 exchanges.<span>No Pipedrive entry yet</span></div></div><div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Roland handoff to Keyona</strong> Roland introduces Keyona, transitions to keyona@getprismm.com.<span>This is when the contact enters Pipedrive</span></div></div><div class="flow-step"><div class="flow-step-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-label"><strong>Pipedrive</strong> Lead created on first reply. Tagged by batch.<span>From here: Keyona owns the relationship</span></div></div></div></div><div class="section-label">Persona: Roland Mercer</div><div class="persona-card"><div class="persona-name">Roland Mercer</div><div class="persona-role">Cold outreach point of contact — Prismm</div><div class="persona-detail"><strong>What he is</strong>A sending persona used exclusively for cold email outreach. Not a real person, not a Prismm employee. He exists entirely inside ReachInbox.<strong>What he does</strong>Opens cold conversations, holds early-stage exchanges, and hands off warm prospects to Keyona when the timing is right.<strong>Sending from</strong>roland@tryprismm.com and/or roland@withprismm.com — dedicated outreach domains that protect the primary Prismm domain.<strong>What Martha does not need to do</strong>Do not create a getprismm.com account for Roland. His entire infrastructure is in ReachInbox only.</div></div>`;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+</body>
+</html>
