@@ -4,228 +4,203 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prismm · ICP Insights</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --navy: #0C2340;
-      --blue: #1A3F6F;
-      --mid: #2B5FA0;
-      --sky: #4E8BC9;
-      --pale: #D6E8F7;
-      --ice: #EFF6FC;
-      --cream: #F9F7F3;
-      --gold: #C8880A;
-      --gold-light: #FAEEDA;
-      --red: #993C1D;
-      --red-light: #FAECE7;
-      --green: #2E6B2E;
-      --green-light: #EAF3DE;
-      --text: #1a1a2e;
-      --muted: #5a6a80;
-      --border: #C8D9EC;
-    }
-
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F5F8FB;
+      color: #1a2a3a;
       min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     /* ── Header ── */
     .site-header {
-      background: var(--navy);
-      padding: 18px 40px;
+      background: #fff;
+      border-bottom: 1px solid #C8D9EC;
+      padding: 14px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .site-logo {
-      font-family: 'DM Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--pale);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .site-logo span { color: var(--sky); }
-    .back-link {
-      font-size: 12px;
-      color: var(--sky);
-      text-decoration: none;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.04em;
-    }
-    .back-link:hover { color: var(--pale); }
+    .site-logo { font-size: 13px; font-weight: 600; color: #0C447C; letter-spacing: 0.05em; text-transform: uppercase; }
+    .site-logo span { color: #378ADD; font-weight: 400; }
+    .back-link { font-size: 12px; color: #378ADD; text-decoration: none; }
+    .back-link:hover { color: #0C447C; }
 
-    /* ── Hero TLDR ── */
+    /* ── TLDR band ── */
     .tldr-band {
-      background: var(--navy);
-      border-bottom: 3px solid var(--gold);
-      padding: 48px 40px 44px;
+      background: #0C2340;
+      padding: 40px 32px 36px;
+      border-bottom: 2px solid #C8880A;
     }
     .tldr-eyebrow {
-      font-family: 'DM Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
+      color: #C8880A;
+      margin-bottom: 12px;
     }
     .tldr-headline {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(28px, 4vw, 44px);
+      font-size: clamp(22px, 3vw, 32px);
       color: #fff;
-      line-height: 1.15;
-      max-width: 800px;
+      font-weight: 600;
+      line-height: 1.25;
+      max-width: 680px;
       margin-bottom: 28px;
     }
-    .tldr-headline em {
-      color: var(--sky);
-      font-style: italic;
-    }
-    .tldr-cards {
+    .tldr-headline em { color: #7AB8E8; font-style: normal; }
+    .tldr-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      max-width: 900px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      max-width: 860px;
     }
     .tldr-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      padding: 18px 20px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 16px 18px;
     }
     .tldr-card-label {
-      font-family: 'DM Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--sky);
-      margin-bottom: 8px;
+      color: #7AB8E8;
+      margin-bottom: 6px;
     }
     .tldr-card-text {
       font-size: 13px;
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.78);
       line-height: 1.6;
     }
     .tldr-card-text strong { color: #fff; font-weight: 500; }
 
     /* ── Meta bar ── */
     .meta-bar {
-      background: var(--ice);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 40px;
+      background: #EAF3FB;
+      border-bottom: 1px solid #C8D9EC;
+      padding: 10px 32px;
       display: flex;
-      align-items: center;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
     }
-    .meta-pill {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .meta-pill span { color: var(--blue); font-weight: 500; }
+    .meta-item { font-size: 11px; color: #5a6a80; }
+    .meta-item span { color: #185FA5; }
 
-    /* ── Body layout ── */
-    .body-wrap {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 48px 40px 80px;
-    }
+    /* ── Body ── */
+    .body-wrap { max-width: 800px; margin: 0 auto; padding: 40px 32px 72px; }
 
-    /* ── Section titles ── */
+    /* ── Section headings ── */
     .section-eyebrow {
-      font-family: 'DM Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
+      color: #C8880A;
+      margin-bottom: 6px;
     }
     .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 24px;
-      color: var(--navy);
-      margin-bottom: 18px;
-      line-height: 1.2;
+      font-size: 18px;
+      font-weight: 600;
+      color: #0C2340;
+      margin-bottom: 20px;
     }
+
+    /* ── Finding block ── */
+    .finding {
+      background: #fff;
+      border: 1px solid #C8D9EC;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .finding-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .finding-source { font-size: 11px; color: #5a6a80; }
+    .finding-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .tag-revenue  { background: #EAF3DE; color: #2E6B2E; }
+    .tag-risk     { background: #FAECE7; color: #993C1D; }
+    .tag-language { background: #FAEEDA; color: #854F0B; }
+    .finding-body { font-size: 13px; color: #2a3a4a; line-height: 1.7; }
+    .finding-body p { margin-bottom: 10px; }
+    .finding-body p:last-child { margin-bottom: 0; }
+    .finding-body strong { color: #0C2340; font-weight: 600; }
+    .finding-body .copy-note {
+      border-top: 1px solid #E8F0F8;
+      padding-top: 10px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #5a6a80;
+    }
+    .finding-body .copy-note strong { color: #185FA5; }
 
     /* ── Pull quote ── */
     .pull-quote {
-      border-left: 3px solid var(--gold);
-      padding: 20px 24px;
-      background: var(--gold-light);
-      border-radius: 0 10px 10px 0;
-      margin: 28px 0;
+      border-left: 3px solid #C8880A;
+      background: #FAEEDA;
+      padding: 18px 22px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
     }
     .pull-quote p {
-      font-family: 'DM Serif Display', serif;
-      font-size: 17px;
-      color: var(--navy);
-      line-height: 1.6;
+      font-size: 15px;
+      color: #1a2a3a;
+      line-height: 1.65;
       font-style: italic;
     }
     .pull-quote cite {
       display: block;
-      font-family: 'DM Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.1em;
-      color: var(--gold);
-      margin-top: 10px;
+      text-transform: uppercase;
+      color: #854F0B;
+      margin-top: 8px;
       font-style: normal;
-      text-transform: uppercase;
     }
 
-    /* ── Finding card ── */
-    .finding {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    /* ── Gap callout ── */
+    .gap-callout {
+      background: #0C2340;
+      border-radius: 10px;
       padding: 26px 28px;
-      margin-bottom: 20px;
+      margin: 32px 0;
     }
-    .finding-source-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .finding-source {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--mid);
-      letter-spacing: 0.04em;
-    }
-    .finding-tag {
+    .gap-callout-label {
       font-size: 10px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: #7AB8E8;
+      margin-bottom: 8px;
     }
-    .tag-revenue  { background: var(--green-light); color: var(--green); }
-    .tag-risk     { background: var(--red-light);   color: var(--red); }
-    .tag-language { background: var(--gold-light);  color: var(--gold); }
-    .tag-gap      { background: var(--ice);         color: var(--blue); }
-
-    .finding-body {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.75;
+    .gap-callout-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.35;
     }
-    .finding-body p { margin-bottom: 12px; }
-    .finding-body p:last-child { margin-bottom: 0; }
-    .finding-body strong { color: var(--navy); font-weight: 600; }
+    .gap-callout-body {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+    }
+    .gap-callout-body strong { color: #fff; }
 
     /* ── Language table ── */
     .lang-table {
@@ -233,131 +208,71 @@
       border-collapse: collapse;
       font-size: 13px;
       background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 1px solid #C8D9EC;
+      border-radius: 10px;
       overflow: hidden;
       margin-bottom: 32px;
     }
     .lang-table th {
       text-align: left;
-      padding: 12px 16px;
+      padding: 10px 16px;
       font-size: 10px;
-      font-family: 'DM Mono', monospace;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--mid);
-      background: var(--ice);
-      border-bottom: 1px solid var(--border);
+      color: #5a6a80;
+      background: #EAF3FB;
+      border-bottom: 1px solid #C8D9EC;
     }
     .lang-table td {
-      padding: 13px 16px;
+      padding: 12px 16px;
       border-bottom: 1px solid #EDF4FB;
       vertical-align: top;
-      line-height: 1.55;
+      line-height: 1.6;
     }
     .lang-table tr:last-child td { border-bottom: none; }
-    .lang-table td:first-child {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--navy);
-      font-weight: 500;
-      width: 42%;
-    }
-    .lang-table td:last-child { color: var(--muted); }
+    .lang-table td:first-child { font-weight: 500; color: #0C447C; width: 40%; }
+    .lang-table td:last-child { color: #4a5a6a; }
 
-    /* ── Gap callout ── */
-    .gap-callout {
-      background: var(--navy);
-      border-radius: 12px;
-      padding: 32px 36px;
-      margin: 32px 0;
-    }
-    .gap-callout-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--sky);
-      margin-bottom: 12px;
-    }
-    .gap-callout-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      color: #fff;
-      margin-bottom: 14px;
-      line-height: 1.3;
-    }
-    .gap-callout-body {
-      font-size: 13px;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.7;
-    }
-    .gap-callout-body strong { color: #fff; }
-
-    /* ── Copy implications ── */
+    /* ── Copy hooks ── */
     .copy-hook {
       background: #fff;
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--sky);
-      border-radius: 0 10px 10px 0;
-      padding: 16px 20px;
-      margin-bottom: 12px;
+      border: 1px solid #C8D9EC;
+      border-left: 3px solid #378ADD;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 10px;
     }
     .copy-hook-label {
-      font-family: 'DM Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--sky);
-      margin-bottom: 6px;
+      color: #378ADD;
+      margin-bottom: 5px;
     }
     .copy-hook-text {
-      font-size: 14px;
-      color: var(--navy);
+      font-size: 13px;
+      color: #1a2a3a;
       line-height: 1.6;
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
     }
 
     /* ── Divider ── */
-    .report-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 40px 0;
-    }
+    .divider { border: none; border-top: 1px solid #C8D9EC; margin: 36px 0; }
 
     /* ── Source list ── */
     .source-list {
-      background: var(--ice);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 24px;
+      background: #EAF3FB;
+      border: 1px solid #C8D9EC;
+      border-radius: 8px;
+      padding: 18px 22px;
     }
-    .source-list-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .source-list ul {
-      list-style: none;
-      padding: 0;
-    }
-    .source-list li {
-      font-size: 12px;
-      color: var(--muted);
-      padding: 5px 0;
-      border-bottom: 1px solid var(--border);
-      line-height: 1.5;
-    }
+    .source-list-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5a6a80; margin-bottom: 10px; }
+    .source-list ul { list-style: none; }
+    .source-list li { font-size: 12px; color: #5a6a80; padding: 5px 0; border-bottom: 1px solid #C8D9EC; line-height: 1.5; }
     .source-list li:last-child { border-bottom: none; }
-    .source-list li strong { color: var(--blue); }
+    .source-list li strong { color: #185FA5; }
 
     @media (max-width: 600px) {
-      .tldr-band, .meta-bar, .body-wrap { padding-left: 20px; padding-right: 20px; }
-      .site-header { padding: 16px 20px; }
+      .site-header, .tldr-band, .meta-bar, .body-wrap { padding-left: 16px; padding-right: 16px; }
     }
   </style>
 </head>
@@ -365,25 +280,24 @@
 
 <header class="site-header">
   <div class="site-logo">Prismm <span>/ ICP Insights</span></div>
-  <a class="back-link" href="index.html">← Back to review portal</a>
+  <a class="back-link" href="index.html">← Back to portal</a>
 </header>
 
-<!-- ── TLDR ── -->
 <div class="tldr-band">
-  <div class="tldr-eyebrow">TL;DR · Intelligence report · April 2026</div>
-  <h1 class="tldr-headline">Banks are calling wealth transfer a <em>record revenue story.</em> They haven't noticed the leak underneath it.</h1>
-  <div class="tldr-cards">
+  <div class="tldr-eyebrow">TL;DR · Bank intelligence report · April 2026</div>
+  <h1 class="tldr-headline">Banks are reporting <em>record wealth management revenue.</em> They haven't noticed the deposit leak underneath it.</h1>
+  <div class="tldr-grid">
     <div class="tldr-card">
       <div class="tldr-card-label">The finding</div>
-      <div class="tldr-card-text">Regional banks report <strong>record wealth management revenue</strong> in Q4 2025 earnings calls. None are tracking what happens to that AUM when the account holder dies.</div>
+      <div class="tldr-card-text">Regional banks called out <strong>record wealth management revenue</strong> in Q4 2025 earnings calls. None are tracking what happens to that AUM when the account holder dies.</div>
     </div>
     <div class="tldr-card">
-      <div class="tldr-card-label">The language they use</div>
-      <div class="tldr-card-text">"Fee income diversification." "Record quarter." "Next generation engagement." They see the upside. They haven't named the structural leak.</div>
+      <div class="tldr-card-label">Their language</div>
+      <div class="tldr-card-text">"Fee income diversification." "Fourth consecutive record quarter." "Next generation engagement." They see the upside. They haven't named the leak.</div>
     </div>
     <div class="tldr-card">
       <div class="tldr-card-label">The copy angle</div>
-      <div class="tldr-card-text">Don't tell them they have a problem. <strong>Mirror their own language back.</strong> Then extend the sentence they never finish: "...and here's what happens to those deposits when that client dies."</div>
+      <div class="tldr-card-text">Don't tell them they have a problem. <strong>Mirror their language, then finish the sentence they never say:</strong> "...and here's what happens to those deposits when that client dies."</div>
     </div>
     <div class="tldr-card">
       <div class="tldr-card-label">The ABA already said it</div>
@@ -392,81 +306,77 @@
   </div>
 </div>
 
-<!-- ── Meta ── -->
 <div class="meta-bar">
-  <div class="meta-pill">Sources: <span>Earnings calls, ABA Journal, Financial Brand, Jack Henry</span></div>
-  <div class="meta-pill">Window: <span>Q3–Q4 2025 + Q1 2026</span></div>
-  <div class="meta-pill">Purpose: <span>Prismm copy intelligence</span></div>
-  <div class="meta-pill">Updated: <span>April 2026</span></div>
+  <div class="meta-item">Sources: <span>Earnings calls, ABA Journal, Financial Brand, Jack Henry</span></div>
+  <div class="meta-item">Window: <span>Q3–Q4 2025 + Q1 2026</span></div>
+  <div class="meta-item">Purpose: <span>Prismm copy intelligence</span></div>
+  <div class="meta-item">Updated: <span>April 2026</span></div>
 </div>
 
-<!-- ── Body ── -->
 <div class="body-wrap">
 
-  <!-- Section 1 -->
   <div class="section-eyebrow">01 / publicly traded regionals</div>
   <h2 class="section-title">What banks are saying on earnings calls</h2>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">Regions Financial (NYSE: RF) · Q4 2025 earnings call · Jan 16, 2026</div>
       <span class="finding-tag tag-revenue">Revenue frame</span>
     </div>
     <div class="finding-body">
-      <p>CEO John Turner used the word "record" four times in a single earnings call to describe wealth management performance. The bank reported that wealth management and corporate bank businesses achieved another year of record fee income, and that wealth management delivered record full-year revenue with a fourth consecutive quarter of growth — driven by continued sales momentum and a favorable market backdrop.</p>
-      <p><strong>What this means for copy:</strong> The internal frame at a bank like Regions is celebratory. Wealth is a "good story." They are not sitting in a defensive posture. The Prismm pitch enters this conversation as a forward extension — "you've built something worth protecting."</p>
+      <p>CEO John Turner used the word "record" four times in one earnings call to describe wealth performance. Wealth management and corporate bank businesses achieved another year of record fee income. Wealth management specifically delivered record full-year revenue with a fourth consecutive quarter of growth, driven by continued sales momentum and a favorable market backdrop.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> The internal frame is celebratory, not defensive. Prismm enters this as a forward extension — "you've built something worth protecting" — not as a warning.</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">Regions Financial · Q3 2025 investor presentation (SEC 8-K)</div>
       <span class="finding-tag tag-revenue">Revenue frame</span>
     </div>
     <div class="finding-body">
-      <p>Their Q3 investor materials noted wealth management income rose 5%, marking a third consecutive record quarter driven by strong sales and favorable markets. The same release showed a 14.3% year-over-year increase in wealth management income.</p>
-      <p><strong>Pattern:</strong> Banks with growing wealth divisions are doubling down on them as fee income diversifiers. The pitch language they respond to is "protect and grow what you've built," not "you're at risk."</p>
+      <p>Q3 investor materials noted wealth management income rose 5%, marking a third consecutive record quarter driven by strong sales and favorable markets, alongside a 14.3% year-over-year increase in wealth management income overall.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> Banks with growing wealth divisions are doubling down on them as fee income diversifiers. The pitch registers as "protect and grow what you've built," not "you're at risk."</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">QCR Holdings (NASDAQ: QCRH) · Midwest community bank holding company · Q4 2025</div>
       <span class="finding-tag tag-revenue">Revenue frame</span>
     </div>
     <div class="finding-body">
-      <p>QCR Holdings — closer in profile to Prismm's ICP — emphasized deposit growth as its core priority in its most recent earnings call. Fee income diversification is gaining traction, with wealth management and mortgage banking fees up 12% quarter-over-quarter. Management also highlighted that digital account openings surged 25% year-over-year, citing appeal to younger demographics as a strategic priority.</p>
-      <p><strong>Read:</strong> This bank is already trying to solve the next-gen problem. They're just trying to solve it through digital account acquisition — not through inheritance infrastructure. Prismm is the missing piece they don't know exists yet.</p>
+      <p>QCR Holdings — closer in size to Prismm's ICP — emphasized deposit growth as its core priority in its most recent earnings call. Wealth management and mortgage banking fees were up 12% quarter-over-quarter. Digital account openings surged 25% year-over-year, with management citing appeal to younger demographics as a strategic priority.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> This bank is already trying to solve the next-gen problem through digital acquisition — not through inheritance infrastructure. Prismm is the missing piece they don't know exists.</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">Wilson Bank Holding Co. · SEC 8-K filing · 2025</div>
       <span class="finding-tag tag-language">Language signal</span>
     </div>
     <div class="finding-body">
-      <p>In their investor communications, Wilson Bank noted their wealth division manages assets exceeding $1.7 billion, framing it as "a reflection of their unwavering commitment to personalized wealth management solutions." The word choice is relationship-oriented, not product-oriented.</p>
-      <p><strong>Copy note:</strong> This framing ("personalized," "commitment," "trust") is the register Prismm should match when writing to community bank personas. They don't see themselves as financial product vendors — they see themselves as relationship institutions.</p>
+      <p>Wilson Bank noted their wealth division manages assets exceeding $1.7 billion, framing it as a reflection of "unwavering commitment to personalized wealth management solutions." The word choice is relationship-oriented, not product-oriented.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> Community banks don't see themselves as financial product vendors. Match this register — "personalized," "commitment," "relationship" — in subject lines and intros.</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">Western New England Bancorp · Investor analysis · Q1 2026</div>
       <span class="finding-tag tag-revenue">Revenue frame</span>
     </div>
     <div class="finding-body">
-      <p>Investor analysis of WNEB explicitly named their strategy: "wealth management growth taps into intergenerational wealth transfer in affluent suburbs." This is an investor-facing document using wealth transfer as a growth thesis — which means the bank's own board has approved this framing as a value creation story.</p>
-      <p><strong>Implication:</strong> At banks like this, the C-suite is already using "intergenerational wealth transfer" as a strategic headline. Prismm walks into a room where the vocabulary already exists. The job is to make the structural risk visible — not introduce the concept.</p>
+      <p>Investor analysis of WNEB explicitly named the strategy: "wealth management growth taps into intergenerational wealth transfer in affluent suburbs." This is an investor-facing document using wealth transfer as a growth thesis — meaning the bank's own board has approved this framing as a value creation story.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> At banks like this, the vocabulary already exists in the boardroom. Prismm walks into a room where the term is familiar. The job is making the structural risk visible, not introducing the concept.</p>
     </div>
   </div>
 
-  <hr class="report-divider" />
+  <hr class="divider" />
 
-  <!-- Section 2 -->
-  <div class="section-eyebrow">02 / trade press + industry publications</div>
-  <h2 class="section-title">What the industry is saying to banks</h2>
+  <div class="section-eyebrow">02 / trade press + industry</div>
+  <h2 class="section-title">What the industry is telling banks to do</h2>
 
   <div class="pull-quote">
     <p>"The settling of the estate should not be the first interaction the bank has with the eventual heirs. By making an effort to involve and engage clients long before that time, the bank can better understand their goals and build that relationship."</p>
@@ -474,75 +384,71 @@
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">ABA Banking Journal · "Getting Ready for the Great Wealth Transfer" · Jan 2026</div>
       <span class="finding-tag tag-language">Language signal</span>
     </div>
     <div class="finding-body">
-      <p>The American Bankers Association's own publication ran a feature naming the problem directly: when $124 trillion starts moving, there is no guarantee that heirs will stick with their parents' banking partner. The article called out that previous retention attempts — digital lockboxes, product bundling — had largely failed because they didn't meet younger generations' expectations for modern, self-service digital tools, and didn't help firms build genuine relationships with the next generation early on.</p>
-      <p>Their recommendation to banks: start focusing very intentionally on intergenerational wealth management — and specifically, make sure the estate settlement is not the first interaction the bank has with the eventual heirs.</p>
-      <p><strong>This is Prismm described from the buyer's seat.</strong> The ABA is telling community banks to do exactly what Prismm enables. The product is the answer to the industry's own advice.</p>
+      <p>The American Bankers Association's own publication named the problem directly: when $124 trillion starts moving, there is no guarantee that heirs will stick with their parents' banking partner. Previous retention attempts — digital lockboxes, product bundling — had largely failed because they didn't build genuine relationships with the next generation early on.</p>
+      <p>The article also called out that banks had tried and failed with digital lockboxes specifically — noting customers preferred Google Drive and found bank-provided document storage cumbersome. This is useful context: the ABA is not pointing banks toward document storage as the answer. It's pointing them toward relationship infrastructure. That's Prismm's lane.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> The ABA is telling community banks to do exactly what Prismm enables. Quoting the ABA back to a banker means citing their own industry authority, not making a cold claim.</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
+    <div class="finding-meta">
       <div class="finding-source">Jack Henry 2025/2026 Strategy Benchmark · Annual CEO survey</div>
       <span class="finding-tag tag-risk">Risk frame</span>
     </div>
     <div class="finding-body">
-      <p>Jack Henry's annual survey of bank and credit union CEOs found that deposit attrition explicitly tied with cyberattacks as the third biggest concern overall — notable because cyberattack anxiety is visceral and immediate, and attrition is being weighted equally. Credit unions specifically cited acquiring younger accountholders as their 37% top concern. For credit unions, accountholder growth and attrition is now a top performance metric alongside return on assets.</p>
-      <p><strong>What this tells us:</strong> These institutions aren't passive about the problem. Attrition is a board metric. But their proposed solutions are digital onboarding and product bundling — not beneficiary infrastructure. Prismm is filling a gap in their current toolkit, not competing with it.</p>
+      <p>Jack Henry's annual survey of bank and credit union CEOs found that deposit attrition tied with cyberattacks as the third biggest concern overall. Credit unions specifically cited acquiring younger accountholders as their top concern at 37%. For credit unions, accountholder growth and attrition is now a top performance metric alongside return on assets.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> These institutions aren't passive. Attrition is a board metric. But their proposed solutions are digital onboarding and product bundling — not beneficiary infrastructure. Prismm fills a gap in their current toolkit, not competing with it.</p>
     </div>
   </div>
 
   <div class="finding">
-    <div class="finding-source-row">
-      <div class="finding-source">The Financial Brand Forum 2026 · Conference agenda · April 2026</div>
+    <div class="finding-meta">
+      <div class="finding-source">The Financial Brand Forum 2026 · Conference agenda</div>
       <span class="finding-tag tag-language">Language signal</span>
     </div>
     <div class="finding-body">
-      <p>The Financial Brand Forum — the industry's largest banking conference — put wealth transfer on the main stage for 2026 with this framing: "The most significant wealth transfer in history is underway right now, with younger generations set to inherit $21 trillion from Baby Boomers, a massive demographic shift that is fundamentally reshaping how people choose and interact with financial institutions." A separate session on longevity banking named "intergenerational wealth transfer" explicitly as a new revenue opportunity.</p>
-      <p><strong>Signal:</strong> This topic has moved from trade press to keynote stage. Banks showing up to this conference are already primed for the vocabulary. Any Prismm outreach to conference attendees lands in a context where the problem has been formally named and elevated by their peers.</p>
+      <p>The Financial Brand Forum — the industry's largest banking conference — put wealth transfer on the main stage for 2026. A featured session described the wealth transfer as "a massive demographic shift that is fundamentally reshaping how people choose and interact with financial institutions," with a session explicitly naming "intergenerational wealth transfer" as a new revenue opportunity. A longevity banking session framed it as one of the key moments where new revenue emerges across generations.</p>
+      <p class="copy-note"><strong>Copy implication:</strong> This topic has moved from trade press to keynote stage. Banks attending this conference are primed for the vocabulary. Any Prismm outreach to conference attendees lands in an already-activated context.</p>
     </div>
   </div>
 
-  <hr class="report-divider" />
+  <hr class="divider" />
 
-  <!-- Section 3 — The gap -->
   <div class="gap-callout">
     <div class="gap-callout-label">03 / the structural gap</div>
     <div class="gap-callout-title">Banks are tracking wealth management revenue. They are not tracking inherited deposit retention.</div>
     <div class="gap-callout-body">
-      Across every earnings call, annual report excerpt, and trade piece reviewed, there is almost no mention of what happens operationally when a Boomer account holder dies. No bank is reporting: what percentage of beneficiaries have a prior relationship with the institution. How long the asset transfer process takes. What percentage of inherited deposits leave.
+      Across every earnings call, annual report excerpt, and trade piece reviewed, there is almost no mention of what happens operationally when a Boomer account holder dies. No bank is publicly reporting what percentage of beneficiaries have a prior relationship with the institution, how long asset transfer takes, or what percentage of inherited deposits leave to competitors.
       <br><br>
-      <strong>Banks are celebrating the upside of wealth management while sitting on a structural leak they haven't instrumented.</strong> The industry press sees it, the ABA named it in January. But it has not become a line item on earnings calls — which means the window is open.
+      <strong>Banks are celebrating the upside of wealth management while sitting on a structural leak they haven't instrumented.</strong> The industry press sees it. The ABA named it in January. But it has not become a line item on earnings calls — which means the window is open.
     </div>
   </div>
 
-  <hr class="report-divider" />
+  <hr class="divider" />
 
-  <!-- Section 4 — Language table -->
   <div class="section-eyebrow">04 / copy intelligence</div>
-  <h2 class="section-title">The exact language banks respond to</h2>
-
-  <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">These phrases are surfacing in executive communications right now. They are the vocabulary already inside the room. Prismm copy should enter through this language, not introduce new terms.</p>
+  <h2 class="section-title">Language banks respond to right now</h2>
 
   <table class="lang-table">
     <thead>
       <tr>
         <th>Their language</th>
-        <th>What it signals for copy</th>
+        <th>What it signals for Prismm copy</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>"Record wealth management revenue"</td>
-        <td>Wealth is a proven fee driver. The frame is celebratory. Enter with "protect what you've built."</td>
+        <td>Celebratory frame. Enter with "protect what you've built," not "you're losing money."</td>
       </tr>
       <tr>
         <td>"Fee income diversification"</td>
-        <td>They're under margin pressure and need non-interest income. Prismm is another fee layer on top of an asset they already own.</td>
+        <td>Margin pressure. Prismm is another fee layer on an asset they already own.</td>
       </tr>
       <tr>
         <td>"Acquiring younger accountholders"</td>
@@ -550,58 +456,50 @@
       </tr>
       <tr>
         <td>"Accountholder growth and attrition"</td>
-        <td>Attrition is the metric, not just acquisition. This is the hook: Prismm addresses attrition at the exact moment it's most preventable.</td>
+        <td>Attrition is the metric, not just acquisition. Prismm addresses attrition at the exact moment it's most preventable.</td>
       </tr>
       <tr>
         <td>"Intergenerational wealth transfer"</td>
-        <td>They know the term. They don't have the infrastructure. Use it without defining it — they'll feel seen, not lectured.</td>
-      </tr>
-      <tr>
-        <td>"Generational shift in assets and attitudes"</td>
-        <td>They feel the cultural change, not just the dollar amount. Lead with the human story first, the AUM number second.</td>
+        <td>They know the term. Don't define it — use it. They'll feel seen, not lectured.</td>
       </tr>
       <tr>
         <td>"The settling of the estate should not be the first interaction"</td>
-        <td>The ABA's own language. If you can quote the ABA back to a banker, you're citing their authority — not making a cold claim.</td>
+        <td>ABA's own language. Citing it back to a banker means citing their authority, not a cold claim.</td>
       </tr>
       <tr>
         <td>"Relationship banking"</td>
-        <td>Community banks don't see themselves as product vendors. Prismm copy should use relationship language, not infrastructure language, in subject lines and intros.</td>
+        <td>Community banks don't see themselves as product vendors. Use relationship language in subject lines — not infrastructure language.</td>
       </tr>
     </tbody>
   </table>
 
-  <!-- Copy hooks -->
-  <div class="section-eyebrow">05 / copy implications</div>
+  <div class="section-eyebrow">05 / copy hooks</div>
   <h2 class="section-title">What this unlocks for Prismm sequences</h2>
 
-  <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">The moment to enter their awareness is right after they read their own record-setting wealth management numbers — because that's exactly when the question "but what happens when those clients die?" should follow. Right now, it doesn't.</p>
-
   <div class="copy-hook">
-    <div class="copy-hook-label">Hook angle — revenue mirror</div>
+    <div class="copy-hook-label">Revenue mirror</div>
     <div class="copy-hook-text">"You just reported record wealth management revenue. Here's the number nobody's tracking: what percentage of that AUM is still at your institution 18 months after the account holder passes."</div>
   </div>
 
   <div class="copy-hook">
-    <div class="copy-hook-label">Hook angle — ABA authority</div>
+    <div class="copy-hook-label">ABA authority</div>
     <div class="copy-hook-text">"The ABA said it in January: the estate settlement shouldn't be the first time you meet the heir. Most banks know this. Almost none have the infrastructure to act on it."</div>
   </div>
 
   <div class="copy-hook">
-    <div class="copy-hook-label">Hook angle — the next-gen problem they already feel</div>
+    <div class="copy-hook-label">Next-gen acquisition angle</div>
     <div class="copy-hook-text">"You're focused on acquiring younger accountholders. The fastest path to a 30-year-old depositor is the one who's already inheriting from your best customer."</div>
   </div>
 
   <div class="copy-hook">
-    <div class="copy-hook-label">Hook angle — silent attrition</div>
+    <div class="copy-hook-label">Silent attrition</div>
     <div class="copy-hook-text">"Your deposit attrition report doesn't have a line for this: inherited assets that left quietly, to a competitor, six months after a death. Prismm makes that line visible — and preventable."</div>
   </div>
 
-  <hr class="report-divider" />
+  <hr class="divider" />
 
-  <!-- Sources -->
   <div class="source-list">
-    <div class="source-list-title">Sources used in this report</div>
+    <div class="source-list-title">Sources</div>
     <ul>
       <li><strong>Regions Financial Q4 2025 earnings call transcript</strong> — Jan 16, 2026 (Investing.com / SEC EDGAR)</li>
       <li><strong>Regions Financial Q3 2025 investor presentation</strong> — Oct 2025 (SEC 8-K exhibit)</li>
@@ -609,9 +507,8 @@
       <li><strong>Wilson Bank Holding Co. 8-K filing</strong> — 2025 (SEC EDGAR)</li>
       <li><strong>Western New England Bancorp investor analysis</strong> — Q1 2026</li>
       <li><strong>ABA Banking Journal: "Getting Ready for the Great Wealth Transfer"</strong> — January 13, 2026</li>
-      <li><strong>Jack Henry 2025/2026 Strategy Benchmark</strong> — Annual CEO survey, community banks and credit unions</li>
+      <li><strong>Jack Henry 2025/2026 Strategy Benchmark</strong> — Annual CEO survey</li>
       <li><strong>The Financial Brand Forum 2026 conference agenda</strong> — Session descriptions and keynote topics</li>
-      <li><strong>Angel Oak Capital Advisors 2026 Financials Outlook</strong> — Feb 2026</li>
       <li><strong>Cerulli Associates: U.S. High-Net-Worth and Ultra-High-Net-Worth Markets</strong> — $124 trillion wealth transfer projection</li>
     </ul>
   </div>
