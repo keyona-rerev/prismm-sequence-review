@@ -5,6 +5,7 @@
       "title": "Conference Contact Outreach Sequence",
       "status": "approved",
       "type": "plain",
+      "classification": "evergreen",
       "pushedDate": "Mar 13, 2026",
       "approvedDate": "Mar 20, 2026",
       "emailCount": 3,
@@ -14,13 +15,14 @@
       "sequenceFile": "sequences/seq-001-conference-outreach.html",
       "batchId": null,
       "approvalNote": "Approved by Martha and Shella. A/B versions per email keyed to contact title. Email 2 collaborative invite angle well-received. Timing rationale approved as-is.",
-      "usageNote": "Use for any contact made at an in-person or virtual industry event. Do not use for cold contacts or warm intro referrals."
+      "usageNote": "Evergreen. Use for any contact made at an in-person or virtual industry event, on an ongoing basis. Not tied to a batch or hypothesis test. Do not use for cold contacts or warm intro referrals."
     },
     {
       "id": "seq-002",
       "title": "Cold Outreach — Community Bank VP/EVP (Southeast)",
       "status": "pending",
       "type": "plain",
+      "classification": "batch",
       "pushedDate": "Mar 20, 2026",
       "emailCount": 4,
       "cadence": "18-day cadence",
