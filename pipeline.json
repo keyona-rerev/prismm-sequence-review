@@ -1,5 +1,57 @@
 {
-  "meta": { "total_contacted": 0, "current_batch": "", "last_updated": "", "tier": 1 },
-  "batches": [],
-  "institutions": []
+  "_schema": {
+    "version": "1.0",
+    "batchSize": 25,
+    "description": "A batch is a group of 25 contacts selected around a shared hypothesis: that contacts with a specific combination of institution type, title tier, asset size, and geography will respond to a particular positioning angle and communication approach. Each batch maps to exactly one sequence. The sequence is the instrument built to test the hypothesis. One batch, one hypothesis, one sequence. If the hypothesis changes, it is a new batch.",
+    "fields": {
+      "batchId": "Unique batch identifier. Format: BCH-NNN",
+      "sequenceId": "The seq-NNN this batch is linked to. One-to-one, permanent.",
+      "hypothesis": "The 'we believe' statement. Why this contact group should respond to this angle.",
+      "qualifiers": {
+        "institutionType": "community bank | credit union | CDFI | other",
+        "titleTier": "The specific title range this batch targets",
+        "assetSize": "Asset size band e.g. $500M–$1B",
+        "geo": "Geographic scope"
+      },
+      "angle": "The core positioning the sequence is built around",
+      "contactCount": "Always 25",
+      "status": "building | ready | active | complete | paused",
+      "apolloListId": "Apollo list ID once contacts are loaded",
+      "enrolledDate": "Date contacts were enrolled in Apollo",
+      "completedDate": "Date the sequence finished running for this batch",
+      "result": {
+        "opens": "Number of opens",
+        "replies": "Number of replies",
+        "meetings": "Number of meetings booked",
+        "hypothesisHeld": "true | false | partial",
+        "notes": "What worked, what didn't, what to change"
+      }
+    }
+  },
+  "batches": [
+    {
+      "batchId": "BCH-001",
+      "sequenceId": "seq-002",
+      "hypothesis": "Community bank VP/EVP leaders in the Southeast managing $500M–$1B institutions are losing inherited deposits silently at life transition moments and have no product or process addressing it. They will respond to a sequence that names the invisible attrition problem and positions Prismm as infrastructure, not a pitch.",
+      "qualifiers": {
+        "institutionType": "community bank",
+        "titleTier": "VP, EVP",
+        "assetSize": "$500M–$1B",
+        "geo": "Southeast and Mid-Atlantic"
+      },
+      "angle": "Invisible attrition — deposit relationships lost when the primary account holder dies and the institution has no system to retain the beneficiary relationship",
+      "contactCount": 25,
+      "status": "ready",
+      "apolloListId": "",
+      "enrolledDate": "",
+      "completedDate": "",
+      "result": {
+        "opens": null,
+        "replies": null,
+        "meetings": null,
+        "hypothesisHeld": null,
+        "notes": ""
+      }
+    }
+  ]
 }
