@@ -230,6 +230,55 @@
     #loading { text-align: center; padding: 60px; color: #378ADD; font-size: 14px; }
     .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; flex-shrink: 0; display: inline-block; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+    /* ===== Daily Buyers tab (added Step 2h) ===== */
+    .badge-buyer { background: #FAECE7; color: #C0392B; }
+    .db-tracker { background:#EAF3FB; border:1px solid #B5D4F4; border-radius:12px; padding:16px 20px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+    .db-tracker-headline { font-size:14px; color:#0C447C; font-weight:600; }
+    .db-tracker-headline b { color:#185FA5; }
+    .db-tracker-counts { display:flex; gap:10px; flex-wrap:wrap; }
+    .db-stat { background:#fff; border:1px solid #B5D4F4; border-radius:10px; padding:8px 16px; text-align:center; min-width:84px; }
+    .db-stat-num { font-size:20px; font-weight:700; color:#0C447C; line-height:1; }
+    .db-stat-label { font-size:11px; color:#185FA5; text-transform:uppercase; letter-spacing:0.04em; margin-top:4px; }
+    .db-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(420px,1fr)); gap:16px; }
+    .db-card { background:#fff; border:1px solid #B5D4F4; border-radius:12px; padding:18px 20px; transition:opacity .3s ease, transform .3s ease; }
+    .db-card.is-skipped { opacity:.5; }
+    .db-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .db-name { font-size:18px; font-weight:700; color:#0C447C; line-height:1.2; }
+    .db-pills { display:flex; align-items:center; gap:8px; margin-top:9px; flex-wrap:wrap; }
+    .db-seg { font-size:11px; font-weight:700; padding:3px 11px; border-radius:20px; color:#fff; text-transform:uppercase; letter-spacing:0.03em; }
+    .db-seg.bank { background:#f9655b; }
+    .db-seg.cu { background:#6658ea; }
+    .db-score { font-size:12px; font-weight:700; padding:3px 12px; border-radius:20px; background:#f5c070; color:#5A3D00; }
+    .db-jh { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; background:#E8F4E8; color:#2D6A2D; }
+    .db-people { margin-top:14px; display:flex; flex-direction:column; gap:9px; }
+    .db-person { font-size:13px; color:#1a1a2e; }
+    .db-person .role { color:#8593A8; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:2px; }
+    .db-person .who { font-weight:600; color:#0C447C; }
+    .db-person .ttl { color:#185FA5; }
+    .db-person.missing .who { color:#993C1D; font-style:italic; font-weight:500; }
+    .db-signals { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+    .db-sig { font-size:11px; padding:4px 10px; border-radius:8px; background:#F5F9FF; border:1px solid #B5D4F4; color:#185FA5; }
+    .db-sig .d { color:#8593A8; margin-left:5px; }
+    .db-sig.verify { border-color:#E7C98F; background:#FAEEDA; color:#854F0B; }
+    .db-why { margin-top:14px; font-size:13px; color:#5A6B82; line-height:1.5; }
+    .db-actions { margin-top:16px; display:flex; gap:10px; }
+    .db-btn { font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px; cursor:pointer; border:1px solid transparent; }
+    .db-btn-approve { background:#f9655b; color:#fff; }
+    .db-btn-approve:hover { background:#E0524A; }
+    .db-btn-skip { background:transparent; color:#185FA5; border-color:#B5D4F4; }
+    .db-btn-skip:hover { background:#F5F9FF; }
+    .db-draft { margin-top:16px; border-top:1px solid #EAF3FB; padding-top:14px; animation:slideDown .18s ease; }
+    .db-draft-loading { font-size:13px; color:#185FA5; padding:10px 0; }
+    .db-draft-label { font-size:10px; color:#8593A8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+    .db-draft-subject { width:100%; font-size:13px; font-weight:600; color:#0C447C; border:1px solid #B5D4F4; border-radius:8px; padding:8px 12px; margin-bottom:10px; background:#F5F9FF; }
+    .db-draft-body { width:100%; min-height:160px; font-size:13px; color:#1a1a2e; border:1px solid #B5D4F4; border-radius:8px; padding:10px 12px; font-family:inherit; line-height:1.5; resize:vertical; background:#F5F9FF; }
+    .db-draft-actions { margin-top:12px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .db-btn-gmail { background:#378ADD; color:#fff; font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px; border:none; cursor:pointer; }
+    .db-btn-gmail:hover { background:#185FA5; }
+    .db-skipped-label { font-size:13px; color:#993C1D; font-weight:600; margin-top:14px; }
+    .db-confirm { font-size:12px; color:#2D6A2D; font-weight:600; }
+    .db-status-flag { font-size:12px; color:#854F0B; font-weight:600; margin-top:14px; background:#FAEEDA; border:1px solid #E7C98F; border-radius:8px; padding:10px 12px; }
+    @media (max-width:520px) { .db-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -253,6 +302,7 @@
     <div class="tab" onclick="switchTab('reports',this)">Weekly Reports <span class="tab-badge badge-reports" id="count-reports">—</span></div>
     <div class="tab" onclick="switchTab('scenarios',this)">Scenarios <span class="tab-badge badge-scenario" id="count-scenarios">—</span></div>
     <div class="tab" onclick="switchTab('audiences',this)">Audiences <span class="tab-badge badge-audience" id="count-audiences">—</span></div>
+    <div class="tab" onclick="switchTab('dailybuyers',this)">Daily Buyers <span class="tab-badge badge-buyer" id="count-dailybuyers">—</span></div>
     <div class="tab" onclick="switchTab('sysinfo',this)">System Info <span class="tab-badge badge-info">&#9432;</span></div>
     <a class="tab tab-external" href="icp-insights.html" target="_blank">ICP Insights <span class="tab-badge badge-reports">&#8599;</span></a>
   </div>
@@ -263,6 +313,7 @@
     <div id="reports"   class="tab-content" style="display:none;"></div>
     <div id="scenarios" class="tab-content" style="display:none;"></div>
     <div id="audiences" class="tab-content" style="display:none;"></div>
+    <div id="dailybuyers" class="tab-content" style="display:none;"></div>
     <div id="sysinfo"   class="tab-content" style="display:none;"></div>
   </div>
 </div>
@@ -321,7 +372,7 @@
     document.getElementById('count-pipeline').textContent = (pipeData.institutions || []).length || '0';
     document.getElementById('count-reports').textContent = reportWeeks.length > 0 ? reportWeeks.length + ' wk' : '0';
     document.getElementById('last-updated').textContent = 'keyona@rerev.io · ' + new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-    renderSequencesTab(sequences, rejections); renderPipelineTab(pipeData); renderReportsTab(); renderScenariosTab(scenarios, sequences); renderAudiencesTab(audiences, sequences); renderSysInfo(sequences);
+    renderSequencesTab(sequences, rejections); renderPipelineTab(pipeData); renderReportsTab(); renderScenariosTab(scenarios, sequences); renderAudiencesTab(audiences, sequences); renderSysInfo(sequences); renderDailyBuyersTab();
     document.getElementById('sequences').classList.add('active'); document.getElementById('sequences').style.display = 'block';
   }
 
@@ -505,6 +556,172 @@
   }
 
   function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  // ===== Daily Buyers tab (Step 2h shell) ============================
+  // GAS proxy endpoint. Paste the deployed /exec URL here in Step 5 to go live.
+  const GAS_EXEC_URL = '';
+  const DB_TOKEN_KEY = 'prismm_db_token';
+
+  // callProxy(action, payload): used for ALL live proxy calls from Step 5 on.
+  // Sends Content-Type text/plain so GAS (which can't answer a CORS preflight)
+  // is never preflighted. Token is read from sessionStorage when present.
+  async function callProxy(action, payload) {
+    if (!GAS_EXEC_URL) throw new Error('GAS_EXEC_URL not set yet (wired in Step 5).');
+    const body = { action: action, payload: payload || {} };
+    const tok = sessionStorage.getItem(DB_TOKEN_KEY);
+    if (tok) body.token = tok;
+    const res = await fetch(GAS_EXEC_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body)
+    });
+    return res.json();
+  }
+
+  function dbEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function dbAttr(s){ return dbEsc(s).replace(/"/g,'&quot;'); }
+  function dbSigLabel(t){
+    const m = { consent_order:'NCUA / FDIC Consent Order', new_ceo:'New CEO', new_dept_head:'New Dept Head',
+      merger_pending:'Merger Pending', new_wealth_service:'New Wealth Service', core_conversion:'Core Conversion',
+      elder_dense_market:'Elder-Dense Market', jack_henry:'Jack Henry Core', public_statement:'Public Deposit Statement' };
+    return m[t] || t;
+  }
+
+  // --- Mock data for the shell. Replaced by callProxy('getDailyBuyers') in Step 5. ---
+  const DB_MOCK_SUMMARY = { surfaced: 10, approved: 3, sent: 2, replied: 1 };
+  const DB_MOCK_BUYERS = [
+    { date:'2026-06-22', institution_name:'First Community Credit Union', type:'credit_union', state:'OH',
+      estimated_assets:'$1.4B', score:9, status:'surfaced', jack_henry:true,
+      buyer_name:'Marcus Adeyemi', buyer_title:'Chief Executive Officer',
+      champion_name:'Dana Whitfield', champion_title:'Head of Member Experience',
+      why_now:'New CEO appointed 11 weeks ago at a credit union operating under an active NCUA consent order on deposit operations.',
+      signals:[ {type:'consent_order',source_url:'https://ncua.gov/news/enforcement',date_confirmed:'2026-05-14'},
+                {type:'new_ceo',source_url:'https://americanbanker.com/',date_confirmed:'2026-04-02'},
+                {type:'elder_dense_market',source_url:null,date_confirmed:null} ] },
+    { date:'2026-06-22', institution_name:'Riverdale Bank', type:'community_bank', state:'TX',
+      estimated_assets:'$2.1B', score:7, status:'surfaced', jack_henry:false,
+      buyer_name:'Priya Raman', buyer_title:'Chief Financial Officer',
+      champion_name:null, champion_title:null,
+      why_now:'Acquisition pending in an elder-dense market; deposit-operations consolidation creates near-term escheatment exposure.',
+      signals:[ {type:'merger_pending',source_url:'https://fdic.gov/news',date_confirmed:'2026-06-01'},
+                {type:'elder_dense_market',source_url:null,date_confirmed:null} ] },
+    { date:'2026-06-22', institution_name:'Horizon Credit Union', type:'credit_union', state:'MN',
+      estimated_assets:'$3.2B', score:6, status:'approved', jack_henry:true,
+      buyer_name:'Lena Sorensen', buyer_title:'President',
+      champion_name:'Theo Marsh', champion_title:'Director, Deposit Operations',
+      why_now:'Newly launched wealth-management service on a Jack Henry Symitar core: a warm relationship path and a fresh family-loyalty mandate.',
+      signals:[ {type:'new_wealth_service',source_url:'https://thefinancialbrand.com/',date_confirmed:'2026-05-28'},
+                {type:'jack_henry',source_url:null,date_confirmed:null} ],
+      draft_subject:'Protecting member families at Horizon Credit Union',
+      draft_body:'Hi Lena,\n\nCongratulations on the new wealth-management launch. As Horizon deepens family relationships, the moment a member dies is exactly where loyalty is won or lost, and most credit unions have no operational path for it.\n\nPrismm handles depositor death and estate transfer end to end, so the family stays with Horizon instead of scattering the accounts. On Symitar it slots in cleanly.\n\nWorth a 15-minute call to walk through it?\n\nKeyona' },
+    { date:'2026-06-22', institution_name:'Cedar Valley Bank', type:'community_bank', state:'IA',
+      estimated_assets:'$0.9B', score:4, status:'skipped', jack_henry:false,
+      buyer_name:'Glen Hofer', buyer_title:'Chief Executive Officer',
+      champion_name:'Ruth Donnelly', champion_title:'BSA Officer',
+      why_now:'Core banking conversion recently announced; appetite for new deposit infrastructure is open during the migration window.',
+      signals:[ {type:'core_conversion',source_url:'https://cedarvalleybank.com/news',date_confirmed:'2026-05-10'} ] }
+  ];
+
+  function dbStat(n,l){ return '<div class="db-stat"><div class="db-stat-num">'+n+'</div><div class="db-stat-label">'+l+'</div></div>'; }
+
+  function renderDailyBuyersTab(){
+    const el = document.getElementById('dailybuyers'); if (!el) return;
+    const s = DB_MOCK_SUMMARY;
+    const badge = document.getElementById('count-dailybuyers'); if (badge) badge.textContent = DB_MOCK_BUYERS.length;
+    const tracker = '<div class="db-tracker"><div class="db-tracker-headline">You\'ve engaged <b>'+s.approved+'</b> high-aligned buyers this week</div>'
+      + '<div class="db-tracker-counts">'+dbStat(s.surfaced,'Surfaced')+dbStat(s.approved,'Approved')+dbStat(s.sent,'Sent')+dbStat(s.replied,'Replied')+'</div></div>';
+    el.innerHTML = tracker + '<div class="db-grid">' + DB_MOCK_BUYERS.map(function(b,i){ return dbCard(b,i); }).join('') + '</div>';
+  }
+
+  function dbCard(b,i){
+    const seg = b.type==='community_bank'
+      ? '<span class="db-seg bank">Community Bank</span>'
+      : '<span class="db-seg cu">Credit Union</span>';
+    const jh = (b.jack_henry===true || b.jack_henry==='true') ? '<span class="db-jh">Jack Henry &#10003;</span>' : '';
+    const buyer = '<div class="db-person"><span class="role">Economic buyer</span><span class="who">'+dbEsc(b.buyer_name||'—')+'</span> <span class="ttl">'+dbEsc(b.buyer_title||'')+'</span></div>';
+    const champ = b.champion_name
+      ? '<div class="db-person"><span class="role">Champion</span><span class="who">'+dbEsc(b.champion_name)+'</span> <span class="ttl">'+dbEsc(b.champion_title||'')+'</span></div>'
+      : '<div class="db-person missing"><span class="role">Champion</span><span class="who">confirm manually</span></div>';
+    const sigs = (b.signals||[]).map(function(sg){
+      const verify = sg.source_url ? '' : ' verify';
+      const d = sg.date_confirmed ? '<span class="d">'+dbEsc(sg.date_confirmed)+'</span>' : '';
+      return '<span class="db-sig'+verify+'">'+dbEsc(dbSigLabel(sg.type))+d+'</span>';
+    }).join('');
+    let body;
+    if (b.status==='skipped') {
+      body = '<div class="db-skipped-label">Skipped</div>';
+    } else if (b.status==='approved' && b.draft_subject) {
+      body = dbDraftBlock(i, b.draft_subject, b.draft_body);
+    } else {
+      body = '<div class="db-actions"><button class="db-btn db-btn-approve" onclick="dbApprove('+i+')">Approve</button>'
+           + '<button class="db-btn db-btn-skip" onclick="dbSkip('+i+')">Skip</button></div>';
+    }
+    return '<div class="db-card'+(b.status==='skipped'?' is-skipped':'')+'" id="db-card-'+i+'">'
+      + '<div class="db-card-top"><div><div class="db-name">'+dbEsc(b.institution_name)+'</div>'
+      + '<div class="db-pills">'+seg+'<span class="db-score">Score '+b.score+'</span>'+jh+'</div></div></div>'
+      + '<div class="db-people">'+buyer+champ+'</div>'
+      + '<div class="db-signals">'+sigs+'</div>'
+      + '<div class="db-why">'+dbEsc(b.why_now||'')+'</div>'
+      + '<div id="db-body-'+i+'">'+body+'</div>'
+      + '</div>';
+  }
+
+  function dbDraftBlock(i, subject, bodyText){
+    return '<div class="db-draft">'
+      + '<div class="db-draft-label">Subject</div>'
+      + '<input class="db-draft-subject" id="db-subj-'+i+'" value="'+dbAttr(subject)+'">'
+      + '<div class="db-draft-label">Body</div>'
+      + '<textarea class="db-draft-body" id="db-bodytext-'+i+'">'+dbEsc(bodyText)+'</textarea>'
+      + '<div class="db-draft-actions"><button class="db-btn-gmail" onclick="dbCreateDraft('+i+')">Create Gmail Draft</button>'
+      + '<span id="db-gmsg-'+i+'"></span></div></div>';
+  }
+
+  // Approve: expand to a loading state, then show the generated draft inline.
+  // SHELL behaviour is simulated; Step 6 replaces the setTimeout with:
+  //   const r = await callProxy('approveBuyer', { rowId: b.date+'|'+b.institution_name });
+  function dbApprove(i){
+    const b = DB_MOCK_BUYERS[i];
+    const body = document.getElementById('db-body-'+i); if (!body) return;
+    body.innerHTML = '<div class="db-draft"><div class="db-draft-loading">Generating draft…</div></div>';
+    setTimeout(function(){
+      if (b.enrichment_status==='not_found') {
+        body.innerHTML = '<div class="db-status-flag">Manual send required — no email found for this contact. The approval is still logged.</div>';
+        return;
+      }
+      body.innerHTML = dbDraftBlock(i, dbMockSubject(b), dbMockBody(b));
+    }, 900);
+  }
+
+  function dbCreateDraft(i){
+    const msg = document.getElementById('db-gmsg-'+i);
+    // SHELL: simulated. Step 6 replaces with callProxy('createGmailDraft', {...}).
+    if (msg) msg.innerHTML = '<span class="db-confirm">&#10003; Gmail draft created with label prismm-buyer-pipeline</span>';
+  }
+
+  function dbSkip(i){
+    const card = document.getElementById('db-card-'+i);
+    const body = document.getElementById('db-body-'+i);
+    if (body) body.innerHTML = '<div class="db-skipped-label">Skipped</div>';
+    if (card) card.classList.add('is-skipped');
+    // SHELL: simulated. Step 6 replaces with callProxy('skipBuyer', {...}).
+  }
+
+  function dbMockSubject(b){
+    return b.type==='community_bank'
+      ? 'Quick question on dormant-deposit exposure at '+b.institution_name
+      : 'Protecting member families at '+b.institution_name;
+  }
+  function dbMockBody(b){
+    const first = (b.buyer_name||'there').split(' ')[0];
+    const lead = (b.signals && b.signals[0]) ? dbSigLabel(b.signals[0].type).toLowerCase() : 'recent change';
+    const pain = b.type==='community_bank'
+      ? 'escheatment and dormant-deposit liability'
+      : 'member-family churn at exactly the wrong moment';
+    return 'Hi '+first+',\n\n[Draft preview — generated live from the signal record in Step 7.]\n\n'
+      + 'Noted the '+lead+' at '+b.institution_name+'. Prismm gives institutions a clean operational path for handling depositor death and estate transfer, closing the gap that drives '+pain+'.\n\n'
+      + 'Worth a 15-minute call to see if it fits?\n\nKeyona';
+  }
+  // ===== end Daily Buyers tab =====
 </script>
 </body>
 </html>
