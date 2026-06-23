@@ -279,6 +279,14 @@
     .db-confirm { font-size:12px; color:#2D6A2D; font-weight:600; }
     .db-status-flag { font-size:12px; color:#854F0B; font-weight:600; margin-top:14px; background:#FAEEDA; border:1px solid #E7C98F; border-radius:8px; padding:10px 12px; }
     @media (max-width:520px) { .db-grid { grid-template-columns:1fr; } }
+    /* Daily Buyers info panel */
+    .db-info { background:#fff; border:1px solid #B5D4F4; border-radius:12px; margin-bottom:14px; overflow:hidden; }
+    .db-info-head { display:flex; align-items:center; justify-content:space-between; padding:13px 18px; cursor:pointer; font-size:13px; font-weight:600; color:#0C447C; }
+    .db-info-head:hover { background:#F5F9FF; }
+    .db-info-body { padding:2px 18px 16px; font-size:13px; color:#5A6B82; line-height:1.55; }
+    .db-info-body p { margin:8px 0; }
+    .db-info-body b { color:#0C447C; }
+    .db-info-h { font-weight:700; color:#0C447C; margin-top:14px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
   </style>
 </head>
 <body>
@@ -562,6 +570,27 @@
   const DB_TOKEN_KEY = 'prismm_db_token';
   let DB_BUYERS = [];
 
+  const DB_INFO_HTML = '<div class="db-info">'
+    + '<div class="db-info-head" onclick="dbToggleInfo()"><span>&#9432;&nbsp; How the Daily Buyers list works</span><span id="db-info-arrow">&#9656;</span></div>'
+    + '<div class="db-info-body" id="db-info-body" style="display:none;">'
+    + '<p>Each morning the system scans NCUA enforcement and pending-merger records and searches trade press and LinkedIn for fresh buying signals at credit unions ($1B&ndash;$10B) and community banks (under $10B). It scores and ranks them, finds the economic buyer and a likely champion at each, and surfaces the top 10 here.</p>'
+    + '<p class="db-info-h">What the signals mean</p>'
+    + '<p>Institutions are scored by stacking signals. <b>Momentary signals (3 pts)</b> mean the buying window is open now: a new CEO/President or department head (last 90 days), an NCUA consent order on deposit/dormant accounts, a pending or approved merger, a newly launched wealth service, or a core-system conversion. <b>Static signals (2 pts)</b> amplify those: an elder-dense market, a Jack Henry core (Symitar / Silverlake), or public statements on deposit growth and member retention. <b>Fit signals (1 pt)</b> confirm the basics: asset size in range and institution type. A higher score means a stronger, more time-sensitive opportunity. A chip marked <b>verify</b> means the source link could not be auto-confirmed and is worth a quick check.</p>'
+    + '<p class="db-info-h">What you do</p>'
+    + '<p><b>Approve</b> reveals the buyer&rsquo;s email and has Claude draft a personalized outreach email anchored to that institution&rsquo;s strongest signal. You edit it, then create a Gmail draft to review and send yourself &mdash; the system never sends. <b>Skip</b> hides the institution until a brand-new signal appears, so you never see a stale target twice. &ldquo;Confirm manually&rdquo; means a person could not be matched and you will want to find them by hand.</p>'
+    + '<p class="db-info-h">The tracker</p>'
+    + '<p>The counts up top track your week: <b>Surfaced</b> (shown) &rarr; <b>Approved</b> &rarr; <b>Sent</b> (Gmail draft created) &rarr; <b>Replied</b> (a reply landed on a pipeline thread).</p>'
+    + '</div></div>';
+
+  function dbToggleInfo(){
+    const b = document.getElementById('db-info-body');
+    const a = document.getElementById('db-info-arrow');
+    if (!b) return;
+    const open = b.style.display !== 'none';
+    b.style.display = open ? 'none' : 'block';
+    if (a) a.innerHTML = open ? '&#9656;' : '&#9662;';
+  }
+
   async function callProxy(action, payload){
     const body = { action: action, payload: payload || {} };
     const tok = sessionStorage.getItem(DB_TOKEN_KEY);
@@ -636,7 +665,7 @@
     DB_BUYERS = (data.buyers||[]).map(normalizeBuyer);
     const badge = document.getElementById('count-dailybuyers'); if (badge) badge.textContent = DB_BUYERS.length;
     const s = (summary && summary.ok && summary.summary) ? summary.summary : {surfaced:0,approved:0,sent:0,replied:0};
-    const tracker = '<div class="db-tracker"><div class="db-tracker-headline">You\'ve engaged <b>'+(s.approved||0)+'</b> high-aligned buyers this week</div>'
+    const tracker = DB_INFO_HTML + '<div class="db-tracker"><div class="db-tracker-headline">You\'ve engaged <b>'+(s.approved||0)+'</b> high-aligned buyers this week</div>'
       + '<div class="db-tracker-counts">'+dbStat(s.surfaced||0,'Surfaced')+dbStat(s.approved||0,'Approved')+dbStat(s.sent||0,'Sent')+dbStat(s.replied||0,'Replied')+'</div></div>';
     if (!DB_BUYERS.length){ el.innerHTML = tracker + '<div class="empty-state"><strong>No buyers surfaced yet today.</strong><p>The morning scan writes the daily 10 here.</p></div>'; return; }
     el.innerHTML = tracker + '<div class="db-grid">'+DB_BUYERS.map(function(b,i){ return dbCard(b,i); }).join('')+'</div>';
