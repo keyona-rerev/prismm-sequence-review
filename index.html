@@ -557,88 +557,95 @@
 
   function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  // ===== Daily Buyers tab (Step 2h shell) ============================
-  // GAS proxy endpoint. Paste the deployed /exec URL here in Step 5 to go live.
-  const GAS_EXEC_URL = '';
+  // ===== Daily Buyers tab (live) =====
+  const GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbzCEAIy60vZdSrKXgNEmPuywgWwOYcoQs65jeNzccnhD_wtsmH-afsKTzob9TSRBXep/exec';
   const DB_TOKEN_KEY = 'prismm_db_token';
+  let DB_BUYERS = [];
 
-  // callProxy(action, payload): used for ALL live proxy calls from Step 5 on.
-  // Sends Content-Type text/plain so GAS (which can't answer a CORS preflight)
-  // is never preflighted. Token is read from sessionStorage when present.
-  async function callProxy(action, payload) {
-    if (!GAS_EXEC_URL) throw new Error('GAS_EXEC_URL not set yet (wired in Step 5).');
+  async function callProxy(action, payload){
     const body = { action: action, payload: payload || {} };
     const tok = sessionStorage.getItem(DB_TOKEN_KEY);
     if (tok) body.token = tok;
-    const res = await fetch(GAS_EXEC_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(body)
-    });
+    const res = await fetch(GAS_EXEC_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(body) });
     return res.json();
+  }
+  async function dbLogin(){
+    const pw = (typeof SITE_PASSWORD !== 'undefined') ? SITE_PASSWORD : 'prismm2026';
+    const r = await callProxy('login', { password: pw });
+    if (r && r.ok && r.token){ sessionStorage.setItem(DB_TOKEN_KEY, r.token); return true; }
+    return false;
+  }
+  async function dbEnsureToken(){
+    if (sessionStorage.getItem(DB_TOKEN_KEY)) return true;
+    return await dbLogin();
+  }
+  async function dbCall(action, payload){
+    let r = await callProxy(action, payload);
+    if (r && r.error === 'unauthorized'){
+      const ok = await dbLogin(); if (!ok) return r;
+      r = await callProxy(action, payload);
+    }
+    return r;
   }
 
   function dbEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function dbAttr(s){ return dbEsc(s).replace(/"/g,'&quot;'); }
   function dbSigLabel(t){
-    const m = { consent_order:'NCUA / FDIC Consent Order', new_ceo:'New CEO', new_dept_head:'New Dept Head',
-      merger_pending:'Merger Pending', new_wealth_service:'New Wealth Service', core_conversion:'Core Conversion',
-      elder_dense_market:'Elder-Dense Market', jack_henry:'Jack Henry Core', public_statement:'Public Deposit Statement' };
-    return m[t] || t;
+    const m = { consent_order:'Consent Order', new_ceo:'New CEO', new_ceo_president:'New CEO/President',
+      new_dept_head:'New Dept Head', new_head_of_deposit_ops_wealth:'New Dept Head',
+      pending_merger:'Merger Pending', pending_approved_merger:'Merger Pending', merger_pending:'Merger Pending',
+      new_wealth_service:'New Wealth Service', newly_launched_wealth_investment_service:'New Wealth Service',
+      core_conversion:'Core Conversion', elder_dense_market:'Elder-Dense Market',
+      jack_henry:'Jack Henry Core', jack_henry_symitar:'Jack Henry Symitar',
+      public_statement:'Public Statement', public_statements_deposit_growth_member_retention:'Public Statement',
+      public_statement_member_retention:'Public Statement',
+      asset_size_in_range:'Asset Size Fit', asset_size_within_range:'Asset Size Fit',
+      institution_type_confirmed:'Type Confirmed' };
+    if (m[t]) return m[t];
+    return String(t||'').replace(/_/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
   }
-
-  // --- Mock data for the shell. Replaced by callProxy('getDailyBuyers') in Step 5. ---
-  const DB_MOCK_SUMMARY = { surfaced: 10, approved: 3, sent: 2, replied: 1 };
-  const DB_MOCK_BUYERS = [
-    { date:'2026-06-22', institution_name:'First Community Credit Union', type:'credit_union', state:'OH',
-      estimated_assets:'$1.4B', score:9, status:'surfaced', jack_henry:true,
-      buyer_name:'Marcus Adeyemi', buyer_title:'Chief Executive Officer',
-      champion_name:'Dana Whitfield', champion_title:'Head of Member Experience',
-      why_now:'New CEO appointed 11 weeks ago at a credit union operating under an active NCUA consent order on deposit operations.',
-      signals:[ {type:'consent_order',source_url:'https://ncua.gov/news/enforcement',date_confirmed:'2026-05-14'},
-                {type:'new_ceo',source_url:'https://americanbanker.com/',date_confirmed:'2026-04-02'},
-                {type:'elder_dense_market',source_url:null,date_confirmed:null} ] },
-    { date:'2026-06-22', institution_name:'Riverdale Bank', type:'community_bank', state:'TX',
-      estimated_assets:'$2.1B', score:7, status:'surfaced', jack_henry:false,
-      buyer_name:'Priya Raman', buyer_title:'Chief Financial Officer',
-      champion_name:null, champion_title:null,
-      why_now:'Acquisition pending in an elder-dense market; deposit-operations consolidation creates near-term escheatment exposure.',
-      signals:[ {type:'merger_pending',source_url:'https://fdic.gov/news',date_confirmed:'2026-06-01'},
-                {type:'elder_dense_market',source_url:null,date_confirmed:null} ] },
-    { date:'2026-06-22', institution_name:'Horizon Credit Union', type:'credit_union', state:'MN',
-      estimated_assets:'$3.2B', score:6, status:'approved', jack_henry:true,
-      buyer_name:'Lena Sorensen', buyer_title:'President',
-      champion_name:'Theo Marsh', champion_title:'Director, Deposit Operations',
-      why_now:'Newly launched wealth-management service on a Jack Henry Symitar core: a warm relationship path and a fresh family-loyalty mandate.',
-      signals:[ {type:'new_wealth_service',source_url:'https://thefinancialbrand.com/',date_confirmed:'2026-05-28'},
-                {type:'jack_henry',source_url:null,date_confirmed:null} ],
-      draft_subject:'Protecting member families at Horizon Credit Union',
-      draft_body:'Hi Lena,\n\nCongratulations on the new wealth-management launch. As Horizon deepens family relationships, the moment a member dies is exactly where loyalty is won or lost, and most credit unions have no operational path for it.\n\nPrismm handles depositor death and estate transfer end to end, so the family stays with Horizon instead of scattering the accounts. On Symitar it slots in cleanly.\n\nWorth a 15-minute call to walk through it?\n\nKeyona' },
-    { date:'2026-06-22', institution_name:'Cedar Valley Bank', type:'community_bank', state:'IA',
-      estimated_assets:'$0.9B', score:4, status:'skipped', jack_henry:false,
-      buyer_name:'Glen Hofer', buyer_title:'Chief Executive Officer',
-      champion_name:'Ruth Donnelly', champion_title:'BSA Officer',
-      why_now:'Core banking conversion recently announced; appetite for new deposit infrastructure is open during the migration window.',
-      signals:[ {type:'core_conversion',source_url:'https://cedarvalleybank.com/news',date_confirmed:'2026-05-10'} ] }
-  ];
-
   function dbStat(n,l){ return '<div class="db-stat"><div class="db-stat-num">'+n+'</div><div class="db-stat-label">'+l+'</div></div>'; }
 
-  function renderDailyBuyersTab(){
+  function normalizeBuyer(r){
+    let signals = [];
+    try { signals = JSON.parse(r.signals_json || '[]'); } catch(e){ signals = []; }
+    return {
+      rowId: (String(r.date||'').slice(0,10)) + '|' + r.institution_name,
+      institution_name: r.institution_name, type: r.institution_type,
+      state: r.state, estimated_assets: r.estimated_assets, score: r.score,
+      signals: signals, why_now: r.why_now, jack_henry: r.jack_henry, status: r.status,
+      buyer_name: r.buyer_name, buyer_title: r.buyer_title,
+      champion_name: r.champion_name, champion_title: r.champion_title,
+      draft_subject: r.draft_subject, draft_body: r.draft_body
+    };
+  }
+
+  async function renderDailyBuyersTab(){
     const el = document.getElementById('dailybuyers'); if (!el) return;
-    const s = DB_MOCK_SUMMARY;
-    const badge = document.getElementById('count-dailybuyers'); if (badge) badge.textContent = DB_MOCK_BUYERS.length;
-    const tracker = '<div class="db-tracker"><div class="db-tracker-headline">You\'ve engaged <b>'+s.approved+'</b> high-aligned buyers this week</div>'
-      + '<div class="db-tracker-counts">'+dbStat(s.surfaced,'Surfaced')+dbStat(s.approved,'Approved')+dbStat(s.sent,'Sent')+dbStat(s.replied,'Replied')+'</div></div>';
-    el.innerHTML = tracker + '<div class="db-grid">' + DB_MOCK_BUYERS.map(function(b,i){ return dbCard(b,i); }).join('') + '</div>';
+    el.innerHTML = '<div class="db-tracker"><div class="db-tracker-headline">Loading buyers…</div></div>';
+    const ok = await dbEnsureToken();
+    if (!ok){ el.innerHTML = '<div class="db-tracker"><div class="db-tracker-headline">Could not sign in to the buyer service. Try reloading.</div></div>'; return; }
+    let data, summary;
+    try {
+      data = await dbCall('getDailyBuyers');
+      summary = await dbCall('getWeeklySummary');
+    } catch(e){
+      el.innerHTML = '<div class="db-tracker"><div class="db-tracker-headline">Error loading buyers: '+dbEsc(e.message)+'</div></div>'; return;
+    }
+    if (!data || !data.ok){ el.innerHTML = '<div class="db-tracker"><div class="db-tracker-headline">'+dbEsc((data&&data.error)||'Failed to load buyers')+'</div></div>'; return; }
+    DB_BUYERS = (data.buyers||[]).map(normalizeBuyer);
+    const badge = document.getElementById('count-dailybuyers'); if (badge) badge.textContent = DB_BUYERS.length;
+    const s = (summary && summary.ok && summary.summary) ? summary.summary : {surfaced:0,approved:0,sent:0,replied:0};
+    const tracker = '<div class="db-tracker"><div class="db-tracker-headline">You\'ve engaged <b>'+(s.approved||0)+'</b> high-aligned buyers this week</div>'
+      + '<div class="db-tracker-counts">'+dbStat(s.surfaced||0,'Surfaced')+dbStat(s.approved||0,'Approved')+dbStat(s.sent||0,'Sent')+dbStat(s.replied||0,'Replied')+'</div></div>';
+    if (!DB_BUYERS.length){ el.innerHTML = tracker + '<div class="empty-state"><strong>No buyers surfaced yet today.</strong><p>The morning scan writes the daily 10 here.</p></div>'; return; }
+    el.innerHTML = tracker + '<div class="db-grid">'+DB_BUYERS.map(function(b,i){ return dbCard(b,i); }).join('')+'</div>';
   }
 
   function dbCard(b,i){
-    const seg = b.type==='community_bank'
-      ? '<span class="db-seg bank">Community Bank</span>'
-      : '<span class="db-seg cu">Credit Union</span>';
+    const seg = b.type==='community_bank' ? '<span class="db-seg bank">Community Bank</span>' : '<span class="db-seg cu">Credit Union</span>';
     const jh = (b.jack_henry===true || b.jack_henry==='true') ? '<span class="db-jh">Jack Henry &#10003;</span>' : '';
-    const buyer = '<div class="db-person"><span class="role">Economic buyer</span><span class="who">'+dbEsc(b.buyer_name||'—')+'</span> <span class="ttl">'+dbEsc(b.buyer_title||'')+'</span></div>';
+    const buyer = '<div class="db-person'+(b.buyer_name?'':' missing')+'"><span class="role">Economic buyer</span><span class="who">'+dbEsc(b.buyer_name||'confirm manually')+'</span> <span class="ttl">'+dbEsc(b.buyer_title||'')+'</span></div>';
     const champ = b.champion_name
       ? '<div class="db-person"><span class="role">Champion</span><span class="who">'+dbEsc(b.champion_name)+'</span> <span class="ttl">'+dbEsc(b.champion_title||'')+'</span></div>'
       : '<div class="db-person missing"><span class="role">Champion</span><span class="who">confirm manually</span></div>';
@@ -648,27 +655,20 @@
       return '<span class="db-sig'+verify+'">'+dbEsc(dbSigLabel(sg.type))+d+'</span>';
     }).join('');
     let body;
-    if (b.status==='skipped') {
-      body = '<div class="db-skipped-label">Skipped</div>';
-    } else if (b.status==='approved' && b.draft_subject) {
-      body = dbDraftBlock(i, b.draft_subject, b.draft_body);
-    } else {
-      body = '<div class="db-actions"><button class="db-btn db-btn-approve" onclick="dbApprove('+i+')">Approve</button>'
-           + '<button class="db-btn db-btn-skip" onclick="dbSkip('+i+')">Skip</button></div>';
-    }
+    if (b.status==='skipped'){ body = '<div class="db-skipped-label">Skipped</div>'; }
+    else if ((b.status==='approved' || b.status==='sent') && b.draft_subject){ body = dbDraftBlock(i, b.draft_subject, b.draft_body); }
+    else { body = '<div class="db-actions"><button class="db-btn db-btn-approve" onclick="dbApprove('+i+')">Approve</button><button class="db-btn db-btn-skip" onclick="dbSkip('+i+')">Skip</button></div>'; }
     return '<div class="db-card'+(b.status==='skipped'?' is-skipped':'')+'" id="db-card-'+i+'">'
       + '<div class="db-card-top"><div><div class="db-name">'+dbEsc(b.institution_name)+'</div>'
-      + '<div class="db-pills">'+seg+'<span class="db-score">Score '+b.score+'</span>'+jh+'</div></div></div>'
+      + '<div class="db-pills">'+seg+'<span class="db-score">Score '+dbEsc(b.score)+'</span>'+jh+'</div></div></div>'
       + '<div class="db-people">'+buyer+champ+'</div>'
       + '<div class="db-signals">'+sigs+'</div>'
       + '<div class="db-why">'+dbEsc(b.why_now||'')+'</div>'
-      + '<div id="db-body-'+i+'">'+body+'</div>'
-      + '</div>';
+      + '<div id="db-body-'+i+'">'+body+'</div></div>';
   }
 
   function dbDraftBlock(i, subject, bodyText){
-    return '<div class="db-draft">'
-      + '<div class="db-draft-label">Subject</div>'
+    return '<div class="db-draft"><div class="db-draft-label">Subject</div>'
       + '<input class="db-draft-subject" id="db-subj-'+i+'" value="'+dbAttr(subject)+'">'
       + '<div class="db-draft-label">Body</div>'
       + '<textarea class="db-draft-body" id="db-bodytext-'+i+'">'+dbEsc(bodyText)+'</textarea>'
@@ -676,50 +676,32 @@
       + '<span id="db-gmsg-'+i+'"></span></div></div>';
   }
 
-  // Approve: expand to a loading state, then show the generated draft inline.
-  // SHELL behaviour is simulated; Step 6 replaces the setTimeout with:
-  //   const r = await callProxy('approveBuyer', { rowId: b.date+'|'+b.institution_name });
-  function dbApprove(i){
-    const b = DB_MOCK_BUYERS[i];
-    const body = document.getElementById('db-body-'+i); if (!body) return;
-    body.innerHTML = '<div class="db-draft"><div class="db-draft-loading">Generating draft…</div></div>';
-    setTimeout(function(){
-      if (b.enrichment_status==='not_found') {
-        body.innerHTML = '<div class="db-status-flag">Manual send required — no email found for this contact. The approval is still logged.</div>';
-        return;
-      }
-      body.innerHTML = dbDraftBlock(i, dbMockSubject(b), dbMockBody(b));
-    }, 900);
+  async function dbApprove(i){
+    const b = DB_BUYERS[i]; const body = document.getElementById('db-body-'+i); if (!body) return;
+    body.innerHTML = '<div class="db-draft"><div class="db-draft-loading">Enriching contact and generating draft… (up to ~30s)</div></div>';
+    const r = await dbCall('approveBuyer', { rowId: b.rowId });
+    if (!r || !r.ok){ body.innerHTML = '<div class="db-status-flag">Error: '+dbEsc((r&&r.error)||'approve failed')+'</div>'; return; }
+    if (r.manual_send){ body.innerHTML = '<div class="db-status-flag">'+dbEsc(r.msg||'Manual send required — no email found. Approval logged.')+'</div>'; return; }
+    b.status='approved'; b.draft_subject=r.subject; b.draft_body=r.body;
+    body.innerHTML = dbDraftBlock(i, r.subject, r.body);
   }
 
-  function dbCreateDraft(i){
-    const msg = document.getElementById('db-gmsg-'+i);
-    // SHELL: simulated. Step 6 replaces with callProxy('createGmailDraft', {...}).
-    if (msg) msg.innerHTML = '<span class="db-confirm">&#10003; Gmail draft created with label prismm-buyer-pipeline</span>';
+  async function dbCreateDraft(i){
+    const b = DB_BUYERS[i];
+    const subjEl = document.getElementById('db-subj-'+i);
+    const bodyEl = document.getElementById('db-bodytext-'+i);
+    const subj = subjEl ? subjEl.value : (b.draft_subject||'');
+    const bod  = bodyEl ? bodyEl.value : (b.draft_body||'');
+    const msg = document.getElementById('db-gmsg-'+i); if (msg) msg.innerHTML = '<span class="db-draft-loading">Creating…</span>';
+    const r = await dbCall('createGmailDraft', { rowId: b.rowId, subject: subj, body: bod });
+    if (msg){ msg.innerHTML = (r&&r.ok) ? '<span class="db-confirm">&#10003; Gmail draft created with label prismm-buyer-pipeline</span>' : '<span class="db-status-flag">'+dbEsc((r&&r.error)||'failed')+'</span>'; }
   }
 
-  function dbSkip(i){
-    const card = document.getElementById('db-card-'+i);
-    const body = document.getElementById('db-body-'+i);
+  async function dbSkip(i){
+    const b = DB_BUYERS[i]; const card = document.getElementById('db-card-'+i); const body = document.getElementById('db-body-'+i);
     if (body) body.innerHTML = '<div class="db-skipped-label">Skipped</div>';
     if (card) card.classList.add('is-skipped');
-    // SHELL: simulated. Step 6 replaces with callProxy('skipBuyer', {...}).
-  }
-
-  function dbMockSubject(b){
-    return b.type==='community_bank'
-      ? 'Quick question on dormant-deposit exposure at '+b.institution_name
-      : 'Protecting member families at '+b.institution_name;
-  }
-  function dbMockBody(b){
-    const first = (b.buyer_name||'there').split(' ')[0];
-    const lead = (b.signals && b.signals[0]) ? dbSigLabel(b.signals[0].type).toLowerCase() : 'recent change';
-    const pain = b.type==='community_bank'
-      ? 'escheatment and dormant-deposit liability'
-      : 'member-family churn at exactly the wrong moment';
-    return 'Hi '+first+',\n\n[Draft preview — generated live from the signal record in Step 7.]\n\n'
-      + 'Noted the '+lead+' at '+b.institution_name+'. Prismm gives institutions a clean operational path for handling depositor death and estate transfer, closing the gap that drives '+pain+'.\n\n'
-      + 'Worth a 15-minute call to see if it fits?\n\nKeyona';
+    await dbCall('skipBuyer', { rowId: b.rowId });
   }
   // ===== end Daily Buyers tab =====
 </script>
