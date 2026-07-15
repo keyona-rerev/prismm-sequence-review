@@ -31,6 +31,21 @@
       "sequenceFile": "sequences/seq-002-cold-cb-vpevp-southeast.html",
       "batchId": "BCH-001",
       "usageNote": "Angle: invisible attrition — deposit relationships lost when the primary account holder dies. Do not use for event contacts, CDFIs, or institutions over $2B."
+    },
+    {
+      "id": "seq-003",
+      "title": "Cold Outreach — DMI Metrics Education Series",
+      "status": "pending",
+      "type": "html",
+      "classification": "batch",
+      "pushedDate": "Jul 15, 2026",
+      "emailCount": 5,
+      "cadence": "~5-6 day cadence, 24 days total",
+      "sender": "Dean Whitfield",
+      "targetAudience": "Retail, deposit, and experience leadership at banks and credit unions, national, bank-agnostic",
+      "sequenceFile": "sequences/seq-003-cold-dmi-education.html",
+      "batchId": null,
+      "usageNote": "Symptom-awareness education series, single version per email (no A/B split), direct peer-to-peer voice. Names Prismm and the Deposit Mortality Index starting in Part 1. Each subsequent part anchors to one real DMI metric: Growth Coverage Ratio (Part 2), ten-year dollar runoff (Part 3), succession capture deficit (Part 4), peer percentile ranking (Part 5). Requires the DMI $799 institution report to be live and fulfillable before sending, since Parts 2-5 each offer to run it. Do not use for warm event contacts (seq-001) or the loss-framed VP/EVP Southeast track (seq-002)."
     }
   ]
 }
