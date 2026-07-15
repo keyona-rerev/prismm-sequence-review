@@ -1,1 +1,444 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prismm — Cold Outreach: DMI Metrics Education Series</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f2f0eb;
+    --surface: #ffffff;
+    --surface-alt: #f8f7f4;
+    --border: #e2ddd6;
+    --border-strong: #c8c2b8;
+    --text-primary: #1a1814;
+    --text-secondary: #6b6560;
+    --text-muted: #9c9690;
+    --accent: #2d5a3d;
+    --accent-light: #eef4f0;
+    --accent-mid: #c8dece;
+    --tag-a: #1e3a5f;
+    --tag-a-bg: #e8eef5;
+    --tag-b: #5a2d1e;
+    --tag-b-bg: #f5ece8;
+    --divider: #ede9e3;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .review-bar {
+    background: #EAF3FB;
+    border-bottom: 1px solid #B5D4F4;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: #185FA5;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: -40px -20px 40px;
+  }
+  .review-bar a {
+    background: #EAF3FB; color: #185FA5; border: 1px solid #85B7EB;
+    padding: 5px 14px; border-radius: 6px; text-decoration: none;
+    font-weight: 500; font-size: 12px;
+  }
+  .review-bar a:hover { background: #D1E5F7; }
+  .rb-status { display: flex; align-items: center; gap: 6px; }
+  .rb-pending {
+    background: #FAEEDA; color: #854F0B; padding: 3px 10px;
+    border-radius: 20px; font-weight: 500; border: 1px solid #FAC775;
+  }
+  .rb-dot { width: 7px; height: 7px; border-radius: 50%; background: #378ADD; animation: pulse 1.4s infinite; display: inline-block; margin-right: 4px; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+
+  .page-header { max-width: 720px; margin: 0 auto 40px; }
+  .page-header h1 { font-weight: 300; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .page-header p { font-size: 22px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+  .page-header .sub { font-size: 14px; font-weight: 400; color: var(--text-secondary); margin-top: 8px; line-height: 1.6; }
+
+  .meta-row { max-width: 720px; margin: -24px auto 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .meta-pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; font-family: 'DM Mono', monospace; }
+  .pill-type   { background: #FAEEDA; color: #854F0B; }
+  .pill-sender { background: #e8eef5; color: #1e3a5f; }
+  .pill-aud    { background: #eef4f0; color: #2d5a3d; }
+  .pill-batch  { background: #f5ece8; color: #5a2d1e; }
+
+  .timeline { max-width: 720px; margin: 0 auto 48px; display: flex; align-items: center; }
+  .timeline-step { flex: 1; text-align: center; position: relative; }
+  .timeline-step:not(:last-child)::after { content: ''; position: absolute; top: 14px; left: calc(50% + 14px); right: -1px; width: calc(100% - 28px); height: 1px; background: var(--border-strong); }
+  .timeline-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+  .timeline-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .timeline-label strong { display: block; color: var(--text-secondary); font-weight: 500; font-size: 12px; margin-bottom: 2px; }
+
+  .email-block { max-width: 720px; margin: 0 auto 32px; }
+  .email-block-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-bottom: 10px; padding-left: 2px; font-family: 'DM Mono', monospace; }
+
+  .single { display: grid; grid-template-columns: 1fr; }
+
+  .email-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .email-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .version-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; }
+  .version-tag.single { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border); }
+  .email-meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: 12px; }
+  .email-meta-label { color: var(--text-muted); font-weight: 400; white-space: nowrap; }
+  .email-meta-value { color: var(--text-secondary); font-weight: 400; }
+  .email-meta-value.subject { color: var(--text-primary); font-weight: 500; }
+  .email-body { padding: 18px 16px 20px; font-size: 14px; line-height: 1.75; color: var(--text-primary); font-weight: 300; }
+  .email-body p { margin-bottom: 14px; }
+  .email-body p:last-child { margin-bottom: 0; }
+  .email-body ul { margin: 0 0 14px 0; padding-left: 0; list-style: none; }
+  .email-body ul li { padding-left: 16px; position: relative; margin-bottom: 10px; }
+  .email-body ul li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .email-body ul li:last-child { margin-bottom: 0; }
+  .token { font-family: 'DM Mono', monospace; font-size: 12px; background: #fff8e6; color: #8a6000; padding: 1px 4px; border-radius: 2px; border: 1px solid #f0d878; }
+
+  .email-rationale { padding: 10px 16px 12px; border-top: 1px solid var(--divider); background: var(--surface-alt); }
+  .rationale-label { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .rationale-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+
+  .metric-callout {
+    max-width: 720px; margin: -18px auto 32px;
+    background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 4px;
+    padding: 10px 16px;
+  }
+  .metric-callout p { font-size: 12px; color: var(--accent); line-height: 1.6; }
+  .metric-callout strong { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; display: block; margin-bottom: 2px; }
+
+  .section-divider { max-width: 720px; margin: 8px auto 32px; display: flex; align-items: center; gap: 12px; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-divider span { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); white-space: nowrap; letter-spacing: 0.08em; }
+
+  .crm-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .crm-header { padding: 12px 16px; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-header h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; }
+  .crm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .crm-table th { text-align: left; padding: 10px 16px; font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--divider); background: var(--surface-alt); }
+  .crm-table td { padding: 10px 16px; border-bottom: 1px solid var(--divider); color: var(--text-primary); vertical-align: top; line-height: 1.5; }
+  .crm-table tr:last-child td { border-bottom: none; }
+  .crm-table td:first-child { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a6000; background: #fffdf5; white-space: nowrap; }
+  .crm-table td:nth-child(3) { font-size: 12px; color: var(--text-secondary); }
+
+  .ambient-section { max-width: 720px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 20px; }
+  .ambient-section h3 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; margin-bottom: 14px; }
+  .trigger-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 500px) { .trigger-list { grid-template-columns: 1fr; } }
+  .trigger-list li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-left: 16px; position: relative; }
+  .trigger-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--border-strong); }
+  .ambient-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--divider); font-size: 12px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+
+  .op-note {
+    max-width: 720px; margin: 0 auto 32px;
+    background: #fffdf5; border: 1px solid #f0d878; border-radius: 4px;
+    padding: 12px 16px;
+  }
+  .op-note h4 { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: #8a6000; margin-bottom: 8px; }
+  .op-note p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+  .page-footer { max-width: 720px; margin: 0 auto; text-align: center; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); letter-spacing: 0.06em; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+
+<div class="review-bar">
+  <div class="rb-status">
+    <span class="rb-pending"><span class="rb-dot"></span>Awaiting review</span>
+    <span>Cold Outreach — DMI Metrics Education — seq-003</span>
+  </div>
+  <a href="https://keyona-rerev.github.io/prismm-sequence-review/">&#8592; Back to review portal</a>
+</div>
+
+<div class="page-header">
+  <h1>Prismm Sales Playbook</h1>
+  <p>Cold Outreach — Symptom-Awareness — DMI Metrics Education Series</p>
+  <p class="sub">Five-touch cold sequence, single version per email, direct peer-to-peer voice throughout. Opens by naming Prismm and the problem plainly in Part 1, then each following email teaches one real Deposit Mortality Index metric: Growth Coverage Ratio, ten-year dollar runoff, succession capture deficit, and peer percentile ranking. Do not use for warm event contacts (seq-001) or the loss-framed VP/EVP Southeast track (seq-002).</p>
+</div>
+
+<div class="meta-row">
+  <span class="meta-pill pill-type">Cold · Symptom-awareness</span>
+  <span class="meta-pill pill-sender">Sender: Dean Whitfield</span>
+  <span class="meta-pill pill-aud">Bank &amp; CU · Retail/Deposit/Experience leadership · National</span>
+  <span class="meta-pill pill-batch">5 touches · ~5-6 day cadence</span>
+</div>
+
+<div class="op-note">
+  <h4>Operational note</h4>
+  <p>This sequence names Prismm and the Deposit Mortality Index directly starting in Part 1. It assumes the DMI product page and $799 institution report are live and orderable before this sequence goes out, since Parts 2 through 5 each offer to run that analysis. Do not send if the DMI report isn't yet fulfillable. Sender defaulted to Dean Whitfield, a neutral alias distinct from seq-002's Roland Mercer; swap to Martha or Keyona voice if preferred before launch.</p>
+</div>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <div class="timeline-dot">P1</div>
+    <div class="timeline-label"><strong>The Open</strong>Day 1</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">P2</div>
+    <div class="timeline-label"><strong>Growth Coverage</strong>Day 6</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">P3</div>
+    <div class="timeline-label"><strong>10-Yr Runoff</strong>Day 12</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">P4</div>
+    <div class="timeline-label"><strong>Succession Deficit</strong>Day 18</div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-dot">P5</div>
+    <div class="timeline-label"><strong>Peer Ranking</strong>Day 24</div>
+  </div>
+</div>
+
+<!-- PART 1 -->
+<div class="email-block">
+  <div class="email-block-label">Part 1 &mdash; The Direct Open &mdash; Day 1</div>
+  <div class="single">
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag single">Single version</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Dean Whitfield</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">Comparing how banks handle inherited deposits, yours included</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>I'm Dean, and I work with Prismm. We help banks and credit unions keep deposits in the family when an account holder dies, by making it simple for beneficiaries to stay instead of moving their money elsewhere.</p>
+        <p>I'm reaching out because we've been talking to banks across the country while building a report on this exact problem, and almost none of them can tell us what share of their account holders have a named, reachable beneficiary on file. Not because it's a hard number to pull, but because no one has ever been assigned to own it.</p>
+        <p>Our early findings put the cost of that gap at hundreds of millions in lost deposits over the next decade for a mid-size bank, and into the billions for larger institutions. Every account holder who dies without a plan in place is a household that eventually ends up banking somewhere else, and it never shows up as a loss internally. It reads as a closed account.</p>
+        <p>Is your bank currently tracking this?</p>
+        <p>Dean</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Names the sender, the company, and the problem in the first two sentences. No withheld hook. States the finding and the dollar cost up front, then asks the direct question. This is the tone every following part builds from.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metric-callout">
+  <p><strong>Metric anchor</strong>None yet. Part 1 states the problem in plain dollar terms without naming a specific DMI component. That starts in Part 2.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- PART 2 -->
+<div class="email-block">
+  <div class="email-block-label">Part 2 &mdash; Growth Coverage Ratio &mdash; Day 6</div>
+  <div class="single">
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag single">Single version</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Dean Whitfield</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">Your growth rate isn't what it looks like</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Following up on the beneficiary question from my last note.</p>
+        <p>Most banks measure growth against last year. We measure it against something else: how much of your deposit base is scheduled to leave through mortality, meaning depositors passing away, regardless of anything your team does. We call the ratio between the two your Growth Coverage Ratio.</p>
+        <p>Across the twelve-bank cohort we've studied, mortality-driven runoff alone ran 6.6 to 8.6 percent of total deposits over ten years. If your reported growth doesn't clear that bar, you're not actually growing. You're refilling a bucket with a hole in it, and every dollar spent on acquisition is partly just replacing deposits you were always going to lose.</p>
+        <p>That reframes customer acquisition cost. Acquiring a new depositor to replace one who died with no plan in place is strictly more expensive than keeping the relationship with their heirs, and most banks are paying that cost without knowing it.</p>
+        <p>Want us to calculate your Growth Coverage Ratio using public data? No submission required on your end.</p>
+        <p>Dean</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">First metric anchor: Growth Coverage Ratio. Ties directly to CAC, the metric this audience already tracks, rather than introducing a new one. CTA is a direct offer to run the analysis for their institution, matching how a banker would actually want to respond.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metric-callout">
+  <p><strong>Metric anchor</strong>Growth Coverage Ratio &mdash; reported growth vs. mortality-driven runoff. CAC reframe lives here.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- PART 3 -->
+<div class="email-block">
+  <div class="email-block-label">Part 3 &mdash; Ten-Year Mortality Runoff, in Dollars &mdash; Day 12</div>
+  <div class="single">
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag single">Single version</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Dean Whitfield</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">What your ten-year number probably looks like</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Using public FDIC deposit data, Census demographics, and actuarial life tables, we can estimate a bank's mortality-driven runoff over ten years with reasonable precision, no internal data required. For a representative mid-size institution, that number lands in the hundreds of millions. For larger banks, it moves into the billions.</p>
+        <p>That's not attrition from rate shopping or a competitor's promotion. It's depositors dying with no beneficiary plan in place, and their heirs banking somewhere else by default. It happens on a schedule, which is what makes it different from every other kind of deposit loss you're used to modeling.</p>
+        <p>Want us to run this estimate for your institution specifically?</p>
+        <p>Dean</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Second metric anchor: the ten-year dollar runoff figure. Kept tight, no throat-clearing opener. CTA mirrors Part 2's pattern: a direct offer to run the number for their institution.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metric-callout">
+  <p><strong>Metric anchor</strong>Estimated ten-year mortality runoff, in dollars. Scheduled, not competitive, attrition.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- PART 4 -->
+<div class="email-block">
+  <div class="email-block-label">Part 4 &mdash; Succession Capture Deficit &mdash; Day 18</div>
+  <div class="single">
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag single">Single version</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Dean Whitfield</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">The 15 percent of the score most banks are failing</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>We score a bank's exposure across four components:</p>
+        <ul>
+          <li><strong>Actuarial exposure, 50 percent of the score.</strong> Your deposit-weighted depositor age.</li>
+          <li><strong>Composition fragility, 20 percent.</strong> How concentrated your deposits are in a narrow set of account types or households.</li>
+          <li><strong>Market concentration, 15 percent.</strong> How reliant you are on a single branch footprint or region.</li>
+          <li><strong>Succession capture deficit, 15 percent.</strong> Whether your institution has any operational capability to keep a relationship once the account holder dies.</li>
+        </ul>
+        <p>That last one is the only component that isn't about your depositor demographics. It's about process.</p>
+        <p>Private banking solved this decades ago with trust officers whose job is exactly that moment. Retail banking never built the equivalent, so on this component specifically, nearly every institution we've scored comes back weak, regardless of size or market. It's also the one part of the score fully within a bank's control to fix.</p>
+        <p>Want to see where you'd land on it?</p>
+        <p>Dean</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Third metric anchor: succession capture deficit, with all four components broken into a scannable list rather than buried in a sentence, since this audience is skimming. Ends on the one component fully within the institution's control, which is the strongest hook of the four.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metric-callout">
+  <p><strong>Metric anchor</strong>Succession capture deficit, 15% of the composite score. The one component that's about process, not demographics.</p>
+</div>
+
+<div class="section-divider"><span>no response</span></div>
+
+<!-- PART 5 -->
+<div class="email-block">
+  <div class="email-block-label">Part 5 &mdash; Peer Percentile Ranking, Direct Ask &mdash; Day 24</div>
+  <div class="single">
+    <div class="email-card">
+      <div class="email-card-header">
+        <div class="version-tag single">Single version</div>
+        <div class="email-meta">
+          <span class="email-meta-label">From</span>
+          <span class="email-meta-value">Dean Whitfield</span>
+          <span class="email-meta-label">To</span>
+          <span class="email-meta-value"><span class="token">{{first_name}}</span></span>
+          <span class="email-meta-label">Subject</span>
+          <span class="email-meta-value subject">Where you'd rank against banks your size</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p><span class="token">{{first_name}}</span>,</p>
+        <p>Last note from me on this.</p>
+        <p>Every institution we score sits somewhere against peers of similar asset size and geography, on a single composite number, whether you're a bank or a credit union. Some of that number you can't change quickly. Deposit-weighted age, branch footprint, market concentration. But a meaningful piece of it, the succession capture component I mentioned, is something you can move starting this year.</p>
+        <p>If you want to see where your institution actually lands, we can build the full report from public data. No data submission required on your end, and it comes back with a peer percentile ranking and a ranked list of what would move your score.</p>
+        <p>Want me to run it for you?</p>
+        <p>Dean</p>
+      </div>
+      <div class="email-rationale">
+        <div class="rationale-label">Why this version</div>
+        <div class="rationale-text">Fourth metric anchor: peer percentile ranking. Signals this is the last touch, ties the series together by referencing the succession capture component from Part 4, and closes with the clearest direct ask of the sequence.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="metric-callout">
+  <p><strong>Metric anchor</strong>Peer percentile ranking against institutions of similar asset size and geography. Closing ask.</p>
+</div>
+
+<div class="section-divider"><span>after part 5</span></div>
+
+<!-- CRM TAGS -->
+<div class="email-block">
+  <div class="email-block-label">CRM Tags Required Before Starting Sequence</div>
+  <div class="crm-section">
+    <div class="crm-header"><h3>Merge tags</h3></div>
+    <table class="crm-table">
+      <thead>
+        <tr><th>Tag</th><th>Field</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{first_name}}</td>
+          <td>Contact first name</td>
+          <td>Required. Used in every email.</td>
+        </tr>
+        <tr>
+          <td>{{institution_name}}</td>
+          <td>Short institution name</td>
+          <td>Not used in current copy since this series stays deliberately generic ("your bank," "your institution"). Reserved if a future revision personalizes further.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RESTART TRIGGERS -->
+<div class="email-block">
+  <div class="email-block-label">After Part 5 &mdash; Ambient Until a Restart Trigger</div>
+  <div class="ambient-section">
+    <h3>Restart Triggers</h3>
+    <ul class="trigger-list">
+      <li>They reply to any part of the sequence, even Part 5</li>
+      <li>They request or order a DMI institution report directly from the site</li>
+      <li>They engage with Prismm or DMI content on LinkedIn</li>
+      <li>They change roles or move to a different institution</li>
+      <li>Their institution announces a digital initiative, rebrand, or M&amp;A activity</li>
+      <li>A DMI methodology update or new cohort study is published</li>
+    </ul>
+    <p class="ambient-note">When a restart trigger fires, treat it as a warm re-introduction rather than a resumption of the cold sequence. Reference whichever metric anchor they engaged with most.</p>
+  </div>
+</div>
+
+<div class="page-footer">Prismm Outreach Playbook &mdash; Cold Track &middot; DMI Metrics Education &mdash; Internal Use Only</div>
+
+</body>
+</html>
