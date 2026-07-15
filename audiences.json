@@ -13,6 +13,20 @@
       "whyDistinct": "Warmth from in-person encounter changes the opener entirely. The 48hr window post-event is the highest-leverage outreach moment. Generic cold copy would waste it.",
       "sequences": ["seq-001"],
       "tags": ["credit-union", "conference", "warm-contact", "event"]
+    },
+    {
+      "id": "bank-cu-dmi-education",
+      "name": "Bank & credit union — cold, DMI metrics education",
+      "segment": "Bank and credit union, bank-agnostic",
+      "targetTitles": ["Chief Deposit Officer", "VP Retail Banking", "Chief Retail Officer", "VP Operations", "Chief Experience Officer", "VP Member Experience", "CRO"],
+      "assetSize": "Any size — DMI scoring methodology applies from mid-size community institutions through large national banks",
+      "geo": "National",
+      "trigger": "Cold outreach, no prior contact",
+      "painPoint": "No institution can currently answer what share of retail account holders have a named, reachable beneficiary on file. Mortality-driven deposit runoff happens on a schedule and reads internally as ordinary attrition rather than a preventable loss.",
+      "angle": "Direct, peer-to-peer education series. Names Prismm and the problem plainly from Part 1, no withheld hook. Each subsequent email teaches one real Deposit Mortality Index metric and offers to run that specific analysis for the recipient's institution: Growth Coverage Ratio, ten-year dollar runoff, succession capture deficit, peer percentile ranking.",
+      "whyDistinct": "Unlike seq-002's loss-framed Southeast VP/EVP track, this audience gets educated with real, ownable metrics from a live Prismm product (the Deposit Mortality Index) rather than narrative stats alone. Bank-agnostic and asset-size agnostic by design, since the DMI methodology scores any institution using public data.",
+      "sequences": ["seq-003"],
+      "tags": ["cold", "education-first", "symptom-awareness", "dmi", "bank-agnostic", "credit-union", "community-bank", "national-bank"]
     }
   ]
 }
