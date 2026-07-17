@@ -14,13 +14,26 @@
     {
       "id": "scenario-002",
       "name": "Cold — DMI Metrics Education Series",
-      "description": "Symptom-awareness education sequence for cold, unmet contacts. Opens by naming Prismm and the beneficiary-tracking gap directly, no withheld hook. Each subsequent email teaches one real Deposit Mortality Index metric (Growth Coverage Ratio, ten-year dollar runoff, succession capture deficit, peer percentile ranking) and offers to run that specific analysis for the recipient's institution.",
+      "description": "Symptom-awareness education sequence for cold, unmet contacts. Opens by naming Prismm, what it does, and the beneficiary-tracking gap directly, no withheld hook. Each subsequent email teaches one real Deposit Mortality Index metric (Growth Coverage Ratio, ten-year dollar runoff) and offers to run that specific analysis for the recipient's institution. First of two sequences in campaign CAMP-DMI-01; hands off to scenario-003 roughly 2-3 weeks after the last touch.",
       "targetAudience": "Retail, deposit, and experience leadership at banks and credit unions, national, bank-agnostic",
       "typicalTitles": ["Chief Deposit Officer", "VP Retail Banking", "Chief Retail Officer", "Chief Experience Officer", "VP Member Experience", "CRO"],
       "assetSize": "Any — DMI scoring works across asset sizes, from mid-size community institutions to large national banks",
       "trigger": "Cold outreach, no prior contact or event encounter",
       "sequences": ["seq-003"],
+      "campaignId": "CAMP-DMI-01",
       "tags": ["cold", "education-first", "symptom-awareness", "dmi", "bank-agnostic", "credit-union", "community-bank", "national-bank"]
+    },
+    {
+      "id": "scenario-003",
+      "name": "Cold — DMI Peer Benchmark (Follow-On)",
+      "description": "Benchmark/direct-ask sequence, second half of the DMI campaign (CAMP-DMI-01). Sent to the same contact list roughly 2-3 weeks after scenario-002's education sequence completes, standing on its own rather than reading as continued fatigue. Leads with the composite DMI score, succession capture deficit, and peer percentile ranking, and closes with the most direct, concrete ask in the campaign.",
+      "targetAudience": "Retail, deposit, and experience leadership at banks and credit unions, national, bank-agnostic",
+      "typicalTitles": ["Chief Deposit Officer", "VP Retail Banking", "Chief Retail Officer", "Chief Experience Officer", "VP Member Experience", "CRO"],
+      "assetSize": "Any — DMI scoring works across asset sizes, from mid-size community institutions to large national banks",
+      "trigger": "Follow-on to scenario-002, same contact list, 2-3 weeks after the education sequence ends",
+      "sequences": ["seq-004"],
+      "campaignId": "CAMP-DMI-01",
+      "tags": ["cold", "benchmark", "direct-ask", "dmi", "bank-agnostic", "credit-union", "community-bank", "national-bank"]
     }
   ]
 }
