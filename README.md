@@ -1,5 +1,11 @@
 # Prismm · Sequence Review Portal
 
+## Setup wizard
+
+Install this product with the step-by-step wizard: https://wizard-prismm-sequence-review.netlify.app
+
+Version history: https://wizard-prismm-sequence-review.netlify.app/history.html
+
 **URL:** https://keyona-rerev.github.io/prismm-sequence-review
 **Password:** prismm2026
 **Repo:** `keyona-rerev/prismm-sequence-review`
